@@ -34,7 +34,7 @@ end
 Function.new(/if *\( *\w+ *[<>=]=? *\w+ *\)/,method(:if_statement))
 
 def printf_func(line)
-  Function.output line.scan(/["](.*?)["]/).first.first # maybe dangerous
+  Function.output(line[/["](.*?)["]/]) # pass to the output what is between quotes
   true
 end
 Function.new(/printf *\(['"].*["']\) *;/,method(:printf_func))

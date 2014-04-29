@@ -61,3 +61,11 @@ class Scope
   end
 end
 
+
+# should transform this class into somethin like this
+# class A
+#   @ololo = 1
+#   class << self
+#     attr_accessor :ololo
+#   end
+# end

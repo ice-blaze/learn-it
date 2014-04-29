@@ -18,8 +18,9 @@ class Function
     @@signature.clone
   end
 
-  def self.output(*line)
-    @@output<<line.first if line.first.is_a? String
+  def self.output(line)
+    @@output<<line if line.is_a? String
+    puts @@output
     @@output.clone
   end
 
