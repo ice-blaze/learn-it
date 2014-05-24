@@ -20,7 +20,6 @@ class Function
 
   def self.output(line)
     @@output<<line if line.is_a? String
-    puts @@output
     @@output.clone
   end
 

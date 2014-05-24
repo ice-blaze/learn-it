@@ -10,8 +10,8 @@ Scope::set_tokens(/{/, /}/)
 def load_inputs(inputs_path)
   for line in FileManager::load_inputs inputs_path
     #if we are in the false jump condition, skip to the output block
-    next if Scope::do line
-    if Scope::jump
+    next if Scope::is_token? line
+    if Scope::is_jumping?
       next
     end
 
@@ -31,8 +31,8 @@ def load_inputs(inputs_path)
   signature
 end
 
-parts_files = Dir.entries('parts').reject{|entry| entry =~ /^\.{1,2}$/}
-parts_files = parts_files.map {|item| item = './parts/' + item}
+solutions_files = Dir.entries('solutions').reject{|entry| entry =~ /^\.{1,2}$/}
+solutions_files = solutions_files.map {|item| item = './solutions/' + item}
 inputs_file_path = './inputs.txt'
 
 puts '------------------------------------'
@@ -43,12 +43,12 @@ puts 'The inputs are in ./inputs.txt ? (y/n)'
 choice = gets.chomp
 if choice == 'n'
   puts 'Insert the inputs file please (be careful with the path):'
-  inputs_file_path = gets.chomp
+  inputs_file_path = gets.chomp  # TODO check if it's a file on the system
 end
 puts 'Which file compared (insert number):'
-parts_files.each_with_index { |item, index | puts '(' + index.to_s + ') ' + item}
+solutions_files.each_with_index { |item, index | puts '(' + index.to_s + ') ' + item}
 choice = gets.chomp
-solution_file_path = parts_files[choice.to_i]
+solution_file_path = solutions_files[choice.to_i]
 
 # puts ar.inspect
 

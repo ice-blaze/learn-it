@@ -1,5 +1,7 @@
 require_relative '../function'
 
+# security fail, maybe juste load function wich cannot interact with the file system
+
 def init_vars_func(line)
   # Miss the type management
   variable_name = line.scan(/\w+/)[1]
@@ -7,7 +9,7 @@ def init_vars_func(line)
   Variable.new(variable_name,variable_value.to_f)
   true
 end
-INIT = Function.new(/\w+ *= *\d+/,method(:init_vars_func))
+Function.new(/\w+ *= *\d+/,method(:init_vars_func))
 
 def if_statement(line)
   operator = line.scan(/[<>=]=?/)[0]

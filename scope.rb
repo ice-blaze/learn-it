@@ -2,7 +2,7 @@ require_relative 'variable'
 
 class Scope
   @@actual_deep = 0
-  @@jump = false
+  @@is_jumping = false
   @@jump_deep = 0
 
   @@open_token = nil
@@ -17,30 +17,32 @@ class Scope
     @@actual_deep
   end
 
-  def self.jump
-    @@jump
+  def self.is_jumping?
+    @@is_jumping
   end
 
-  def self.do(line)
+  def self.is_token?(line)
     if @@close_token.match(line)
       self.go_back
-      @@jump = false if @@actual_deep == @@jump_deep
+      @@is_jumping = false if @@actual_deep == @@jump_deep  # prevent when there are close tokens but we aren't on the good depth
       return true
     end
 
     if @@open_token.match(line)
-      return self.go_deeper
+      self.go_deeper
+      return true
     end
+
+    false
   end
 
   def self.start_jump
     @@jump_deep = @@actual_deep
-    @@jump = true
+    @@is_jumping = true
   end
 
   def self.go_deeper
     @@actual_deep += 1
-    true
   end
 
   def self.go_back
