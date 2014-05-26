@@ -1,0 +1,14 @@
+<h1>Interpreters#show</h1>
+
+<p>
+  title : <%= @interpreter.title %> V <%= @interpreter.version %><br>
+  description : <%= @interpreter.description %>
+</p>
+<p><%= link_to 'Edit', edit_interpreter_path(@interpreter) %></p>
+
+<h2>All functions:</h2>
+<% @functions.each_with_index do |f, index| %>
+  <%= render partial: 'functions/function', locals: {index: index, function: f}  %>
+<% end %>
+
+

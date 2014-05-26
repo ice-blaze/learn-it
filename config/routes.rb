@@ -1,12 +1,49 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
 
-  devise_for :models
+  devise_for :admins
+  devise_for :users
+  # get 'parts/show'
+  # get 'parts/new'
+  # get 'parts/edit'
+  # get 'parts/delete'
+  #
+  # get 'functions/show'
+  # get 'functions/new'
+  # get 'functions/edit'
+  # get 'functions/delete'
+  #
+  # get 'tutorials/index'
+  # get 'tutorials/show'
+  # get 'tutorials/new'
+  # get 'tutorials/edit'
+  # get 'tutorials/delete'
+  #
+  # get 'interpreters/index'
+  # get 'interpreters/show'
+  # get 'interpreters/new'
+  # get 'interpreters/edit'
+  # get 'interpreters/delete'
+
+  resources :tutorials do
+    # resources :comments_tutorials
+    resources :parts
+  end
+
+  resources :interpreters do
+    resources :functions
+  end
+
+  get '/home' => 'page#home'
+  get '/creator' => 'page#creator'
+  get '/about' => 'page#about'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'page#home'
+
+  # devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

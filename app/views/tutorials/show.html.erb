@@ -1,0 +1,10 @@
+<h1>Tutorials#show</h1>
+
+<%= render partial: 'tutorial', locals: {tutorial: @tutorial} %>
+
+<p><%= link_to 'Edit', edit_tutorial_path(@tutorial) %></p>
+
+<h2>All parts:</h2>
+<% @parts.each_with_index do |p, index| %>
+  <%= render partial: 'parts/part', locals: {index: index, part: p}  %>
+<% end %>

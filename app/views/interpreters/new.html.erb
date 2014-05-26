@@ -1,0 +1,32 @@
+<h1>Interpreters#new</h1>
+
+<%= form_for :interpreter, url: interpreters_path do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :is_finish %>
+    <%= f.check_box :is_finish %>
+  </p>
+
+  <p>
+    <%= f.label :open_token %>
+    <%= f.text_field :open_token %>
+  </p>
+
+  <p>
+    <%= f.label :close_token %>
+    <%= f.text_field :close_token %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

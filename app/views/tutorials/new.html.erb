@@ -1,0 +1,35 @@
+<h1>Tutorials#new</h1>
+
+<% if @tutorial.errors.any? %>
+  <div class="alert-box alert">
+    <%= pluralize(@tutorial.errors.count, 'error') %> :<br>
+    <a href="#" class="close">&times;</a>
+
+    <ul>
+      <% @tutorial.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for :tutorial, url: tutorials_path do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :interpreter %>
+    <%= f.collection_select :interpreter_id, Interpreter.all, :id, :title %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  like: 1
+  dislike: 1
+  date: 2014-05-24 15:31:27
+
+two:
+  content: MyText
+  like: 1
+  dislike: 1
+  date: 2014-05-24 15:31:27

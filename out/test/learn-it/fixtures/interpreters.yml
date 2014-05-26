@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  is_finish: false
+  open_token: MyString
+  close_token: MyString
+
+two:
+  title: MyString
+  description: MyText
+  is_finish: false
+  open_token: MyString
+  close_token: MyString

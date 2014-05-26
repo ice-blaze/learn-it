@@ -1,0 +1,69 @@
+<h1>Interpreters#edit</h1>
+
+<%= form_for :interpreter, url: interpreter_path(@interpreter), method: :patch do |f| %>
+  <% if @interpreter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interpreter.errors.count, 'error') %> prohibited this interpreter from being saved:</h2>
+      <ul>
+        <% @interpreter.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :is_finish %>
+    <%= f.check_box :is_finish %>
+  </p>
+
+  <p>
+    <%= f.label :open_token %>
+    <%= f.text_field :open_token %>
+  </p>
+
+  <p>
+    <%= f.label :close_token %>
+    <%= f.text_field :close_token %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+
+<h2>Add function:</h2>
+<%= form_for([@interpreter , @interpreter.functions.build]) do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :regex %>
+    <%= f.text_area :regex %>
+  </p>
+  <p>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<h2>All functions:</h2>
+<% @functions[0..-2].each_with_index do |f, index| %>
+  <%= render partial: 'functions/function', locals: {index: index, function: f} %>
+<% end %>

@@ -1,14 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>LearnIt</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title><%= content_for?(:title) ? yield(:title)+' - Learn-it' : 'Learn-it' %></title>
 
-</body>
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'vendor/modernizr' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+  <% if user_signed_in? %>
+      <%= link_to 'Home',root_path%>
+      <%= link_to 'Create tutorials',creator_path%>
+      <%= link_to 'About',about_path%>
+      <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to 'Sign up', new_user_registration_path %>
+    <% end %>
+
+    <% unless notice.nil? %>
+      <div data-alert class="notice alert-box info radius">
+        <%= notice %>
+        <a href="#" class="close"> &times;</a>
+      </div>
+    <% end %>
+
+    <% unless alert.nil? %>
+      <div data-alert class="alert alert-box alert radius">
+        <%= alert %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <%= javascript_include_tag 'application' %>
+  </body>
 </html>
