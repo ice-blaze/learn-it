@@ -1,2 +1,49 @@
 <h1>Functions#show</h1>
-<p>Find me in app/views/functions/show.html.erb</p>
+
+<div class="row">
+  <div class="large-4 columns">
+    <h4>
+      <%= @function.name %><br>
+      <%= @function.regex %>
+    </h4>
+  </div>
+  <div class="large-4 columns">
+    <%= @function.description %>
+  </div>
+  <div class="large-4 columns">
+    <textarea readonly rows="4" cols="50">
+      <%= @function.content %>
+    </textarea>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h4>Comments</h4>
+    <%= form_for([@interpreter,@function,@function.function_comments.build]) do |f| %>
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.label :content %>
+          <%= f.text_field :content %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% @comments[0..-2].reverse.each_with_index do |c, index| %>
+  <div class="row">
+    <div class="columns">
+      <p>
+        <%= c.user.email %><br>
+        <%= c.content %>
+      </p>
+    </div>
+  </div>
+<% end %>

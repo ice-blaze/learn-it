@@ -2,7 +2,8 @@ class InterpretersController < ApplicationController
   def show
     @interpreter = Interpreter.find(params[:id])
     @functions = @interpreter.functions
-    # @comments
+    @comment = InterpreterComment.new
+    @comments = @interpreter.interpreter_comments
   end
 
   def create

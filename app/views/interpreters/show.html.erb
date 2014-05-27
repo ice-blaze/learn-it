@@ -1,14 +1,53 @@
-<h1>Interpreters#show</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Interpreters#show</h1>
+    <div class="row">
+      <div class="large-4 columns">
+        <h4><%= @interpreter.title %></h4>
+        <p>Is finished : <%= @interpreter.is_finish.yesno.downcase %></p>
+      </div>
+      <div class="large-6 columns">
+        <h4><%= @interpreter.description %></h4>
+      </div>
+      <div class="large-2 columns">
+        <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'button small' %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  title : <%= @interpreter.title %> V <%= @interpreter.version %><br>
-  description : <%= @interpreter.description %>
-</p>
-<p><%= link_to 'Edit', edit_interpreter_path(@interpreter) %></p>
+<div class="row">
+  <div class="large-2 text-center columns">
+    <h4>All function</h4>
+    <% @functions.each_with_index do |f, index| %>
+      <div class="columns">
+        <%= link_to f.name, interpreter_function_path(@interpreter,f), class: 'button small' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="large-10 columns">
+    <h4>Comments</h4>
+    <%= form_for([@interpreter,@interpreter.interpreter_comments.build]) do |f| %>
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.label :content %>
+          <%= f.text_field :content %>
+        </div>
+      </div>
 
-<h2>All functions:</h2>
-<% @functions.each_with_index do |f, index| %>
-  <%= render partial: 'functions/function', locals: {index: index, function: f}  %>
-<% end %>
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+    <% @comments[0..-2].reverse.each_with_index do |c, index| %>
+      <p>
+        <%= c.user.email %><br>
+        <%= c.content %>
+      </p>
+    <% end %>
+  </div>
+</div>
 
 

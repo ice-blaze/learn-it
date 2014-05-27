@@ -1,0 +1,2 @@
+module FunctionCommentsHelper
+end

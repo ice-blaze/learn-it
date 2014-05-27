@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526172212) do
+ActiveRecord::Schema.define(version: 20140527162931) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -31,53 +31,18 @@ ActiveRecord::Schema.define(version: 20140526172212) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
-  create_table "comment_functions", force: true do |t|
+  create_table "function_comments", force: true do |t|
     t.text     "content"
     t.integer  "like"
     t.integer  "dislike"
-    t.datetime "date"
     t.integer  "function_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
-  add_index "comment_functions", ["function_id"], name: "index_comment_functions_on_function_id", using: :btree
-
-  create_table "comment_interpreters", force: true do |t|
-    t.text     "content"
-    t.integer  "like"
-    t.integer  "dislike"
-    t.datetime "date"
-    t.integer  "interpreter_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comment_interpreters", ["interpreter_id"], name: "index_comment_interpreters_on_interpreter_id", using: :btree
-
-  create_table "comment_parts", force: true do |t|
-    t.text     "content"
-    t.integer  "like"
-    t.integer  "dislike"
-    t.datetime "date"
-    t.integer  "part_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comment_parts", ["part_id"], name: "index_comment_parts_on_part_id", using: :btree
-
-  create_table "comment_tutorials", force: true do |t|
-    t.text     "content"
-    t.integer  "like"
-    t.integer  "dislike"
-    t.datetime "date"
-    t.integer  "tutorial_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comment_tutorials", ["tutorial_id"], name: "index_comment_tutorials_on_tutorial_id", using: :btree
+  add_index "function_comments", ["function_id"], name: "index_function_comments_on_function_id", using: :btree
+  add_index "function_comments", ["user_id"], name: "index_function_comments_on_user_id", using: :btree
 
   create_table "functions", force: true do |t|
     t.string   "name"
@@ -86,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140526172212) do
     t.integer  "interpreter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "functions", ["interpreter_id"], name: "index_functions_on_interpreter_id", using: :btree
@@ -112,6 +78,19 @@ ActiveRecord::Schema.define(version: 20140526172212) do
   add_index "grade_tutorials", ["tutorial_id"], name: "index_grade_tutorials_on_tutorial_id", using: :btree
   add_index "grade_tutorials", ["user_id"], name: "index_grade_tutorials_on_user_id", using: :btree
 
+  create_table "interpreter_comments", force: true do |t|
+    t.text     "content"
+    t.integer  "like"
+    t.integer  "dislike"
+    t.integer  "interpreter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "interpreter_comments", ["interpreter_id"], name: "index_interpreter_comments_on_interpreter_id", using: :btree
+  add_index "interpreter_comments", ["user_id"], name: "index_interpreter_comments_on_user_id", using: :btree
+
   create_table "interpreters", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -126,6 +105,19 @@ ActiveRecord::Schema.define(version: 20140526172212) do
 
   add_index "interpreters", ["user_id"], name: "index_interpreters_on_user_id", using: :btree
 
+  create_table "part_comments", force: true do |t|
+    t.text     "content"
+    t.integer  "like"
+    t.integer  "dislike"
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "part_comments", ["part_id"], name: "index_part_comments_on_part_id", using: :btree
+  add_index "part_comments", ["user_id"], name: "index_part_comments_on_user_id", using: :btree
+
   create_table "parts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -136,6 +128,19 @@ ActiveRecord::Schema.define(version: 20140526172212) do
   end
 
   add_index "parts", ["tutorial_id"], name: "index_parts_on_tutorial_id", using: :btree
+
+  create_table "tutorial_comments", force: true do |t|
+    t.text     "content"
+    t.integer  "like"
+    t.integer  "dislike"
+    t.integer  "tutorial_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "tutorial_comments", ["tutorial_id"], name: "index_tutorial_comments_on_tutorial_id", using: :btree
+  add_index "tutorial_comments", ["user_id"], name: "index_tutorial_comments_on_user_id", using: :btree
 
   create_table "tutorials", force: true do |t|
     t.string   "title"

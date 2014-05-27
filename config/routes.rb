@@ -25,12 +25,17 @@ Rails.application.routes.draw do
   # get 'interpreters/delete'
 
   resources :tutorials do
-    # resources :comments_tutorials
-    resources :parts
+    resources :tutorial_comments, path: 'comments'
+    resources :parts do
+      resources :part_comments, path: 'comments'
+    end
   end
 
   resources :interpreters do
-    resources :functions
+    resources :interpreter_comments, path: 'comments'
+    resources :functions do
+      resources :function_comments, path: 'comments'
+    end
   end
 
   get '/home' => 'page#home'

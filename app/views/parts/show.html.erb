@@ -1,6 +1,20 @@
 <h1>Parts#show</h1>
 
-<p>
-  title : <%= @part.title %><br>
-  content : <%= @part.content %><br>
-</p>
+<div class="row" data-equalizer>
+  <div class="large-2 columns panel center" data-equalizer-watch>
+    <h4>All parts</h4>
+    <% @parts.each_with_index do |p,index| %>
+      <%= link_to (index+1).to_s+' '+p.title, [@tutorial,p], class: 'custom-button-class disabled' %>
+    <% end %>
+  </div>
+  <div class="large-5 columns panel" data-equalizer-watch>
+    <h4><%= @part.title %></h4>
+    <p><%= @part.content %></p>
+    <%= link_to 'Review', tutorial_part_part_comments_path(@tutorial,@part), class: 'button small right' %>
+  </div>
+  <div class="large-5 columns panel" data-equalizer-watch>
+    <h4></h4>
+    <textarea rows="4" cols="50"></textarea>
+    <a href="#" data-reveal-id="underdevelopment" class="button small right">Execute</a>
+  </div>
+</div>

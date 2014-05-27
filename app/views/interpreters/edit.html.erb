@@ -12,55 +12,81 @@
     </div>
   <% end %>
 
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :is_finish %>
-    <%= f.check_box :is_finish %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :is_finish %>
+      <%= f.check_box :is_finish %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :open_token %>
-    <%= f.text_field :open_token %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :open_token %>
+      <%= f.text_field :open_token %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :close_token %>
-    <%= f.text_field :close_token %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :close_token %>
+      <%= f.text_field :close_token %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit %>
+    </div>
+  </div>
 <% end %>
 
 
 
 <h2>Add function:</h2>
-<%= form_for([@interpreter , @interpreter.functions.build]) do |f| %>
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :regex %>
-    <%= f.text_area :regex %>
-  </p>
-  <p>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= form_for([@interpreter, @interpreter.functions.build]) do |f| %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :regex %>
+      <%= f.text_area :regex %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit %>
+    </div>
+  </div>
 <% end %>
 
 <h2>All functions:</h2>

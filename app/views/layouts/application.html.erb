@@ -8,34 +8,73 @@
 
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
+    <%= javascript_include_tag :defaults %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="<%= root_path %>">Learn-it</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+      <% if user_signed_in? %>
+        <ul class="left">
+          <li><%= link_to 'Home',root_path%></li>
+          <li><%= link_to 'Create tutorials',creator_path%></li>
+          <li><%= link_to 'About',about_path%></li>
+        </ul>
+        <ul class="right">
+          <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+        </ul>
+      <% else %>
+        <ul class="right">
+          <li><%= link_to 'Sign in', new_user_session_path %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        </ul>
+      <% end %>
 
-  <% if user_signed_in? %>
-      <%= link_to 'Home',root_path%>
-      <%= link_to 'Create tutorials',creator_path%>
-      <%= link_to 'About',about_path%>
-      <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to 'Sign in', new_user_session_path %>
-      <%= link_to 'Sign up', new_user_registration_path %>
-    <% end %>
+      </section>
+    </nav>
 
-    <% unless notice.nil? %>
-      <div data-alert class="notice alert-box info radius">
-        <%= notice %>
-        <a href="#" class="close"> &times;</a>
-      </div>
-    <% end %>
 
-    <% unless alert.nil? %>
-      <div data-alert class="alert alert-box alert radius">
-        <%= alert %>
-        <a href="#" class="close">&times;</a>
-      </div>
-    <% end %>
+    <div class="row small-6 large-centered columns">
+      <% unless notice.nil? %>
+        <br>
+        <div data-alert class="notice alert-box info radius">
+          <%= notice %>
+          <a href="#" class="close"> &times;</a>
+        </div>
+      <% end %>
+
+      <% unless alert.nil? %>
+        <br>
+        <div data-alert class="alert alert-box alert radius">
+          <%= alert %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
+
+      <% flash.each do |name, msg| -%>
+        <br>
+        <div data-alert class="alert alert-box alert radius">
+          <%= content_tag :div, msg, class: name %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end -%>
+    </div>
+
+    <div id="underdevelopment" class="reveal-modal" data-reveal>
+      <h2>Under development</h2>
+      <p class="lead">Under development</p>
+      <p>Under development</p>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
 
     <%= yield %>
 

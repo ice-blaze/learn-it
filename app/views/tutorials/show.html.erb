@@ -1,10 +1,55 @@
-<h1>Tutorials#show</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Tutorials#show</h1>
+    <div class="row">
+      <div class="large-4 columns">
+        <h4><%= @tutorial.title %></h4>
+        <p>Is finished : <%= @tutorial.is_finish.yesno.downcase %></p>
+      </div>
+      <div class="large-6 columns">
+        <h4><%= @tutorial.description %></h4>
+      </div>
+      <div class="large-2 columns">
+        <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'button small' %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render partial: 'tutorial', locals: {tutorial: @tutorial} %>
+<div class="row">
+  <div class="large-12 columns text-center">
+    <%= link_to 'Start', [@tutorial,@parts.first], class: 'button small' %>
+  </div>
+</div>
 
-<p><%= link_to 'Edit', edit_tutorial_path(@tutorial) %></p>
+<div class="row">
+  <div class="large-2 columns">
+    <h4>All parts:</h4>
+    <% @parts.each_with_index do |p, index| %>
+      <%= render partial: 'parts/part', locals: {index: index, part: p}  %>
+    <% end %>
+  </div>
+  <div class="large-10 columns">
+    <h4>Comments</h4>
+    <%= form_for([@tutorial,@tutorial.tutorial_comments.build]) do |f| %>
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.label :content %>
+          <%= f.text_field :content %>
+        </div>
+      </div>
 
-<h2>All parts:</h2>
-<% @parts.each_with_index do |p, index| %>
-  <%= render partial: 'parts/part', locals: {index: index, part: p}  %>
-<% end %>
+      <div class="row">
+        <div class="large-12 columns">
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+    <% @comments[0..-2].reverse.each_with_index do |c, index| %>
+      <p>
+        <%= c.user.email %><br>
+        <%= c.content %>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,3 +1,17 @@
 // Place all the styles related to the parts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'foundation';
+
+
+// Using the available options
+.custom-button-class {
+  $padding: 1rem;
+  $bg: green;
+  $radius: 500rem;
+  $full-width: true;
+  $disabled: false;
+  $is-input: false;
+  @include button($padding, $bg, $radius, $full-width, $disabled, $is-input);
+}

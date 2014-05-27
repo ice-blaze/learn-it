@@ -11,49 +11,65 @@
       </ul>
     </div>
   <% end %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :interpreter %>
-    <%= f.collection_select :interpreter_id, Interpreter.all, :id, :title %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :interpreter %>
+      <%= f.collection_select :interpreter_id, Interpreter.all, :id, :title %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.submit 'save' %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit 'save' %>
+    </div>
+  </div>
 <% end %>
 
-<%= form_for ([@tutorial , @tutorial.parts.build]) do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
+<%= form_for ([@tutorial, @tutorial.parts.build]) do |f| %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.label :signature %>
-    <%= f.text_area :signature %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :signature %>
+      <%= f.text_area :signature %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit %>
+    </div>
+  </div>
 <% end %>
 
 <h2>All parts:</h2>
 <% @parts[0..-2].each_with_index do |p, index| %>
-  <%= render partial: 'parts/part', locals: {index: index, part: p}  %>
+  <%= render partial: 'parts/part', locals: {index: index, part: p} %>
 <% end %>
 
 

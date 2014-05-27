@@ -5,6 +5,8 @@ class TutorialsController < ApplicationController
   def show
     @tutorial = Tutorial.find(params[:id])
     @parts = @tutorial.parts
+    @comment = TutorialComment.new
+    @comments = @tutorial.tutorial_comments
   end
 
   def new
@@ -51,6 +53,6 @@ class TutorialsController < ApplicationController
 
   private
   def tutorial_params
-    params.require(:tutorial).permit(:title, :description, :is_finish, :interpreter_id, :version)
+    params.require(:tutorial).permit(:title, :description, :is_finish, :interpreter_id, :tutorial_comment_id, :version)
   end
 end

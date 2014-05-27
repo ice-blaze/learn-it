@@ -1,5 +1,5 @@
 class Interpreter < ActiveRecord::Base
-  has_many :comment_interpreters
+  has_many :interpreter_comments, inverse_of: :interpreter
   has_many :grade_interpreters
   has_many :functions, inverse_of: :interpreter
   has_many :tutorials, inverse_of: :interpreter
