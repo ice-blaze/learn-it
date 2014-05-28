@@ -1,0 +1,8 @@
+<h2>All parts:</h2>
+<% parts[0..-2].each_with_index do |part, index| %>
+  <p>
+    title : <%= index+1 %> <%= part.title %><br>
+    content : <%= part.content %><br>
+  </p>
+<% end %>
+

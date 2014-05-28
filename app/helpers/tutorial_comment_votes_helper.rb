@@ -1,0 +1,2 @@
+module TutorialCommentVotesHelper
+end

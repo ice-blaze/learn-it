@@ -1,0 +1,50 @@
+<!--Project: Learn-it-->
+<!--Author : Etienne Frank-->
+<!--Year   : 2014-->
+
+<!--Vote section-->
+
+<!--If the vote exist, we have only to update it-->
+<% @exist = false %>
+<% votes.each do |v| %>
+  <% if !v.user.nil? && v.user.id == current_user.id %>
+    <% @exist = true %>
+
+    <% if v.positive==true %>
+      <span data-tooltip class="tip-top" title="Already vote this choice !">
+        <%= nb_pos_vote(votes) %>
+        <button class="plus-button-disabled"><i class="fi-plus"></i></button>
+      </span>
+      <%= form_for(update_vote_link+[v]) do |f| %>
+        <%= f.hidden_field :positive, :value => false %>
+        <%= nb_neg_vote(votes)-1 %>
+        <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
+      <% end %>
+    <% else %>
+      <%= form_for(update_vote_link+[v]) do |f| %>
+        <%= f.hidden_field :positive, :value => true %>
+        <%= nb_pos_vote(votes) %>
+        <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
+      <% end %>
+      <span data-tooltip class="tip-top" title="Already vote this choice !">
+            <%= nb_neg_vote(votes)-1 %>
+        <button class="minus-button-disabled"><i class="fi-minus"></i></button>
+          </span>
+    <% end %>
+    <% break %>
+  <% end %>
+<% end %>
+
+<!--If the the user haven't vote yet, we have to create it-->
+<% if @exist == false %>
+  <%= form_for(create_vote_link) do |f| %>
+    <%= f.hidden_field :positive, :value => true %>
+    <%= nb_pos_vote(votes) %>
+    <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
+  <% end %>
+  <%= form_for(create_vote_link) do |f| %>
+    <%= f.hidden_field :positive, :value => false %>
+    <%= nb_neg_vote(votes)-1 %>
+    <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
+  <% end %>
+<% end %>

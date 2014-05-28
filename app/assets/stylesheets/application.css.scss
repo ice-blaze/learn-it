@@ -15,3 +15,31 @@
  *= require foundation_and_overrides
 
  */
+@import 'foundation-icons';
+@import 'foundation';
+
+$green: #009933;
+$red: #b73123;
+$padding: 0.6rem;
+$radius: 0rem;
+$full-width: true;
+$is-input: false;
+
+
+.plus-button-disabled {
+  @include button($padding, $green, $radius, false, true, $is-input);
+}
+.minus-button-disabled {
+  @include button($padding, $red, $radius, false, true, $is-input);
+}
+
+.plus-button {
+  @include button($padding, $green, $radius, false, false, $is-input);
+}
+.minus-button {
+  @include button($padding, $red, $radius, false, false, $is-input);
+}
+
+.comment-panel {
+  @include panel($bg: #e8e8e8,$padding:1.5rem,$adjust:false);
+}

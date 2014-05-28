@@ -4,9 +4,6 @@ class TutorialsController < ApplicationController
 
   def show
     @tutorial = Tutorial.find(params[:id])
-    @parts = @tutorial.parts
-    @comment = TutorialComment.new
-    @comments = @tutorial.tutorial_comments
   end
 
   def new

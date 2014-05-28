@@ -67,10 +67,7 @@
   </div>
 <% end %>
 
-<h2>All parts:</h2>
-<% @parts[0..-2].each_with_index do |p, index| %>
-  <%= render partial: 'parts/part', locals: {index: index, part: p} %>
-<% end %>
+<%= render partial: 'parts/parts', locals: {parts: @parts}  %>
 
 
 

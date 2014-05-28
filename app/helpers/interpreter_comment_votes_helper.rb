@@ -1,0 +1,2 @@
+module InterpreterCommentVotesHelper
+end

@@ -18,32 +18,24 @@
 </div>
 
 <div class="row">
-  <div class="large-12 columns">
-    <h4>Comments</h4>
-    <%= form_for([@interpreter,@function,@function.function_comments.build]) do |f| %>
-      <div class="row">
-        <div class="large-12 columns">
-          <%= f.label :content %>
-          <%= f.text_field :content %>
-        </div>
-      </div>
+  <%= render partial: 'page/add_comment', locals: {link: [@interpreter,@function,@function.function_comments.build]} %>
+  <br>
 
-      <div class="row">
-        <div class="large-12 columns">
-          <%= f.submit %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+  <!--Comments zone-->
+  <% @function.function_comments[0..-2].reverse.each do |c| %>
+    <div class="row comment-panel">
 
-<% @comments[0..-2].reverse.each_with_index do |c, index| %>
-  <div class="row">
-    <div class="columns">
-      <p>
-        <%= c.user.email %><br>
-        <%= c.content %>
-      </p>
+      <!-- Content zone-->
+      <%= render partial: 'page/comment_content', locals: {comment: c} %>
+
+      <!-- +/- zone, vote of comments-->
+      <div class="large-2 columns text-right">
+        <%= render partial: 'page/comment_vote', locals: {
+            votes: c.function_comment_votes,
+            update_vote_link: [@interpreter,@function,c],
+            create_vote_link: [@interpreter,@function,c,c.function_comment_votes.build]
+        } %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

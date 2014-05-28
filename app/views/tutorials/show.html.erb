@@ -18,38 +18,39 @@
 
 <div class="row">
   <div class="large-12 columns text-center">
-    <%= link_to 'Start', [@tutorial,@parts.first], class: 'button small' %>
+    <%= link_to 'Start', [@tutorial,@tutorial.parts.first], class: 'button small' %>
   </div>
 </div>
 
 <div class="row">
-  <div class="large-2 columns">
-    <h4>All parts:</h4>
-    <% @parts.each_with_index do |p, index| %>
-      <%= render partial: 'parts/part', locals: {index: index, part: p}  %>
-    <% end %>
-  </div>
-  <div class="large-10 columns">
-    <h4>Comments</h4>
-    <%= form_for([@tutorial,@tutorial.tutorial_comments.build]) do |f| %>
-      <div class="row">
-        <div class="large-12 columns">
-          <%= f.label :content %>
-          <%= f.text_field :content %>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="large-12 columns">
-          <%= f.submit %>
+  <!--Tutorial parts zone-->
+  <div class="large-2 columns">
+    <%= render partial: 'parts/parts', locals: {parts: @tutorial.parts}  %>
+  </div>
+
+  <!--New comment zone-->
+  <div class="large-10 columns">
+
+    <%= render partial: 'page/add_comment', locals: {link: [@tutorial,@tutorial.tutorial_comments.build]} %>
+    <br>
+
+    <!--Comments zone-->
+    <% @tutorial.tutorial_comments[0..-2].reverse.each do |c| %>
+      <div class="row comment-panel">
+
+        <!-- Content zone-->
+        <%= render partial: 'page/comment_content', locals: {comment: c} %>
+
+        <!-- +/- zone, vote of comments-->
+        <div class="large-2 columns text-right">
+          <%= render partial: 'page/comment_vote', locals: {
+              votes: c.tutorial_comment_votes,
+              update_vote_link: [@tutorial,c],
+              create_vote_link: [@tutorial,c,c.tutorial_comment_votes.build]
+          } %>
         </div>
       </div>
-    <% end %>
-    <% @comments[0..-2].reverse.each_with_index do |c, index| %>
-      <p>
-        <%= c.user.email %><br>
-        <%= c.content %>
-      </p>
     <% end %>
   </div>
 </div>

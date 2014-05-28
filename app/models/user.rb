@@ -12,4 +12,16 @@ class User < ActiveRecord::Base
   has_many :function_comments, inverse_of: :user
   has_many :tutorial_comments, inverse_of: :user
   has_many :part_comments, inverse_of: :user
+
+  has_many :interpreter_comment_votes
+  has_many :interpreter_comments, through: :interpreter_comment_votes
+
+  has_many :tutorial_comment_votes
+  has_many :tutorial_comments, through: :tutorial_comment_votes
+
+  has_many :function_comment_votes
+  has_many :function_comments, through: :function_comment_votes
+
+  has_many :part_comment_votes
+  has_many :part_comments, through: :part_comment_votes
 end

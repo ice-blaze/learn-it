@@ -25,16 +25,24 @@ Rails.application.routes.draw do
   # get 'interpreters/delete'
 
   resources :tutorials do
-    resources :tutorial_comments, path: 'comments'
+    resources :tutorial_comments, path: 'comments' do
+      resources :tutorial_comment_votes
+    end
     resources :parts do
-      resources :part_comments, path: 'comments'
+      resources :part_comments, path: 'comments' do
+        resources :part_comment_votes
+      end
     end
   end
 
   resources :interpreters do
-    resources :interpreter_comments, path: 'comments'
+    resources :interpreter_comments, path: 'comments' do
+      resources :interpreter_comment_votes
+    end
     resources :functions do
-      resources :function_comments, path: 'comments'
+      resources :function_comments, path: 'comments' do
+        resources :function_comment_votes
+      end
     end
   end
 

@@ -14,4 +14,20 @@ module ApplicationHelper
   def title(page_title)
     content_for :title, page_title.to_s
   end
+
+  def nb_pos_vote(votes)
+    count = 0
+    votes.each do |vote|
+      count += 1 if vote.positive
+    end
+    count
+  end
+
+  def nb_neg_vote(votes)
+    count = 0
+    votes.each do |vote|
+      count += 1 unless vote.positive
+    end
+    count
+  end
 end

@@ -16,26 +16,25 @@
     </div>
     <div class="row">
       <div class="columns">
-        <h4>Comments</h4>
-        <%= form_for([@tutorial,@part,@part.part_comments.build]) do |f| %>
-          <div class="row">
-            <div class="large-12 columns">
-              <%= f.label :content %>
-              <%= f.text_field :content %>
-            </div>
-          </div>
+        <%= render partial: 'page/add_comment', locals: {link: [@tutorial,@part,@part.part_comments.build]} %>
+        <br>
 
-          <div class="row">
-            <div class="large-12 columns">
-              <%= f.submit %>
+        <!--Comments zone-->
+        <% @part.part_comments[0..-2].reverse.each do |c| %>
+          <div class="row comment-panel">
+
+            <!-- Content zone-->
+            <%= render partial: 'page/comment_content', locals: {comment: c} %>
+
+            <!-- +/- zone, vote of comments-->
+            <div class="large-2 columns text-right">
+              <%= render partial: 'page/comment_vote', locals: {
+                  votes: c.part_comment_votes,
+                  update_vote_link: [@tutorial,@part,c],
+                  create_vote_link: [@tutorial,@part,c,c.part_comment_votes.build]
+              } %>
             </div>
           </div>
-        <% end %>
-        <% @comments[0..-2].reverse.each_with_index do |c, index| %>
-          <p>
-            <%= c.user.email %><br>
-            <%= c.content %>
-          </p>
         <% end %>
       </div>
     </div>

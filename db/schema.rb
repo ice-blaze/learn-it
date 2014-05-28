@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527162931) do
+ActiveRecord::Schema.define(version: 20140528085044) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20140527162931) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "function_comment_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "function_comment_id"
+    t.boolean  "positive"
+  end
+
+  add_index "function_comment_votes", ["function_comment_id"], name: "index_function_comment_votes_on_function_comment_id", using: :btree
+  add_index "function_comment_votes", ["user_id"], name: "index_function_comment_votes_on_user_id", using: :btree
 
   create_table "function_comments", force: true do |t|
     t.text     "content"
@@ -78,6 +89,17 @@ ActiveRecord::Schema.define(version: 20140527162931) do
   add_index "grade_tutorials", ["tutorial_id"], name: "index_grade_tutorials_on_tutorial_id", using: :btree
   add_index "grade_tutorials", ["user_id"], name: "index_grade_tutorials_on_user_id", using: :btree
 
+  create_table "interpreter_comment_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "interpreter_comment_id"
+    t.boolean  "positive"
+  end
+
+  add_index "interpreter_comment_votes", ["interpreter_comment_id"], name: "index_interpreter_comment_votes_on_interpreter_comment_id", using: :btree
+  add_index "interpreter_comment_votes", ["user_id"], name: "index_interpreter_comment_votes_on_user_id", using: :btree
+
   create_table "interpreter_comments", force: true do |t|
     t.text     "content"
     t.integer  "like"
@@ -105,6 +127,17 @@ ActiveRecord::Schema.define(version: 20140527162931) do
 
   add_index "interpreters", ["user_id"], name: "index_interpreters_on_user_id", using: :btree
 
+  create_table "part_comment_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "part_comment_id"
+    t.boolean  "positive"
+  end
+
+  add_index "part_comment_votes", ["part_comment_id"], name: "index_part_comment_votes_on_part_comment_id", using: :btree
+  add_index "part_comment_votes", ["user_id"], name: "index_part_comment_votes_on_user_id", using: :btree
+
   create_table "part_comments", force: true do |t|
     t.text     "content"
     t.integer  "like"
@@ -128,6 +161,17 @@ ActiveRecord::Schema.define(version: 20140527162931) do
   end
 
   add_index "parts", ["tutorial_id"], name: "index_parts_on_tutorial_id", using: :btree
+
+  create_table "tutorial_comment_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "tutorial_comment_id"
+    t.boolean  "positive"
+  end
+
+  add_index "tutorial_comment_votes", ["tutorial_comment_id"], name: "index_tutorial_comment_votes_on_tutorial_comment_id", using: :btree
+  add_index "tutorial_comment_votes", ["user_id"], name: "index_tutorial_comment_votes_on_user_id", using: :btree
 
   create_table "tutorial_comments", force: true do |t|
     t.text     "content"

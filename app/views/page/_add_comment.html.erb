@@ -1,0 +1,15 @@
+<h4>Comments</h4>
+<%= form_for(link) do |f| %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :content %>
+      <%= f.text_field :content %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
