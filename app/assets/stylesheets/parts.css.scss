@@ -3,15 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import 'foundation';
+//@import 'application';
 
+$padding: 1rem;
+$done: #009933;
+$undone: #b73123;
+$radius: 500rem;
+$full-width: true;
+$disabled: false;
+$is-input: false;
 
 // Using the available options
-.custom-button-class {
-  $padding: 1rem;
-  $bg: green;
-  $radius: 500rem;
-  $full-width: true;
-  $disabled: false;
-  $is-input: false;
-  @include button($padding, $bg, $radius, $full-width, $disabled, $is-input);
+.done-part {
+  @include button($padding, $done, $radius, $full-width, $disabled, $is-input);
+}
+
+.undone-part {
+  @include button($padding, $undone, $radius, $full-width, $disabled, $is-input);
 }

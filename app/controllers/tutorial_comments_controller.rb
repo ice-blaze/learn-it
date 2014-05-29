@@ -1,4 +1,6 @@
 class TutorialCommentsController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     @tutorial = Tutorial.find(params[:tutorial_id])
     @comment = @tutorial.tutorial_comments.create(comment_params)
@@ -13,10 +15,6 @@ class TutorialCommentsController < ApplicationController
   end
 
   def update
-
-  end
-
-  def index
 
   end
 

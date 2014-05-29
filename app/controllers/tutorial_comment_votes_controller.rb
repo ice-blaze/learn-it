@@ -1,4 +1,6 @@
 class TutorialCommentVotesController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     @tutorial = Tutorial.find(params[:tutorial_id])
     @comment = TutorialComment.find(params[:tutorial_comment_id])

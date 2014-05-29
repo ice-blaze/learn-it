@@ -1,0 +1,7 @@
+<%= form_for(grade_link) do |f| %>
+  <%= f.label :grade %>
+  <%= f.number_field(:grade, in: 1.0..10.0, step: 0.1, value: grade_value) %>
+  <div class="text-right">
+    <%= f.submit 'Set grade', class: 'button tiny' %>
+  </div>
+<% end %>

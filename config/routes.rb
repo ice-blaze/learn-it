@@ -2,46 +2,31 @@ Rails.application.routes.draw do
 
   devise_for :admins
   devise_for :users
-  # get 'parts/show'
-  # get 'parts/new'
-  # get 'parts/edit'
-  # get 'parts/delete'
-  #
-  # get 'functions/show'
-  # get 'functions/new'
-  # get 'functions/edit'
-  # get 'functions/delete'
-  #
-  # get 'tutorials/index'
-  # get 'tutorials/show'
-  # get 'tutorials/new'
-  # get 'tutorials/edit'
-  # get 'tutorials/delete'
-  #
-  # get 'interpreters/index'
-  # get 'interpreters/show'
-  # get 'interpreters/new'
-  # get 'interpreters/edit'
-  # get 'interpreters/delete'
+  get 'users/:id' => 'users#show'
+  # devise_for :users, :path_prefix => 'd'
+  # resources :users, :only => [:show]
 
   resources :tutorials do
-    resources :tutorial_comments, path: 'comments' do
-      resources :tutorial_comment_votes
+    resources :tutorial_grades, only: [:create]
+    resources :tutorial_comments, path: 'comments', only: [:create,:update,:destroy] do
+      resources :tutorial_comment_votes, only: [:create,:update,:destroy]
     end
     resources :parts do
-      resources :part_comments, path: 'comments' do
-        resources :part_comment_votes
+      resources :done_parts,only: [:create,:destroy]
+      resources :part_comments, path: 'comments', only: [:index,:create,:update,:destroy] do
+        resources :part_comment_votes, only: [:create,:update,:destroy]
       end
     end
   end
 
   resources :interpreters do
-    resources :interpreter_comments, path: 'comments' do
-      resources :interpreter_comment_votes
+    resources :interpreter_grades, only: [:create]
+    resources :interpreter_comments, path: 'comments', only: [:create,:update,:destroy] do
+      resources :interpreter_comment_votes, only: [:create,:update,:destroy]
     end
     resources :functions do
-      resources :function_comments, path: 'comments' do
-        resources :function_comment_votes
+      resources :function_comments, path: 'comments', only: [:index,:create,:update,:destroy] do
+        resources :function_comment_votes, only: [:create,:update,:destroy]
       end
     end
   end

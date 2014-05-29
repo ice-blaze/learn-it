@@ -4,6 +4,8 @@ class TutorialsController < ApplicationController
 
   def show
     @tutorial = Tutorial.find(params[:id])
+    @grade = @tutorial.tutorial_grades.where(:user_id => current_user.id).first.grade rescue nil
+    @grade = 0.0 if @grade.blank?
   end
 
   def new
@@ -11,8 +13,6 @@ class TutorialsController < ApplicationController
   end
 
   def create
-    # render plain: tutorial_params.inspect
-    # @interpreters = Interpreter.all
     @tutorial = Tutorial.new(tutorial_params)
 
     @tutorial.user = current_user

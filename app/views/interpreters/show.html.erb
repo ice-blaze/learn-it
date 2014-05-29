@@ -10,7 +10,15 @@
         <h4><%= @interpreter.description %></h4>
       </div>
       <div class="large-2 columns">
-        <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'button small' %>
+        <div class="text-right">
+          <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'button small' %>
+        </div>
+
+        <!--grade section-->
+        <%= render partial: 'page/grade', locals: {
+            grade_link: [@interpreter,@interpreter.interpreter_grades.build],
+            grade_value: @grade
+        }%>
       </div>
     </div>
   </div>

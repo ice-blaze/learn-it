@@ -4,6 +4,9 @@ class InterpretersController < ApplicationController
     @functions = @interpreter.functions
     @comment = InterpreterComment.new
     @comments = @interpreter.interpreter_comments
+
+    @grade = @interpreter.interpreter_grades.where(:user_id => current_user.id).first.grade rescue nil
+    @grade = 0.0 if @grade.blank?
   end
 
   def create

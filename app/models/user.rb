@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :grade_interpreters
-  has_many :grade_tutorials
+  has_many :done_parts, inverse_of: :user
+  has_many :interpreter_grades, inverse_of: :user
+  has_many :tutorial_grades, inverse_of: :user
   has_many :tutorials, inverse_of: :user
   has_many :interpreters,inverse_of: :user
   has_many :interpreter_comments, inverse_of: :user

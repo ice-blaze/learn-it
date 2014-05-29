@@ -1,4 +1,5 @@
 class FunctionCommentsController < ApplicationController
+  before_action :authenticate_member!
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
     @function = Function.find(params[:function_id])

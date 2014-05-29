@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528085044) do
+ActiveRecord::Schema.define(version: 20140529145526) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20140528085044) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "done_parts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "part_id"
+  end
+
+  add_index "done_parts", ["part_id"], name: "index_done_parts_on_part_id", using: :btree
+  add_index "done_parts", ["user_id"], name: "index_done_parts_on_user_id", using: :btree
 
   create_table "function_comment_votes", force: true do |t|
     t.datetime "created_at"
@@ -67,28 +77,6 @@ ActiveRecord::Schema.define(version: 20140528085044) do
 
   add_index "functions", ["interpreter_id"], name: "index_functions_on_interpreter_id", using: :btree
 
-  create_table "grade_interpreters", force: true do |t|
-    t.float    "grade"
-    t.integer  "user_id"
-    t.integer  "interpreter_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "grade_interpreters", ["interpreter_id"], name: "index_grade_interpreters_on_interpreter_id", using: :btree
-  add_index "grade_interpreters", ["user_id"], name: "index_grade_interpreters_on_user_id", using: :btree
-
-  create_table "grade_tutorials", force: true do |t|
-    t.float    "grade"
-    t.integer  "user_id"
-    t.integer  "tutorial_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "grade_tutorials", ["tutorial_id"], name: "index_grade_tutorials_on_tutorial_id", using: :btree
-  add_index "grade_tutorials", ["user_id"], name: "index_grade_tutorials_on_user_id", using: :btree
-
   create_table "interpreter_comment_votes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -112,6 +100,17 @@ ActiveRecord::Schema.define(version: 20140528085044) do
 
   add_index "interpreter_comments", ["interpreter_id"], name: "index_interpreter_comments_on_interpreter_id", using: :btree
   add_index "interpreter_comments", ["user_id"], name: "index_interpreter_comments_on_user_id", using: :btree
+
+  create_table "interpreter_grades", force: true do |t|
+    t.float    "grade"
+    t.integer  "user_id"
+    t.integer  "interpreter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interpreter_grades", ["interpreter_id"], name: "index_interpreter_grades_on_interpreter_id", using: :btree
+  add_index "interpreter_grades", ["user_id"], name: "index_interpreter_grades_on_user_id", using: :btree
 
   create_table "interpreters", force: true do |t|
     t.string   "title"
@@ -185,6 +184,17 @@ ActiveRecord::Schema.define(version: 20140528085044) do
 
   add_index "tutorial_comments", ["tutorial_id"], name: "index_tutorial_comments_on_tutorial_id", using: :btree
   add_index "tutorial_comments", ["user_id"], name: "index_tutorial_comments_on_user_id", using: :btree
+
+  create_table "tutorial_grades", force: true do |t|
+    t.float    "grade"
+    t.integer  "user_id"
+    t.integer  "tutorial_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tutorial_grades", ["tutorial_id"], name: "index_tutorial_grades_on_tutorial_id", using: :btree
+  add_index "tutorial_grades", ["user_id"], name: "index_tutorial_grades_on_user_id", using: :btree
 
   create_table "tutorials", force: true do |t|
     t.string   "title"

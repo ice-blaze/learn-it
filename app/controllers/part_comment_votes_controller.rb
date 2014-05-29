@@ -1,4 +1,6 @@
 class PartCommentVotesController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     @tutorial = Tutorial.find(params[:tutorial_id])
     @part = Part.find(params[:part_id])

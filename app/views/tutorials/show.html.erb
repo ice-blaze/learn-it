@@ -10,7 +10,16 @@
         <h4><%= @tutorial.description %></h4>
       </div>
       <div class="large-2 columns">
-        <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'button small' %>
+        <div class="text-right">
+          <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'button small' %>
+        </div>
+
+        <!--grade section-->
+        <%= render partial: 'page/grade', locals: {
+            grade_link: [@tutorial,@tutorial.tutorial_grades.build],
+            grade_value: @grade
+        }%>
+
       </div>
     </div>
   </div>
