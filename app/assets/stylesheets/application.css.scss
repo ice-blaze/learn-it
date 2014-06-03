@@ -25,6 +25,13 @@ $radius: 0rem;
 $full-width: true;
 $is-input: false;
 
+.red-text{
+  color: #ff0013;
+}
+
+.green-text{
+  color: #30ff00;
+}
 
 .plus-button-disabled {
   @include button($padding, $green, $radius, false, true, $is-input);

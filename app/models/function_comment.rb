@@ -8,4 +8,8 @@ class FunctionComment < ActiveRecord::Base
   def parent_path
     [self.function.interpreter,self.function]
   end
+
+  def votes
+    self.function_comment_votes
+  end
 end

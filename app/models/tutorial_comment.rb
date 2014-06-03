@@ -8,4 +8,8 @@ class TutorialComment < ActiveRecord::Base
   def parent_path
     self.tutorial
   end
+
+  def votes
+    self.tutorial_comment_votes
+  end
 end

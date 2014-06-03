@@ -1,23 +1,46 @@
 <div class='row'>
   <div class='small-12'>
-    <%= form_for(current_user, as: current_user.email, url: password_path(current_user), html: { method: :put }) do |f| %>
-      <%= f.hidden_field :reset_password_token %>
-
-      <div >
-        <%= f.label :password, 'New password' %><br>
-        <%= f.password_field :password, autofocus: true, autocomplete: 'off' %>
-      </div>
-
-      <div >
-        <%= f.label :password_confirmation, 'Confirm new password' %><br>
-        <%= f.password_field :password_confirmation, autocomplete: 'off' %>
-      </div>
-
-      <div><%= f.submit 'Change my password' %></div>
-    <% end %>
+    <%= link_to 'change account settings', edit_user_registration_path, class: 'button tiny' %>
+  </div>
+  <div class='small-12'>
     <h4>All your comments</h4>
-    <% current_user.comments.each do |comment| %>
-      <%= link_to truncate(comment.content), comment.parent_path, class: 'button round' %>
+    <% @user.comments.each do |comment| %>
+      <% positive = comment.votes.where(positive: true).count %>
+      <% unpositive = comment.votes.where(positive: false).count %>
+      <%= link_to comment.parent_path, class: 'button round' do %>
+        <%= truncate(comment.content) %>
+        <span class="green-text"><%= positive.to_s %></span>
+        /
+        <span class="red-text"><%= unpositive.to_s %></span>
+      <% end %>
     <% end %>
+  </div>
+  <div class='small-12'>
+    <h4>Your unfinished tutorials and interpreters</h4>
+    <% @unfini_tut_int.each do |unfinished| %>
+      <%= link_to unfinished, class: 'button round' do %>
+        <%= unfinished.title %>
+        <%= unfinished.grade_mean %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="small-12">
+    <h4>Tutorials</h4>
+    <div class="small-6 columns">
+      <h5>Started but not finished</h5>
+      <% @try_unfinish.each do |tutorial| %>
+        <%= link_to tutorial, class: 'button round' do %>
+          <% tutorial.title %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="small-6 columns">
+      <h5>Finished</h5>
+      <% @try_finish.each do |tutorial| %>
+        <%= link_to tutorial, class: 'button round' do %>
+          <% tutorial.title %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

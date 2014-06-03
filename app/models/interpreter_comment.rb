@@ -8,4 +8,8 @@ class InterpreterComment < ActiveRecord::Base
   def parent_path
     self.interpreter
   end
+
+  def votes
+    self.interpreter_comment_votes
+  end
 end
