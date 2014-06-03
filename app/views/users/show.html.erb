@@ -1,1 +1,23 @@
-lkasjd bra
+<div class='row'>
+  <div class='small-12'>
+    <%= form_for(current_user, as: current_user.email, url: password_path(current_user), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div >
+        <%= f.label :password, 'New password' %><br>
+        <%= f.password_field :password, autofocus: true, autocomplete: 'off' %>
+      </div>
+
+      <div >
+        <%= f.label :password_confirmation, 'Confirm new password' %><br>
+        <%= f.password_field :password_confirmation, autocomplete: 'off' %>
+      </div>
+
+      <div><%= f.submit 'Change my password' %></div>
+    <% end %>
+    <h4>All your comments</h4>
+    <% current_user.comments.each do |comment| %>
+      <%= link_to truncate(comment.content), comment.parent_path, class: 'button round' %>
+    <% end %>
+  </div>
+</div>

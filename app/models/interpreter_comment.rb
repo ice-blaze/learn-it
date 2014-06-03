@@ -4,4 +4,8 @@ class InterpreterComment < ActiveRecord::Base
 
   has_many :interpreter_comment_votes
   has_many :users, through: :interpreter_comment_votes
+
+  def parent_path
+    self.interpreter
+  end
 end

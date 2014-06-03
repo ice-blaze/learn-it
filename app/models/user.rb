@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
 
   has_many :part_comment_votes
   has_many :part_comments, through: :part_comment_votes
+
+  def comments
+    self.tutorial_comments+self.part_comments+self.interpreter_comments+self.function_comments
+  end
 end

@@ -1,7 +1,7 @@
 class PageController < ApplicationController
   def home
-    @tutorials = Tutorial.all
-    @interpreters = Interpreter.all
+    @tops = Tutorial.all.sort{|a,b| a.grade_mean <=> b.grade_mean}.reverse
+    @newest = Tutorial.order(created_at: :desc)
   end
 
   def creator

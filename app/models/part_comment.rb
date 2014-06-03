@@ -4,4 +4,8 @@ class PartComment < ActiveRecord::Base
 
   has_many :part_comment_votes
   has_many :users, through: :part_comment_votes
+
+  def parent_path
+    [self.part.tutorial,self.part]
+  end
 end

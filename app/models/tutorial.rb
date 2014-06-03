@@ -7,4 +7,8 @@ class Tutorial < ActiveRecord::Base
 
   validates :title, :description, :user, :interpreter, presence: true
   validates :is_finish, :inclusion => {:in => [true, false]}
+
+  def grade_mean
+    self.tutorial_grades.sum(:grade) / self.tutorial_grades.count
+  end
 end

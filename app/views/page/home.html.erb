@@ -6,15 +6,15 @@
 
 <div class="row">
   <div class="large-6 columns">
-    <h3>Top 5 tutorials (unfinished):</h3>
-    <% @tutorials.each_with_index do |t, index| %>
+    <h3>Top 5 tutorials :</h3>
+    <% @tops.each_with_index do |t, index| %>
       <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
     <% end %>
   </div>
 
   <div class="large-6 columns">
-    <h3>Most recent tutorial (unfinished) :</h3>
-    <% @tutorials.each_with_index do |t, index| %>
+    <h3>Most recent tutorial :</h3>
+    <% @newest.each_with_index do |t, index| %>
       <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
     <% end %>
   </div>

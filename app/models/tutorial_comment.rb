@@ -4,4 +4,8 @@ class TutorialComment < ActiveRecord::Base
 
   has_many :tutorial_comment_votes
   has_many :users, through: :tutorial_comment_votes
+
+  def parent_path
+    self.tutorial
+  end
 end

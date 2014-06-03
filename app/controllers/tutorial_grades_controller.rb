@@ -1,5 +1,5 @@
 class TutorialGradesController < ApplicationController
-  before_action :authenticate_member!
+  # before_action :authenticate_member!
 
   def create
     #if vote with actual user exist, only update

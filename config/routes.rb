@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
   devise_for :users
-  get 'users/:id' => 'users#show'
+  get 'users/:id' => 'users#show', as: 'users'
   # devise_for :users, :path_prefix => 'd'
   # resources :users, :only => [:show]
 
