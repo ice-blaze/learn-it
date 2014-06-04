@@ -1,0 +1,10 @@
+<% datas.each do |data| %>
+  <% positive = data.votes.where(positive: true).count %>
+  <% unpositive = data.votes.where(positive: false).count %>
+  <%= link_to data.path, class: 'button round' do %>
+    <%= data.title %>
+    <span class="green-text"><%= positive.to_s %></span>
+    /
+    <span class="red-text"><%= unpositive.to_s %></span>
+  <% end %>
+<% end %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :tutorial_comment_votes, only: [:create,:update,:destroy]
     end
     resources :parts do
+      resources :part_votes,only: [:create,:update,:destroy]
       resources :done_parts,only: [:create,:destroy]
       resources :part_comments, path: 'comments', only: [:index,:create,:update,:destroy] do
         resources :part_comment_votes, only: [:create,:update,:destroy]
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
       resources :interpreter_comment_votes, only: [:create,:update,:destroy]
     end
     resources :functions do
+      resources :function_votes,only: [:create,:update,:destroy]
       resources :function_comments, path: 'comments', only: [:index,:create,:update,:destroy] do
         resources :function_comment_votes, only: [:create,:update,:destroy]
       end

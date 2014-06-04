@@ -12,9 +12,6 @@ class Tutorial < ActiveRecord::Base
     self.tutorial_grades.sum(:grade) / self.tutorial_grades.count
   end
 
-  #return true if fully finished
-  #       false if partialy finished
-  #       nil if never touched
   def done(user)
     parts = self.parts
     count = 0

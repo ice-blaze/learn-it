@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529145526) do
+ActiveRecord::Schema.define(version: 20140604075106) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 20140529145526) do
 
   add_index "function_comments", ["function_id"], name: "index_function_comments_on_function_id", using: :btree
   add_index "function_comments", ["user_id"], name: "index_function_comments_on_user_id", using: :btree
+
+  create_table "function_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "positive"
+    t.integer  "user_id"
+    t.integer  "function_id"
+  end
+
+  add_index "function_votes", ["function_id"], name: "index_function_votes_on_function_id", using: :btree
+  add_index "function_votes", ["user_id"], name: "index_function_votes_on_user_id", using: :btree
 
   create_table "functions", force: true do |t|
     t.string   "name"
@@ -149,6 +160,17 @@ ActiveRecord::Schema.define(version: 20140529145526) do
 
   add_index "part_comments", ["part_id"], name: "index_part_comments_on_part_id", using: :btree
   add_index "part_comments", ["user_id"], name: "index_part_comments_on_user_id", using: :btree
+
+  create_table "part_votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "positive"
+    t.integer  "user_id"
+    t.integer  "part_id"
+  end
+
+  add_index "part_votes", ["part_id"], name: "index_part_votes_on_part_id", using: :btree
+  add_index "part_votes", ["user_id"], name: "index_part_votes_on_user_id", using: :btree
 
   create_table "parts", force: true do |t|
     t.string   "title"

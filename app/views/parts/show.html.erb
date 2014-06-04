@@ -1,11 +1,10 @@
 <div class="row" data-equalizer>
   <h1>Parts#show</h1>
   <div class="large-2 columns panel center" data-equalizer-watch>
-    <h4>All parts</h4>
-    <% @parts.each_with_index do |p,index| %>
-      <% done = p.done_parts.where(:user_id => current_user.id).first %>
-      <%= link_to (index+1).to_s+' '+p.title, [@tutorial,p], class: done.blank? ? 'undone-part' : 'done-part'   %>
-    <% end %>
+    <%= render partial: 'parts/parts',
+               locals: {parts: @tutorial.parts,
+                        tutorial: @tutorial,
+                        user: current_user}  %>
   </div>
   <div class="large-5 columns panel" data-equalizer-watch>
     <h4><%= @part.title %></h4>

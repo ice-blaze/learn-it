@@ -4,19 +4,13 @@
   </div>
   <div class='small-12'>
     <h4>All your comments</h4>
-    <% @user.comments.each do |comment| %>
-      <% positive = comment.votes.where(positive: true).count %>
-      <% unpositive = comment.votes.where(positive: false).count %>
-      <%= link_to comment.parent_path, class: 'button round' do %>
-        <%= truncate(comment.content) %>
-        <span class="green-text"><%= positive.to_s %></span>
-        /
-        <span class="red-text"><%= unpositive.to_s %></span>
-      <% end %>
-    <% end %>
+
+    <%= render partial: 'users/button_with_votes',
+               locals: {datas: @user.comments} %>
+
   </div>
   <div class='small-12'>
-    <h4>Your unfinished tutorials and interpreters</h4>
+    <h4>Work in progress</h4>
     <% @unfini_tut_int.each do |unfinished| %>
       <%= link_to unfinished, class: 'button round' do %>
         <%= unfinished.title %>
@@ -42,5 +36,12 @@
         <% end %>
       <% end %>
     </div>
+  </div>
+  <div class="small-12">
+    <h4>Improve your self</h4>
+
+    <%= render partial: 'users/button_with_votes',
+               locals: {datas: @improve} %>
+
   </div>
 </div>

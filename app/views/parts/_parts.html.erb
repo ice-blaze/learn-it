@@ -1,8 +1,9 @@
-<h2>All parts:</h2>
-<% parts[0..-2].each_with_index do |part, index| %>
-  <p>
-    title : <%= index+1 %> <%= part.title %><br>
-    content : <%= part.content %><br>
-  </p>
-<% end %>
+<!--parts-->
+<!--tutorial-->
+<!--user-->
+<h4>All parts</h4>
+<% parts.each_with_index do |p,index| %>
+  <% done = p.done_parts.where(:user_id => user.id).first %>
 
+  <%= link_to (index+1).to_s+' '+p.title, [tutorial,p], class: done.blank? ? 'undone-part' : 'done-part'   %>
+<% end %>

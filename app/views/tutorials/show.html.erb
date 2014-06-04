@@ -35,7 +35,10 @@
 
   <!--Tutorial parts zone-->
   <div class="large-2 columns">
-    <%= render partial: 'parts/parts', locals: {parts: @tutorial.parts}  %>
+    <%= render partial: 'parts/parts',
+               locals: {parts: @tutorial.parts,
+                        tutorial: @tutorial,
+                        user: current_user}  %>
   </div>
 
   <!--New comment zone-->

@@ -74,7 +74,10 @@
   </div>
 <% end %>
 
-<%= render partial: 'parts/parts', locals: {parts: @parts}  %>
+<%= render partial: 'parts/parts',
+           locals: {parts: @parts[0..-2],
+                    tutorial: @tutorial,
+                    user: current_user}  %>
 
 
 
