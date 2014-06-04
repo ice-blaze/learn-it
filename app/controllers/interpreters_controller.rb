@@ -1,4 +1,7 @@
 class InterpretersController < ApplicationController
+
+  before_action :authenticate_user!, except: :show
+
   def show
     @interpreter = Interpreter.find(params[:id])
     @functions = @interpreter.functions

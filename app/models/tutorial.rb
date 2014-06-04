@@ -9,6 +9,7 @@ class Tutorial < ActiveRecord::Base
   validates :is_finish, :inclusion => {:in => [true, false]}
 
   def grade_mean
+    return 0 if self.tutorial_grades.count == 0
     self.tutorial_grades.sum(:grade) / self.tutorial_grades.count
   end
 

@@ -5,6 +5,8 @@ class PartComment < ActiveRecord::Base
   has_many :part_comment_votes
   has_many :users, through: :part_comment_votes
 
+  validates :content, :like, :dislike, :user, :part, presence: true
+
   def path
     [self.part.tutorial,self.part]
   end

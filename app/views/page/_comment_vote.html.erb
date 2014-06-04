@@ -4,6 +4,8 @@
 
 <!--Vote section-->
 
+<% return unless user_signed_in? %>
+
 <!--If the vote exist, we have only to update it-->
 <% @exist = false %>
 <% votes.each do |v| %>

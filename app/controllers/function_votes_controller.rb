@@ -1,4 +1,7 @@
 class FunctionVotesController < ApplicationController
+
+  before_action :authenticate_user!
+
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
     @function = Function.find(params[:function_id])

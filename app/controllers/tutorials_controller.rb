@@ -1,6 +1,5 @@
 class TutorialsController < ApplicationController
-  def index
-  end
+  before_action :authenticate_user!, except: :show
 
   def show
     @tutorial = Tutorial.find(params[:id])

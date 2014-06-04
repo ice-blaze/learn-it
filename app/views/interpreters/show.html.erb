@@ -10,9 +10,11 @@
         <h4><%= @interpreter.description %></h4>
       </div>
       <div class="large-2 columns">
-        <div class="text-right">
-          <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'button small' %>
-        </div>
+        <% if current_user == @interpreter.user %>
+          <div class="text-right">
+            <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'button small' %>
+          </div>
+        <% end %>
 
         <!--grade section-->
         <%= render partial: 'page/grade', locals: {

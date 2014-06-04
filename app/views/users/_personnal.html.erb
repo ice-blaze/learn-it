@@ -1,0 +1,47 @@
+<div class='row'>
+  <div class='small-12'>
+    <%= link_to 'change account settings', edit_user_registration_path, class: 'button tiny' %>
+  </div>
+  <div class='small-12'>
+    <h4>All your comments</h4>
+
+    <%= render partial: 'users/button_with_votes',
+               locals: {datas: @user.comments} %>
+
+  </div>
+  <div class='small-12'>
+    <h4>Work in progress</h4>
+    <% @unfini_tut_int.each do |unfinished| %>
+      <%= link_to unfinished, class: 'button round' do %>
+        <%= unfinished.title %>
+        <%= unfinished.grade_mean %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="small-12">
+    <h4>Tutorials</h4>
+    <div class="small-6 columns">
+      <h5>Started but not finished</h5>
+      <% @try_unfinish.each do |tutorial| %>
+        <%= link_to tutorial, class: 'button round' do %>
+          <% tutorial.title %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="small-6 columns">
+      <h5>Finished</h5>
+      <% @try_finish.each do |tutorial| %>
+        <%= link_to tutorial, class: 'button round' do %>
+          <% tutorial.title %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="small-12">
+    <h4>Improve your self</h4>
+
+    <%= render partial: 'users/button_with_votes',
+               locals: {datas: @improve} %>
+
+  </div>
+</div>

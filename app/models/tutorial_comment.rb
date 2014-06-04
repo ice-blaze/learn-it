@@ -5,6 +5,8 @@ class TutorialComment < ActiveRecord::Base
   has_many :tutorial_comment_votes
   has_many :users, through: :tutorial_comment_votes
 
+  validates :content, :like, :dislike, :user, :tutorial, presence: true
+
   def path
     self.tutorial
   end

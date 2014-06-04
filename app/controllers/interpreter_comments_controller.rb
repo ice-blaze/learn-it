@@ -1,4 +1,7 @@
 class InterpreterCommentsController < ApplicationController
+
+  before_action :authenticate_user!
+
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
     @comment = @interpreter.interpreter_comments.create(comment_params)

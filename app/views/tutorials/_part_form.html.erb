@@ -1,0 +1,30 @@
+<%= form_for link do |f| %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :signature %>
+      <%= f.text_area :signature %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <%= f.submit class: 'button tiny' %>
+    </div>
+    <div class="large-6 columns">
+      <%= link_to 'Go to the page', link, class: 'button tiny right' unless new  %>
+    </div>
+  </div>
+<% end %>

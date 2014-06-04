@@ -41,43 +41,30 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <%= f.submit 'save' %>
+      <%= f.submit 'save', class: 'button tiny' %>
     </div>
   </div>
 <% end %>
 
-<%= form_for ([@tutorial, @tutorial.parts.build]) do |f| %>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#newpart">New part</a>
+    <div id="newpart" class="content">
+      <%= render partial: 'part_form',
+                 locals: {link: [@tutorial, @tutorial.parts.build], new: true} %>
     </div>
-  </div>
+  </dd>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :signature %>
-      <%= f.text_area :signature %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.submit %>
-    </div>
-  </div>
-<% end %>
-
-<%= render partial: 'parts/parts',
-           locals: {parts: @parts[0..-2],
-                    tutorial: @tutorial,
-                    user: current_user}  %>
+  <% @tutorial.parts[0..-2].each_with_index do |p, index| %>
+    <dd>
+      <a href="#part<%= p.id %>"><%= (index+1).to_s+' '+p.title %></a>
+      <div id="part<%= p.id %>" class="content">
+        <%= render partial: 'part_form',
+                   locals: {link: [@tutorial, p], new: false} %>
+      </div>
+    </dd>
+  <% end %>
+</dl>
 
 
 

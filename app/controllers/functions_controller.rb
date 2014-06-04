@@ -1,4 +1,7 @@
 class FunctionsController < ApplicationController
+
+  before_action :authenticate_user!, except: :show
+
   def show
     @interpreter = Interpreter.find(params[:interpreter_id])
     @functions = @interpreter.functions
@@ -11,6 +14,17 @@ class FunctionsController < ApplicationController
     @interpreter = Interpreter.find(params[:interpreter_id])
     @function = @interpreter.functions.create(function_params)
     redirect_to edit_interpreter_path(@interpreter)
+  end
+
+  def update
+    interpreter = Interpreter.find(params[:interpreter_id])
+    function = Function.find(params[:id])
+
+    if function.update(function_params)
+      redirect_to edit_interpreter_path(interpreter)
+    else
+      render 'edit'
+    end
   end
 
   def edit

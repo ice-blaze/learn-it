@@ -5,6 +5,8 @@ class InterpreterComment < ActiveRecord::Base
   has_many :interpreter_comment_votes
   has_many :users, through: :interpreter_comment_votes
 
+  validates :content, :like, :dislike, :interpreter, :user, presence: true
+
   def path
     self.interpreter
   end

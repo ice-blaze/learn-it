@@ -49,47 +49,28 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <%= f.submit %>
+      <%= f.submit class: 'button tiny' %>
     </div>
   </div>
 <% end %>
 
 
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#newpart">New function</a>
+    <div id="newpart" class="content">
+      <%= render partial: 'function_form',
+                 locals: {link: [@interpreter, @interpreter.functions.build], new: true} %>
+    </div>
+  </dd>
 
-<h2>Add function:</h2>
-<%= form_for([@interpreter, @interpreter.functions.build]) do |f| %>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :regex %>
-      <%= f.text_area :regex %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.submit %>
-    </div>
-  </div>
-<% end %>
-
-<h2>All functions:</h2>
-<% @functions[0..-2].each_with_index do |f, index| %>
-  <%= render partial: 'functions/function', locals: {index: index, function: f} %>
-<% end %>
+  <% @interpreter.functions[0..-2].each_with_index do |f, index| %>
+    <dd>
+      <a href="#part<%= f.id %>"><%= (index+1).to_s+' '+f.title %></a>
+      <div id="part<%= f.id %>" class="content">
+        <%= render partial: 'function_form',
+                   locals: {link: [@interpreter, f],new: false} %>
+      </div>
+    </dd>
+  <% end %>
+</dl>

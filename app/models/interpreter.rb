@@ -10,6 +10,8 @@ class Interpreter < ActiveRecord::Base
   validates :open_token, length: { is: 1 }
   validates :close_token, length: { is: 1 }
 
+  validates :title,:description, :is_finish, :open_token, :close_token, :user, :version, presence: true
+
   def grade_mean
     self.interpreter_grades.sum(:grade) / self.interpreter_grades.count
   end

@@ -3,7 +3,12 @@
 <!--user-->
 <h4>All parts</h4>
 <% parts.each_with_index do |p,index| %>
-  <% done = p.done_parts.where(:user_id => user.id).first %>
+
+  <% if user_signed_in? %>
+    <% done = p.done_parts.where(:user_id => user.id).first %>
+  <% else %>
+    <% done = true %>
+  <% end %>
 
   <%= link_to (index+1).to_s+' '+p.title, [tutorial,p], class: done.blank? ? 'undone-part' : 'done-part'   %>
 <% end %>

@@ -10,9 +10,11 @@
         <h4><%= @tutorial.description %></h4>
       </div>
       <div class="large-2 columns">
-        <div class="text-right">
-          <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'button small' %>
-        </div>
+        <% if user_signed_in? && @tutorial.user == current_user %>
+          <div class="text-right">
+            <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'button small' %>
+          </div>
+        <% end %>
 
         <!--grade section-->
         <%= render partial: 'page/grade', locals: {

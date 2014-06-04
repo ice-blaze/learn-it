@@ -1,15 +1,17 @@
-<h4>Comments</h4>
-<%= form_for(link) do |f| %>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :content %>
-      <%= f.text_field :content %>
+<% if user_signed_in? %>
+  <h4>Comments</h4>
+  <%= form_for(link) do |f| %>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :content %>
+        <%= f.text_field :content %>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="large-12 columns text-right">
-      <%= f.submit 'add comment', class: 'button tiny'%>
+    <div class="row">
+      <div class="large-12 columns text-right">
+        <%= f.submit 'add comment', class: 'button tiny'%>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

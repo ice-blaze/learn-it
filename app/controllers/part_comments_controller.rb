@@ -1,5 +1,15 @@
 class PartCommentsController < ApplicationController
 
+  before_action :authenticate_user!, except: :index
+
+  def index
+    @tutorial = Tutorial.find(params[:tutorial_id])
+    @part = Part.find(params[:part_id])
+    @parts = @tutorial.parts
+    @comment = PartComment.new
+    @comments = @part.part_comments
+  end
+
   def create
     @tutorial = Tutorial.find(params[:tutorial_id])
     @part = Part.find(params[:part_id])
@@ -18,13 +28,6 @@ class PartCommentsController < ApplicationController
 
   end
 
-  def index
-    @tutorial = Tutorial.find(params[:tutorial_id])
-    @part = Part.find(params[:part_id])
-    @parts = @tutorial.parts
-    @comment = PartComment.new
-    @comments = @part.part_comments
-  end
 
   private
   def comment_params

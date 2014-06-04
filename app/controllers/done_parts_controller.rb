@@ -1,4 +1,5 @@
 class DonePartsController < ApplicationController
+
   before_action :authenticate_user!
 
   def create
@@ -9,6 +10,7 @@ class DonePartsController < ApplicationController
       redirect_to [@tutorial,@part], :flash => { :error => 'Signature doesn\'t match, retry !'}
       return
     end
+
 
     @done_part = DonePart.new
     @done_part.user = current_user
