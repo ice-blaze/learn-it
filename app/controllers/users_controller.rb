@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
     parts = Part.where(tutorial: Tutorial.where(user: current_user))
     functions = Function.where(interpreter: Interpreter.where(user: current_user))
-    @improve = parts+functions
-
+    @improve = (parts+functions).sort_by{|e| e.votes.where(positive: true).count-e.votes.where(positive: false).count}
   end
 end
