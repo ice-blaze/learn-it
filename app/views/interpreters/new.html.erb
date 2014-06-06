@@ -1,4 +1,16 @@
 <h1>Interpreters#new</h1>
+<% if @interpreter.errors.any? %>
+  <div class="alert-box alert">
+    <%= pluralize(@interpreter.errors.count, 'error') %> :<br>
+    <a href="#" class="close">&times;</a>
+
+    <ul>
+      <% @interpreter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_for :interpreter, url: interpreters_path do |f| %>
   <div class="row">

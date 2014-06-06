@@ -9,6 +9,10 @@ class UsersController < ApplicationController
       unfinished_int = current_user.tutorials.where(is_finish: false)
       @unfini_tut_int = unfinished_int + unfinished_tut
 
+      finished_tut = current_user.interpreters.where(is_finish: true)
+      finished_int = current_user.tutorials.where(is_finish: true)
+      @fini_tut_int = finished_int + finished_tut
+
       try_tutorials = Tutorial.where(id: Part.where(id: DonePart.where(user: current_user).pluck(:part_id)).pluck(:tutorial_id).uniq)
       @try_finish = []
       @try_unfinish = []

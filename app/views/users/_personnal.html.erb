@@ -9,39 +9,72 @@
                locals: {datas: @user.comments} %>
 
   </div>
+
   <div class='small-12'>
-    <h4>Work in progress</h4>
-    <% @unfini_tut_int.each do |unfinished| %>
-      <%= link_to unfinished, class: 'button round' do %>
-        <%= unfinished.title %>
-        <%= unfinished.grade_mean %>
+    <h4>Your work</h4>
+    <div class="small-6 columns">
+      <% if @unfini_tut_int.size == 0 %>
+        <h5>No work in progress</h5>
+      <% else %>
+        <h5>Work in progress</h5>
+        <% @unfini_tut_int.each do |unfinished| %>
+          <%= link_to unfinished, class: 'button round' do %>
+            <%= unfinished.title %><br>
+            Grade : <%= unfinished.grade_mean %>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+    <div class="small-6 columns">
+      <% if @fini_tut_int.size == 0 %>
+        <h5>No work finished</h5>
+      <% else %>
+        <h5>Work finished</h5>
+        <% @fini_tut_int.each do |finished| %>
+          <%= link_to finished, class: 'button round' do %>
+            <%= finished.title %><br>
+            Grade : <%= finished.grade_mean %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+
   <div class="small-12">
     <h4>Tutorials</h4>
     <div class="small-6 columns">
-      <h5>Started but not finished</h5>
-      <% @try_unfinish.each do |tutorial| %>
-        <%= link_to tutorial, class: 'button round' do %>
-          <% tutorial.title %>
+      <% if @try_unfinish.size == 0 %>
+        <h5>No started tutorials</h5>
+      <% else %>
+        <h5>Started but not finished</h5>
+        <% @try_unfinish.each do |tutorial| %>
+          <%= link_to tutorial, class: 'button round' do %>
+            <% tutorial.title %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
     <div class="small-6 columns">
-      <h5>Finished</h5>
-      <% @try_finish.each do |tutorial| %>
-        <%= link_to tutorial, class: 'button round' do %>
-          <% tutorial.title %>
+      <% if @try_finish.size == 0 %>
+        <h5>No tutorials finished</h5>
+      <% else %>
+        <h5>Finished</h5>
+        <% @try_finish.each do |tutorial| %>
+          <%= link_to tutorial, class: 'button round' do %>
+            <% tutorial.title %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
   </div>
+
   <div class="small-12">
-    <h4>Improve your self</h4>
-
-    <%= render partial: 'users/button_with_votes',
-               locals: {datas: @improve} %>
-
+    <% if @improve.size == 0 %>
+      <h4>You have done no tutorials or interpreter</h4>
+    <% else %>
+      <h4>Improve your self</h4>
+      <%= render partial: 'users/button_with_votes',
+                 locals: {datas: @improve} %>
+    <% end %>
   </div>
 </div>

@@ -12,25 +12,33 @@ class FunctionsController < ApplicationController
 
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
-    @function = @interpreter.functions.create(function_params)
-    redirect_to edit_interpreter_path(@interpreter)
+    function = @interpreter.functions.create(function_params)
+    # function.content = function.content.gsub(/\\/, '\\\\')
+    if function.save
+      redirect_to edit_interpreter_path(@interpreter)
+    else
+      redirect_to edit_interpreter_path(@interpreter), flash: { error: 'Ouch' }
+    end
   end
 
   def update
     interpreter = Interpreter.find(params[:interpreter_id])
     function = Function.find(params[:id])
-
     if function.update(function_params)
+      # function.content = function.content.gsub(/\\/, '\\\\')
       redirect_to edit_interpreter_path(interpreter)
     else
-      render 'edit'
+      redirect_to edit_interpreter_path(interpreter), flash: { error: 'Ouch' }
     end
   end
 
   def edit
   end
 
-  def delete
+  def destroy
+    interpreter = Interpreter.find(params[:interpreter_id])
+    Function.find(params[:id]).destroy
+    redirect_to edit_interpreter_path(interpreter), flash: { error: 'Function deleted' }
   end
 
   private

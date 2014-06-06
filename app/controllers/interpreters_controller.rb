@@ -4,6 +4,7 @@ class InterpretersController < ApplicationController
 
   def show
     @interpreter = Interpreter.find(params[:id])
+    @function = Function.new
     @functions = @interpreter.functions
     @comment = InterpreterComment.new
     @comments = @interpreter.interpreter_comments
@@ -17,6 +18,7 @@ class InterpretersController < ApplicationController
 
     @interpreter.version = 1
     @interpreter.user = current_user
+    @interpreter.is_finish = false if params[:is_finish].blank?
 
     if @interpreter.save
       redirect_to @interpreter
