@@ -1,5 +1,6 @@
-<h1>Comments index</h1>
-
+<%= breadcrumbs({title: @tutorial.title, link: @tutorial},
+                {title: @part.title, link: [@tutorial,@part]},
+                current: "comments") %>
 <div class="row">
   <div class="large-2 columns panel">
     <%= render partial: 'parts/parts',
@@ -8,17 +9,17 @@
                         user: current_user}  %>
   </div>
   <div class="large-10 columns panel">
-      <div class="text-center columns  large-8">
-        <h4><%= @part.title %></h4>
-        <p><%= @part.content %></p>
-      </div>
-      <div class="text-right right columns large-2">
-        <%= render partial: 'page/comment_vote', locals: {
-            votes: @part.part_votes,
-            update_vote_link: [@tutorial,@part],
-            create_vote_link: [@tutorial,@part,@part.part_votes.build]
-        } %>
-      </div>
+    <div class="text-center columns  large-8">
+      <h4><%= @part.title %></h4>
+      <p><%= @part.content %></p>
+    </div>
+    <div class="text-right right columns large-2">
+      <%= render partial: 'page/comment_vote', locals: {
+          votes: @part.part_votes,
+          update_vote_link: [@tutorial,@part],
+          create_vote_link: [@tutorial,@part,@part.part_votes.build]
+      } %>
+    </div>
     <div class="row">
       <div class="columns">
         <%= render partial: 'page/add_comment', locals: {link: [@tutorial,@part,@part.part_comments.build]} %>

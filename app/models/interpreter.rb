@@ -6,12 +6,12 @@ class Interpreter < ActiveRecord::Base
   belongs_to :user
 
   validates :title,:description, :open_token, :close_token, :user, presence: true
-  validates :is_finish, :inclusion => {:in => [true, false]}
+  validates :is_finish, inclusion: [true, false]
   validates :open_token, length: { is: 1 }
   validates :close_token, length: { is: 1 }
 
   def grade_mean
-    return 0 if self.interpreter_grades.count == 0
+    return 0.0 if self.interpreter_grades.count == 0
     self.interpreter_grades.sum(:grade) / self.interpreter_grades.count
   end
 end

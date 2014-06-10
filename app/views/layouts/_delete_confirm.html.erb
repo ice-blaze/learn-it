@@ -1,0 +1,8 @@
+<!--link / name / id-->
+
+<div id="<%= id %>" class="reveal-modal" data-reveal>
+  <h2>Do you really want to delete this <%= name %> ?</h2>
+  <p>This action cannot be undone.</p>
+  <a class="close-reveal-modal">&#215;</a>
+  <%= link_to 'delete', link, method: :delete, class: 'button tiny alert right' %>
+</div>

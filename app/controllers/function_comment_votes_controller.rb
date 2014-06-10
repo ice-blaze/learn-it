@@ -1,6 +1,6 @@
 class FunctionCommentVotesController < ApplicationController
 
-  before_action :authenticate_member!
+  before_action :authenticate_user!
 
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
@@ -23,7 +23,7 @@ class FunctionCommentVotesController < ApplicationController
     if @vote.update(vote_params)
       redirect_to [@interpreter,@function]
     else
-      redirect_to [@interpreter,@function], :flash => { :info => 'Change vote FAILED !' }
+      redirect_to [@interpreter,@function], flash: { info: 'Change vote FAILED !' }
     end
   end
 

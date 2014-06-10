@@ -1,4 +1,4 @@
-<h1>Tutorials#new</h1>
+<%= breadcrumbs({title: 'creator page', link: creator_path}, current: 'new tutorial') %>
 
 <% if @tutorial.errors.any? %>
   <div class="alert-box alert">
@@ -37,7 +37,7 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <%= f.submit %>
+      <%= f.submit 'save', class: 'button small' %>
     </div>
   </div>
 <% end %>

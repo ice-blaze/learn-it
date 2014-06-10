@@ -27,7 +27,10 @@ class PartsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    tutorial = Tutorial.find(params[:tutorial_id])
+    Part.find(params[:id]).destroy
+    redirect_to edit_tutorial_path(tutorial), flash: { error: 'Part deleted' }
   end
 
   private

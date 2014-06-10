@@ -1,5 +1,5 @@
+<%= breadcrumbs({title: @tutorial.title, link: @tutorial}, current: @part.title) %>
 <div class="row" data-equalizer>
-  <h1>Parts#show</h1>
   <div class="large-2 columns panel center" data-equalizer-watch>
     <%= render partial: 'parts/parts',
                locals: {parts: @tutorial.parts,
@@ -10,10 +10,11 @@
     <h4><%= @part.title %></h4>
     <p><%= @part.content %></p>
     <%= link_to 'Review', tutorial_part_part_comments_path(@tutorial,@part), class: 'button small right' %>
+
   </div>
   <div class="large-5 columns panel" data-equalizer-watch>
     <%= form_for([@tutorial,@part,@part.done_parts.build()]) do |f|%>
-      <%= text_area_tag :signature %>
+      <%= text_area_tag :signature, nil, size: '14x16' %>
       <%= f.submit 'Execute', class: 'button small right' %>
     <% end %>
     <h4></h4>

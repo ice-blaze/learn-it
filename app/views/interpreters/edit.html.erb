@@ -1,4 +1,5 @@
-<h1>Interpreters#edit</h1>
+<%= breadcrumbs({title: @interpreter.title, link: @interpreter}, current: 'edit') %>
+<%= render partial: 'layouts/delete_confirm', locals: {id: 'interpreterDelete', name: 'interpreter', link: @interpreter}%>
 
 <%= form_for :interpreter, url: interpreter_path(@interpreter), method: :patch do |f| %>
   <% if @interpreter.errors.any? %>
@@ -50,6 +51,7 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.submit class: 'button tiny' %>
+      <a href="#" data-reveal-id="interpreterDelete" class="button tiny alert right">Delete</a>
     </div>
   </div>
 <% end %>

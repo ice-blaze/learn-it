@@ -1,5 +1,5 @@
 class TutorialCommentsController < ApplicationController
-  before_action :authenticate_member!
+  before_action :authenticate_user!
 
   def create
     @tutorial = Tutorial.find(params[:tutorial_id])

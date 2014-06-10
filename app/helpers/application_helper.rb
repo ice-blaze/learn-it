@@ -30,4 +30,22 @@ module ApplicationHelper
     end
     count
   end
+
+  def breadcrumbs(*links, current: current)
+    html = "<br><div class='row'>
+    <div class='large-12 columns '>
+      <ul class='breadcrumbs'>"
+
+    html += "<li>"+link_to('home',root_path) +"</li>" unless current.downcase == 'home'
+    links.each do |link|
+      html += "<li>"
+      html += link_to link[:title], link[:link]
+      html += "</li>"
+    end
+    html +=  "<li class='current'>"+current+"</li>" unless current.blank?
+    html += '</ul>
+            </div>
+            </div>'
+    html.html_safe
+  end
 end

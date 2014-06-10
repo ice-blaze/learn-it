@@ -1,6 +1,10 @@
-<h1>Page#creator</h1>
+<%= breadcrumbs current: 'creator' %>
 
-<p><%= link_to 'Show tutorials', home_path %></p>
-<p><%= link_to 'Create tutorials', new_tutorial_path %></p>
-<p><%= link_to 'Create interpreter', new_interpreter_path %></p>
-
+<div class="row">
+  <div class="large-6 column text-center">
+    <%= link_to 'Create tutorials', new_tutorial_path, class: 'button' %>
+  </div>
+  <div class="large-6 column text-center">
+    <%= link_to 'Create interpreter', new_interpreter_path, class: 'button' %>
+  </div>
+</div>

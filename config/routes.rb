@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
   get 'users/:id' => 'users#show', as: 'users'
-  # devise_for :users, :path_prefix => 'd'
-  # resources :users, :only => [:show]
+  get 'users/:id' => 'users#show', as: 'user'
 
   resources :tutorials do
     resources :tutorial_grades, only: [:create]

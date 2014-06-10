@@ -1,5 +1,5 @@
 class InterpreterGradesController < ApplicationController
-  before_action :authenticate_member!
+  before_action :authenticate_user!
 
   def create
     #if vote with actual user exist, only update

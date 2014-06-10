@@ -1,7 +1,7 @@
 class Tutorial < ActiveRecord::Base
-  has_many :tutorial_comments, inverse_of: :tutorial
-  has_many :tutorial_grades, inverse_of: :tutorial
-  has_many :parts, inverse_of: :tutorial
+  has_many :tutorial_comments, inverse_of: :tutorial, dependent: :delete_all
+  has_many :tutorial_grades, inverse_of: :tutorial, dependent: :delete_all
+  has_many :parts, inverse_of: :tutorial, dependent: :delete_all
   belongs_to :user
   belongs_to :interpreter
 
@@ -9,7 +9,7 @@ class Tutorial < ActiveRecord::Base
   validates :is_finish, :inclusion => {:in => [true, false]}
 
   def grade_mean
-    return 0 if self.tutorial_grades.count == 0
+    return 0.0 if self.tutorial_grades.count == 0
     self.tutorial_grades.sum(:grade) / self.tutorial_grades.count
   end
 

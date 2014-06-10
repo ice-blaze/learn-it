@@ -24,7 +24,10 @@
       <%= f.submit class: 'button tiny' %>
     </div>
     <div class="large-6 columns">
-      <%= link_to 'Go to the page', link, class: 'button tiny right' unless new  %>
+      <% unless new %>
+        <%= link_to 'delete', link, method: :delete, class: 'button tiny alert right' %>
+        <%= link_to 'Go to the page', link, class: 'button tiny right' %>
+      <% end %>
     </div>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<h1>Tutorials#edit</h1>
+<%= breadcrumbs({title: @tutorial.title,link: @tutorial},current: 'edit') %>
 
 <%= form_for :tutorial, url: tutorial_path(@tutorial), method: :patch do |f| %>
   <% if @tutorial.errors.any? %>
@@ -11,6 +11,7 @@
       </ul>
     </div>
   <% end %>
+  <%= render partial: 'layouts/delete_confirm', locals: {id: 'tutorialDelete', name: 'tutorial', link: @tutorial}%>
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :title %>
@@ -42,13 +43,14 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.submit 'save', class: 'button tiny' %>
+      <a href="#" data-reveal-id="tutorialDelete" class="button tiny alert right">Delete</a>
     </div>
   </div>
 <% end %>
 
 <dl class="accordion" data-accordion>
   <dd>
-    <a href="#newpart">New part</a>
+    <a href="<%= request.original_url %>#newpart">New part</a>
     <div id="newpart" class="content">
       <%= render partial: 'part_form',
                  locals: {link: [@tutorial, @tutorial.parts.build], new: true} %>

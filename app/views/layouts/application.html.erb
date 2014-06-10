@@ -24,12 +24,11 @@
       <section class="top-bar-section">
       <% if user_signed_in? %>
         <ul class="left">
-          <li><%= link_to 'Home',root_path%></li>
           <li><%= link_to 'Create tutorials',creator_path%></li>
           <li><%= link_to 'About',about_path%></li>
         </ul>
         <ul class="right">
-          <li><%= link_to current_user.email, users_path(current_user) %></li>
+          <li><%= link_to current_user.email, current_user %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
         </ul>
       <% else %>
@@ -44,11 +43,11 @@
 
     <div class="row small-6 large-centered columns">
       <% unless notice.nil? %>
-        <br>
-        <div data-alert class="notice alert-box info radius">
-          <%= notice %>
-          <a href="#" class="close"> &times;</a>
-        </div>
+        <!--<br>-->
+        <!--<div data-alert class="notice alert-box info radius">-->
+          <!--<% notice %>-->
+          <!--<a href="#" class="close"> &times;</a>-->
+        <!--</div>-->
       <% end %>
 
       <% unless alert.nil? %>

@@ -44,7 +44,9 @@ class TutorialsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    Tutorial.find(params[:id]).destroy
+    redirect_to root_path, flash: { info: 'Tutorial deleted' }
   end
 
   private

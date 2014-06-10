@@ -1,4 +1,4 @@
 <div class="large-10 columns">
-  <%= comment.user.email %><br>
+  <%= link_to comment.user.email, comment.user %> <span class="right"><%= comment.created_at.strftime("Posted on %d %a %Y at %T") %></span><br><br>
   <%= comment.content %>
 </div>

@@ -1,3 +1,4 @@
+<%= breadcrumbs(current: @user.email) %>
 <% if current_user == @user %>
   <%= render 'users/personnal' %>
 <% else %>

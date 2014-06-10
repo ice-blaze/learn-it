@@ -49,7 +49,9 @@ class InterpretersController < ApplicationController
     @function = Function.new
   end
 
-  def delete
+  def destroy
+    Interpreter.find(params[:id]).destroy
+    redirect_to root_path, flash: { info: 'Interpreter deleted' }
   end
 
   private

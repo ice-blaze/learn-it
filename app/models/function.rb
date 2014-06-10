@@ -1,6 +1,6 @@
 class Function < ActiveRecord::Base
-  has_many :function_comments, inverse_of: :function
-  has_many :function_votes, inverse_of: :function
+  has_many :function_comments, inverse_of: :function, dependent: :delete_all
+  has_many :function_votes, inverse_of: :function, dependent: :delete_all
   belongs_to :interpreter
 
   validates :regex, :content, :interpreter, presence: true

@@ -1,21 +1,26 @@
 <% title "Home" %>
 
-<div class="row small-3 large-centered columns">
-  <h1>Home</h1>
-</div>
+<%= breadcrumbs(current: 'home') %>
+<!--<div class="row small-3 large-centered columns">-->
+  <!--<h1>Home</h1>-->
+<!--</div>-->
 
 <div class="row">
   <div class="large-6 columns">
     <h3>Top 5 tutorials :</h3>
-    <% @tops.each_with_index do |t, index| %>
-      <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
-    <% end %>
+    <div class="panel">
+      <% @tops.each_with_index do |t, index| %>
+        <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+      <% end %>
+    </div>
   </div>
 
   <div class="large-6 columns">
     <h3>Most recent tutorial :</h3>
-    <% @newest.each_with_index do |t, index| %>
-      <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
-    <% end %>
+    <div class="panel">
+      <% @newest.each_with_index do |t, index| %>
+        <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+      <% end %>
+    </div>
   </div>
 </div>
