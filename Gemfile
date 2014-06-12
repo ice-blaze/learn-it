@@ -6,12 +6,9 @@ gem 'rails', '4.1.1'
 
 # for deployment on Heroku
 gem 'heroku'
-group :development, :test do
-  # Use mysql as the database for Active Record
-  gem 'mysql2'
-end
+gem 'pg'
+
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
@@ -51,3 +48,5 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
+
+ruby '2.1.0'
