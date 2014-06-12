@@ -4,5 +4,6 @@ class FunctionVote < ActiveRecord::Base
 
   validates_uniqueness_of :user, :scope => :function
 
-  validates :positive, :user, :function, presence: true
+  validates :user, :function, presence: true
+  validates :positive, inclusion: [true, false]
 end

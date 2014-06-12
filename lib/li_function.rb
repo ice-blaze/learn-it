@@ -53,7 +53,6 @@ class LIFunction
   def do(line)
     # to save an history, each function calls are stored in an array
     @@signature << @function.name if @isSignature
-
     @function.call(line)
   end
 

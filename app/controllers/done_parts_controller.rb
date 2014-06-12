@@ -9,8 +9,15 @@ class DonePartsController < ApplicationController
     # create functions
     LIFunction::reset_functions
     @tutorial.interpreter.functions.each do |f|
-      eval("def #{f.name}(line)\r\n#{f.content}\r\nend")
-      LIFunction.new(Regexp.new(f.regex),method(f.name),f.name=='nothing_func'?false:true)
+      #thread is there to limit eval abuse
+      eval("def #{f.name}(line)
+          thread = Thread.start {
+          $SAFE = 4
+          #{f.content}
+          }
+          thread.join
+          end")
+      LIFunction.new(Regexp.new(f.regex),method(f.name),f.name=='nothing_func'?false:true).taint
     end
 
     # set token
@@ -25,6 +32,8 @@ class DonePartsController < ApplicationController
     # return
 
     if signature_inputs != signature_part || signature_inputs.blank?
+      # render plain: signature_inputs.inspect + "\n" +signature_part.inspect
+      # return
       redirect_to [@tutorial,@part], :flash => { :error => 'Signature doesn\'t match, retry !'}
       return
     end

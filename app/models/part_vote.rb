@@ -4,5 +4,6 @@ class PartVote < ActiveRecord::Base
 
   validates_uniqueness_of :user, scope: :part
 
-  validates :user, :part, :positive, presence: true
+  validates :user, :part, presence: true
+  validates :positive, inclusion: [true, false]
 end
