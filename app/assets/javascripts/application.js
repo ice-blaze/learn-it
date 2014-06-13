@@ -17,3 +17,14 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+function regexTester(callElement, regexId) {
+    var regex = document.getElementById(regexId).value;
+
+    var re = new RegExp(regex);
+    if (callElement.value.match(re)) {
+        callElement.className = " regex-validate";
+    } else {
+        callElement.className = " regex-error";
+    }
+}

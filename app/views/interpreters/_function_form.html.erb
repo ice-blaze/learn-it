@@ -1,4 +1,4 @@
-<%= form_for link do |f| %>
+<%= form_for link, namespace: link.last.id do |f| %>
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :name %>
@@ -12,9 +12,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <%= f.label :regex %>
       <%= f.text_area :regex %>
+    </div>
+    <div class="large-6 columns">
+      <label>Regex tester</label>
+      <textarea onkeydown="regexTester(this, '<%= link.last.id %>_function_regex')"> </textarea>
     </div>
   </div>
   <div class="row">

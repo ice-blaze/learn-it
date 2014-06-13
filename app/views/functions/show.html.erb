@@ -1,14 +1,15 @@
-<h1>Functions#show</h1>
+<%= breadcrumbs({title: @interpreter.title, link: @interpreter}, current: @function.title) %>
 
 <div class="row">
-  <div class="large-2 columns">
-    <h4>
-      <%= @function.name %><br>
-      <%= @function.regex %>
-    </h4>
-  </div>
-  <div class="large-4 columns">
-    <%= @function.description %>
+  <div class="large-6 columns">
+    <div class="large-2 columns">
+      <h4>
+        <%= @function.name %><br>
+      </h4>
+    </div>
+    <div class="large-4 columns">
+      <%= @function.description %>
+    </div>
   </div>
   <div class="large-4 columns">
     <textarea readonly rows="15" cols="50">
@@ -21,6 +22,18 @@
         update_vote_link: [@interpreter,@function],
         create_vote_link: [@interpreter,@function,@function.function_votes.build]
     } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns ">
+    <h5>Regex</h5>
+  </div>
+  <div class="large-6 columns ">
+    <textarea id="function_regex" disabled><%= @function.regex %></textarea>
+  </div>
+  <div class="large-6 columns">
+    <textarea onkeydown="regexTester(this, 'function_regex')" placeholder="Regex tester"></textarea>
   </div>
 </div>
 
