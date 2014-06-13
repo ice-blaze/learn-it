@@ -48,5 +48,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
+gem 'tinymce-rails'
+gem 'jquery-turbolinks'
 
 ruby '2.1.0'

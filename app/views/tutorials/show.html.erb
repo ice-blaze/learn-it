@@ -11,12 +11,12 @@
         <% end %>
       </div>
       <div class="large-6 columns">
-        <h4><%= @tutorial.description %></h4>
+        <h4><%= @tutorial.description.html_safe %></h4>
       </div>
       <div class="large-2 columns">
         <% if user_signed_in? && @tutorial.user == current_user %>
           <div class="text-right">
-            <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'edit-button-expand-tiny' %>
+            <%= button_to 'Edit', edit_tutorial_path(@tutorial), class: 'edit-button-expand-tiny', method: :get  %>
           </div>
         <% end %>
 

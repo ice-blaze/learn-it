@@ -1,4 +1,6 @@
 <%= breadcrumbs({title: 'creator page', link: creator_path}, current: 'new interpreter') %>
+<%= tinymce_assets %>
+
 <% if @interpreter.errors.any? %>
   <div class="alert-box alert">
     <%= pluralize(@interpreter.errors.count, 'error') %> :<br>
@@ -23,7 +25,8 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, class: 'tinymce', rows: 15 %>
+      <%= tinymce %>
     </div>
   </div>
 

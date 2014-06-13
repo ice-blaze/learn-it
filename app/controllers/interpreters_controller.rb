@@ -9,7 +9,7 @@ class InterpretersController < ApplicationController
     @comment = InterpreterComment.new
     @comments = @interpreter.interpreter_comments
 
-    @grade = @interpreter.interpreter_grades.where(:user_id => current_user.id).first.grade rescue nil
+    @grade = @interpreter.interpreter_grades.where(user_id: current_user.id).first.grade rescue nil
     @grade = 0.0 if @grade.blank?
   end
 
@@ -45,7 +45,7 @@ class InterpretersController < ApplicationController
 
   def edit
     @interpreter = Interpreter.find(params[:id])
-    @functions = @interpreter.functions
+    @functions = @interpreter.functions.sort_by &:created_at
     @function = Function.new
   end
 

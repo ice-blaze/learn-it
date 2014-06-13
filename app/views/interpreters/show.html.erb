@@ -11,12 +11,12 @@
         <% end %>
       </div>
       <div class="large-6 columns">
-        <h4><%= @interpreter.description %></h4>
+        <h4><%= @interpreter.description.html_safe %></h4>
       </div>
       <div class="large-2 columns">
         <% if current_user == @interpreter.user %>
           <div class="text-right">
-            <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'edit-button-expand-tiny' %>
+            <%= button_to 'Edit', edit_interpreter_path(@interpreter), class: 'edit-button-expand-tiny', method: :get %>
           </div>
         <% end %>
 

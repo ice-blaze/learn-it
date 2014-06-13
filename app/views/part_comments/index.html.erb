@@ -9,11 +9,11 @@
                         user: current_user}  %>
   </div>
   <div class="large-10 columns panel">
-    <div class="text-center columns  large-8">
+    <div class="large-10 columns">
       <h4><%= @part.title %></h4>
-      <p><%= @part.content %></p>
+      <p><%= @part.content.html_safe %></p>
     </div>
-    <div class="text-right right columns large-2">
+    <div class="large-2 text-right right columns">
       <%= render partial: 'page/comment_vote', locals: {
           votes: @part.part_votes,
           update_vote_link: [@tutorial,@part],

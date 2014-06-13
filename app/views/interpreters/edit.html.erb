@@ -1,4 +1,6 @@
 <%= breadcrumbs({title: @interpreter.title, link: @interpreter}, current: 'edit') %>
+<%= tinymce_assets %>
+
 <%= render partial: 'layouts/delete_confirm', locals: {id: 'interpreterDelete', name: 'interpreter', link: @interpreter}%>
 
 <%= form_for :interpreter, url: interpreter_path(@interpreter), method: :patch do |f| %>
@@ -23,7 +25,8 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, class: 'tinymce', rows: 15 %>
+      <%= tinymce %>
     </div>
   </div>
 

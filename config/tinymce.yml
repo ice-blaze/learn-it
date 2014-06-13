@@ -1,0 +1,19 @@
+toolbar:
+  - styleselect | bold italic underline | link image | undo redo | forecolor backcolor emoticons | textcolor | charmap | lists | paste
+  - table | fullscreen preview print | alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent
+plugins:
+  - table
+  - fullscreen
+  - bbcode
+  - autosave
+  - paste
+  - spellchecker
+  - wordcount
+  - emoticons
+  - textcolor
+  - charmap
+  - link
+  - image
+  - lists
+  - preview
+  - print

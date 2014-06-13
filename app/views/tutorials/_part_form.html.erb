@@ -9,7 +9,8 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :content %>
-      <%= f.text_area :content %>
+      <%= f.text_area :content, namespace: link.last.id, class: 'tinymce', rows: 15 %>
+      <%= tinymce %>
     </div>
   </div>
   <div class="row">

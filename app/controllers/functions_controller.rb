@@ -13,7 +13,6 @@ class FunctionsController < ApplicationController
   def create
     @interpreter = Interpreter.find(params[:interpreter_id])
     function = @interpreter.functions.create(function_params)
-    # function.content = function.content.gsub(/\\/, '\\\\')
     if function.save
       redirect_to edit_interpreter_path(@interpreter)
     else
@@ -25,7 +24,6 @@ class FunctionsController < ApplicationController
     interpreter = Interpreter.find(params[:interpreter_id])
     function = Function.find(params[:id])
     if function.update(function_params)
-      # function.content = function.content.gsub(/\\/, '\\\\')
       redirect_to edit_interpreter_path(interpreter)
     else
       redirect_to edit_interpreter_path(interpreter), flash: { error: 'Ouch' }

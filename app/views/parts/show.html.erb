@@ -8,7 +8,7 @@
   </div>
   <div class="large-5 columns panel" data-equalizer-watch>
     <h4><%= @part.title %></h4>
-    <p><%= @part.content %></p>
+    <p><%= @part.content.html_safe %></p>
     <%= link_to 'Review', tutorial_part_part_comments_path(@tutorial,@part), class: 'button small right' %>
 
   </div>
