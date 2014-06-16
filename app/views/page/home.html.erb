@@ -1,26 +1,55 @@
-<% title "Home" %>
+<% title 'Home' %>
 
 <%= breadcrumbs(current: 'home') %>
-<!--<div class="row small-3 large-centered columns">-->
-  <!--<h1>Home</h1>-->
-<!--</div>-->
+<% if cookies[:welcom_alert].blank? %>
+  <div data-alert class="alert-box secondary large-8 large-offset-2 columns">
+    <div class="text-center">
+      <h3>Weclome</h3>
+      <h5>
+        This is a programming learning site web.<br>
+        You will find tutorials, which you can do it right now !<br>
+        You can also make your own tutorial !<br>
+        All tutorials use interpreters.<br>
+        Those interpreters can be create by the community or by you.<br>
+      </h5>
+    </div>
+    <a href="#" class="close">&times;</a>
+  </div>
+  <% cookies[:welcom_alert] = true %>
+<% end %>
+
 
 <div class="row">
+
   <div class="large-6 columns">
+
     <h3>Top 5 tutorials :</h3>
+    <%= form_tag(root_path, method: 'get', id: 'search-top-form') do %>
+      <%= text_field_tag :top_search, params[:top_search], placeholder: 'Search top tutorial' %>
+      <%= hidden_field_tag :recent_search, params[:recent_search] %>
+      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+    <% end %>
+
     <div class="panel">
       <% @tops.each_with_index do |t, index| %>
         <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
       <% end %>
+      <%= will_paginate @tops, param_name: 'top_page', renderer: FoundationPagination::Rails %>
     </div>
   </div>
 
   <div class="large-6 columns">
     <h3>Most recent tutorial :</h3>
+    <%= form_tag(root_path, method: 'get', id: 'search-recent-form') do %>
+      <%= text_field_tag :recent_search, params[:recent_search], placeholder: 'Search recent tutorial' %>
+      <%= hidden_field_tag :top_search, params[:top_search] %>
+      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+    <% end %>
     <div class="panel">
       <% @newest.each_with_index do |t, index| %>
         <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
       <% end %>
+      <%= will_paginate @newest, param_name: 'recent_page', renderer: FoundationPagination::Rails %>
     </div>
   </div>
 </div>

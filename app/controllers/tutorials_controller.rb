@@ -5,6 +5,7 @@ class TutorialsController < ApplicationController
     @tutorial = Tutorial.find(params[:id])
     @grade = @tutorial.tutorial_grades.where(:user_id => current_user.id).first.grade rescue nil
     @grade = 0.0 if @grade.blank?
+    @comments = @tutorial.tutorial_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
   end
 
   def new

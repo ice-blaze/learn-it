@@ -4,7 +4,6 @@ toolbar:
 plugins:
   - table
   - fullscreen
-  - bbcode
   - autosave
   - paste
   - spellchecker

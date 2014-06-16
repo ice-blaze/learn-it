@@ -42,7 +42,8 @@
   <br>
 
   <!--Comments zone-->
-  <% @function.function_comments[0..-2].reverse.each do |c| %>
+  <%= will_paginate @comments, renderer: FoundationPagination::Rails %>
+  <% @comments.each do |c| %>
     <div class="row comment-panel">
 
       <!-- Content zone-->
@@ -58,4 +59,5 @@
       </div>
     </div>
   <% end %>
+  <%= will_paginate @comments, renderer: FoundationPagination::Rails %>
 </div>

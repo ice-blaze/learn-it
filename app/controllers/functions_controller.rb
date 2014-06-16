@@ -7,7 +7,7 @@ class FunctionsController < ApplicationController
     @functions = @interpreter.functions
     @function = Function.find(params[:id])
     @comment = PartComment.new
-    @comments = @function.function_comments
+    @comments =  @function.function_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
   end
 
   def create
