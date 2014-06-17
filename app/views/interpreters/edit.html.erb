@@ -15,41 +15,7 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'tinymce', rows: 15 %>
-      <%= tinymce %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :is_finish %>
-      <%= f.check_box :is_finish %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :open_token %>
-      <%= f.text_field :open_token %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :close_token %>
-      <%= f.text_field :close_token %>
-    </div>
-  </div>
+  <%= render partial: 'interpreter_form', locals: {form: f} %>
 
   <div class="row">
     <div class="large-12 columns">
@@ -59,22 +25,32 @@
   </div>
 <% end %>
 
-<dl class="accordion" data-accordion>
-  <dd>
-    <a href="#newpart">New function</a>
-    <div id="newpart" class="content">
-      <%= render partial: 'function_form',
-                 locals: {link: [@interpreter, @interpreter.functions.build], new: true} %>
-    </div>
-  </dd>
+<div class="row">
+  <div class="large-12 columns">
+    <%= render partial: 'help_interpreter' %><br>
+  </div>
+</div>
 
-  <% @interpreter.functions[0..-2].each_with_index do |f, index| %>
-    <dd>
-      <a href="#part<%= f.id %>"><%= (index+1).to_s+' '+f.title %></a>
-      <div id="part<%= f.id %>" class="content">
-        <%= render partial: 'function_form',
-                   locals: {link: [@interpreter, f],new: false} %>
-      </div>
-    </dd>
-  <% end %>
-</dl>
+<div class="row">
+  <div class="large-12 columns">
+    <dl class="accordion" data-accordion>
+      <dd>
+        <a href="#newpart">New function</a>
+        <div id="newpart" class="content">
+          <%= render partial: 'function_form',
+                     locals: {link: [@interpreter, @interpreter.functions.build], new: true} %>
+        </div>
+      </dd>
+
+      <% @interpreter.functions[0..-2].each_with_index do |f, index| %>
+        <dd>
+          <a href="#part<%= f.id %>"><%= (index+1).to_s+' '+f.title %></a>
+          <div id="part<%= f.id %>" class="content">
+            <%= render partial: 'function_form',
+                       locals: {link: [@interpreter, f],new: false} %>
+          </div>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>

@@ -2,9 +2,33 @@
 
 <div class="row">
   <div class="large-6 column text-center">
-    <%= link_to 'Create tutorials', new_tutorial_path, class: 'button' %>
+    <%= button_to 'Create tutorials', new_tutorial_path, class: 'button', method: :get  %>
   </div>
   <div class="large-6 column text-center">
-    <%= link_to 'Create interpreter', new_interpreter_path, class: 'button' %>
+    <%= button_to 'Create interpreter', new_interpreter_path, class: 'button', method: :get %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 column">
+    <%= form_tag(creator_path, method: 'get', id: 'search-tutorial-form') do %>
+      <%= text_field_tag :tutorial_search, params[:tutorial_search], placeholder: 'Search tutorial' %>
+      <%= hidden_field_tag :interpreter_search, params[:interpreter_search] %>
+      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+    <% end %>
+  </div>
+  <div class="large-6 column">
+    <%= form_tag(creator_path, method: 'get', id: 'search-interpreter-form') do %>
+      <%= text_field_tag :interpreter_search, params[:interpreter_search], placeholder: 'Search interpreter' %>
+      <%= hidden_field_tag :tutorial_search, params[:tutorial_search] %>
+      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 column">
+  </div>
+  <div class="large-6 column">
   </div>
 </div>

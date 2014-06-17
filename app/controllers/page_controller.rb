@@ -17,6 +17,10 @@ class PageController < ApplicationController
   end
 
   def creator
+    @tutorials = []
+    @tutorials = Tutorial.where("LOWER(title) LIKE LOWER('%#{params[:tutorial_search]}%')") if params[:tutorial_search]
+    @interpreters = Interpreter.where("LOWER(title) LIKE LOWER('%#{params[:interpreter_search]}%')") if params[:interpreter_search]
+
   end
 
   def about

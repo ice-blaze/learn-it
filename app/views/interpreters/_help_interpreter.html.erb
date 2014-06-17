@@ -1,0 +1,33 @@
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#help_section">Help (how it's works)</a>
+    <div id="help_section" class="content">
+      <ol>
+        <li>Choose a name of the function that doesn't contain spaces.</li>
+        <li>Add a description which summarize what the function do.</li>
+        <li>
+          Find a regex which will match with your line. The most precise it is the best it is.<br>
+          In the case where the regex is small and cover a large possibilities,<br>
+          put this functions at the end of order list.
+        </li>
+        <li>
+          The content of the function is ruby code.<br>
+          If it's isn't a condition, it must return true.<br>
+          <ul class="no-bullet">
+            <li><b>Variables :</b>
+              <ul class="no-bullet">
+                <li>instantiate : <kbd>Variable.new(variable_name,variable_value.to_f)</kbd></li>
+                <li>find variable : <kbd>Variable.convert(a_variable_name)</kbd></li>
+              </ul>
+            </li>
+            <li><b>Output :</b>
+              <ul class="no-bullet">
+                <li>To add values to the output you must use this : <kbd>LIFunction.output("something")</kbd></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </dd>
+</dl>

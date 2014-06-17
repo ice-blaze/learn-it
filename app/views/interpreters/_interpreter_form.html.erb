@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="large-12 columns">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'tinymce', rows: 15 %>
+    <%= tinymce %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= form.label :is_finish %>
+    <%= form.check_box :is_finish %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= form.label :open_token, 'Token to open a block' %>
+    <%= form.text_field :open_token, placeholder: 'In C language it is {' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= form.label :close_token, 'Token to end a block' %>
+    <%= form.text_field :close_token,placeholder: 'In C language it is }' %>
+  </div>
+</div>

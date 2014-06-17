@@ -15,41 +15,8 @@
 <% end %>
 
 <%= form_for :interpreter, url: interpreters_path do |f| %>
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'tinymce', rows: 15 %>
-      <%= tinymce %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :is_finish %>
-      <%= f.check_box :is_finish %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :open_token %>
-      <%= f.text_field :open_token %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :close_token %>
-      <%= f.text_field :close_token %>
-    </div>
-  </div>
+  <%= render partial: 'interpreter_form', locals: {form: f} %>
 
   <div class="row">
     <div class="large-12 columns">
