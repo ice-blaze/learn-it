@@ -14,7 +14,7 @@
         <h4><%= @interpreter.description.html_safe %></h4>
       </div>
       <div class="large-2 columns">
-        <% if current_user == @interpreter.user %>
+        <% if current_user == @interpreter.user || admin? %>
           <div class="text-right">
             <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'edit-button-expand-tiny', method: :get %>
           </div>

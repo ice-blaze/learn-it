@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
 
   COMMENTS_PER_PAGE = 2
   TUTORIALS_PER_PAGE = 2
+
+  def admin?
+    current_user.try(:admin?)
+  end
 end

@@ -1,5 +1,5 @@
 class PartsController < ApplicationController
-  before_action :authenticate_user!, except: :show
+  before_action :authenticate_creator!, except: :show
 
   def show
     @tutorial = Tutorial.find(params[:tutorial_id])
@@ -73,6 +73,11 @@ class PartsController < ApplicationController
   end
 
   private
+  def authenticate_creator!
+    tutorial = Part.find(params[:id]).tutorial
+    redirect_to root_path unless tutorial.user == current_user || admin?
+  end
+
   def part_params
     params.require(:part).permit(:title, :content, :signature, :tutorial)
   end

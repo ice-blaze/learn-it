@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="large-8 large-offset-2 columns">
+    <h1>Users list</h1>
+    <table>
+      <thead>
+      <tr>
+        <th width="3000">Users</th>
+        <th width="600">Admin</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |u| %>
+        <tr>
+          <td><%= link_to u.email, u %></td>
+          <td class="text-center">
+            <%= link_to('Rise to admin', rise_to_admin_user_path(u), class: 'button tiny', method: :get) unless u.admin? %>
+            <%= 'Yes' if u.admin? %>
+          </td>
+          <td><%= link_to 'Destroy', admin_destroy_user_path(u), method: :delete, class: 'button tiny alert' %></td>
+
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>

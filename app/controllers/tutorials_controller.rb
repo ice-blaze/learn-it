@@ -1,9 +1,9 @@
 class TutorialsController < ApplicationController
-  before_action :authenticate_user!, except: :show
+  before_action :authenticate_creator!, except: :show
 
   def show
     @tutorial = Tutorial.find(params[:id])
-    @grade = @tutorial.tutorial_grades.where(:user_id => current_user.id).first.grade rescue nil
+    @grade = @tutorial.tutorial_grades.where(user_id: current_user.id).first.grade rescue nil
     @grade = 0.0 if @grade.blank?
     @comments = @tutorial.tutorial_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
   end
@@ -49,6 +49,11 @@ class TutorialsController < ApplicationController
   end
 
   private
+  def authenticate_creator!
+    tutorial = Tutorial.find(params[:id])
+    redirect_to root_path unless tutorial.user == current_user || admin?
+  end
+
   def tutorial_params
     params.require(:tutorial).permit(:title, :description, :is_finish, :interpreter_id, :tutorial_comment_id, :version)
   end

@@ -14,7 +14,7 @@
         <h4><%= @tutorial.description.html_safe %></h4>
       </div>
       <div class="large-2 columns">
-        <% if user_signed_in? && @tutorial.user == current_user %>
+        <% if @tutorial.user == current_user || admin? %>
           <div class="text-right">
             <%= link_to 'Edit', edit_tutorial_path(@tutorial), class: 'edit-button-expand-tiny round', method: :get  %>
           </div>

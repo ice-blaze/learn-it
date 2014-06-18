@@ -4,7 +4,7 @@ class TutorialGradesController < ApplicationController
   def create
     #if vote with actual user exist, only update
     @tutorial = Tutorial.find(params[:tutorial_id])
-    @grade = @tutorial.tutorial_grades.where(:user_id => current_user.id).first
+    @grade = @tutorial.tutorial_grades.where(user_id: current_user.id).first
 
     if @grade.blank?
       @grade = TutorialGrade.new

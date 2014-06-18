@@ -48,4 +48,8 @@ module ApplicationHelper
             </div>'
     html.html_safe
   end
+
+  def admin?
+    current_user.try(:admin?)
+  end
 end

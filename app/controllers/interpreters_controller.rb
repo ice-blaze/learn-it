@@ -1,6 +1,6 @@
 class InterpretersController < ApplicationController
 
-  before_action :authenticate_user!, except: :show
+  before_action :authenticate_creator!, except: :show
 
   def show
     @interpreter = Interpreter.find(params[:id])
@@ -55,6 +55,11 @@ class InterpretersController < ApplicationController
   end
 
   private
+  def authenticate_creator!
+    interpreter = Interpreter.find(params[:id])
+    redirect_to root_path unless interpreter.user == current_user || admin?
+  end
+
   def interpreter_params
     params.require(:interpreter).permit(:title, :description, :is_finish, :open_token, :close_token, :version)
   end

@@ -23,14 +23,18 @@
     <%= form_tag(creator_path, method: 'get', id: 'search-tutorial-form') do %>
       <%= text_field_tag :tutorial_search, params[:tutorial_search], placeholder: 'Search tutorial' %>
       <%= hidden_field_tag :interpreter_search, params[:interpreter_search] %>
-      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+      <div class="text-center">
+        <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+      </div>
     <% end %>
   </div>
   <div class="large-6 column">
     <%= form_tag(creator_path, method: 'get', id: 'search-interpreter-form') do %>
       <%= text_field_tag :interpreter_search, params[:interpreter_search], placeholder: 'Search interpreter' %>
       <%= hidden_field_tag :tutorial_search, params[:tutorial_search] %>
-      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+      <div class="text-center">
+        <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -25,7 +25,6 @@
       <% if user_signed_in? %>
         <ul class="left">
           <li><%= link_to 'Create tutorials',creator_path%></li>
-          <li><%= link_to 'About',about_path%></li>
         </ul>
         <ul class="right">
           <li><%= link_to current_user.email, current_user %></li>
@@ -37,6 +36,14 @@
           <li><%= link_to 'Sign up', new_user_registration_path %></li>
         </ul>
       <% end %>
+      <% if current_user.try(:admin?) %>
+          <ul class="left">
+            <li><%= link_to 'Manage users', users_path %></li>
+          </ul>
+      <% end %>
+        <ul class="left">
+          <li><%= link_to 'About',about_path %></li>
+        </ul>
 
       </section>
     </nav>
@@ -73,7 +80,6 @@
       <p>Under development</p>
       <a class="close-reveal-modal">&#215;</a>
     </div>
-
 
     <%= yield %>
 

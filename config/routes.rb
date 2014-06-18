@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :admins
   devise_for :users
-  get 'users/:id' => 'users#show', as: 'users'
   get 'users/:id' => 'users#show', as: 'user'
+  match 'users/:id' => 'users#destroy', via: :delete, as: :admin_destroy_user
+  match 'users/:id/rise_to_admin' => 'users#rise_to_admin', via: :get, as: :rise_to_admin_user
+  get 'users', to: 'users#index'
 
   resources :tutorials do
     resources :tutorial_grades, only: [:create]

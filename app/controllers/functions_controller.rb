@@ -1,6 +1,6 @@
 class FunctionsController < ApplicationController
 
-  before_action :authenticate_user!, except: :show
+  before_action :authenticate_creator!, except: :show
 
   def show
     @interpreter = Interpreter.find(params[:interpreter_id])
@@ -40,6 +40,11 @@ class FunctionsController < ApplicationController
   end
 
   private
+  def authenticate_creator!
+    interpreter = Function.find(params[:id]).interpreter
+    redirect_to root_path unless interpreter.user == current_user || admin?
+  end
+
   def function_params
     params.require(:function).permit(:name, :regex, :content, :description, :interpreter)
   end

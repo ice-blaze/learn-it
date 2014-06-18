@@ -4,7 +4,7 @@ class InterpreterGradesController < ApplicationController
   def create
     #if vote with actual user exist, only update
     @interpreter = Interpreter.find(params[:interpreter_id])
-    @grade = @interpreter.interpreter_grades.where(:user_id => current_user.id).first
+    @grade = @interpreter.interpreter_grades.where(user_id: current_user.id).first
 
     if @grade.blank?
       @grade = InterpreterGrade.new
