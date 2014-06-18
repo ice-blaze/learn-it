@@ -27,10 +27,8 @@ class TutorialsController < ApplicationController
 
   def edit
     @tutorial = Tutorial.find params[:id]
-    @parts = @tutorial.parts
+    @parts = @tutorial.parts_ordered
     @part = Part.new
-
-    #redirect if id doesnt exist
   end
 
   def update

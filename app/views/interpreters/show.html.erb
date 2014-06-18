@@ -16,7 +16,7 @@
       <div class="large-2 columns">
         <% if current_user == @interpreter.user %>
           <div class="text-right">
-            <%= button_to 'Edit', edit_interpreter_path(@interpreter), class: 'edit-button-expand-tiny', method: :get %>
+            <%= link_to 'Edit', edit_interpreter_path(@interpreter), class: 'edit-button-expand-tiny', method: :get %>
           </div>
         <% end %>
 

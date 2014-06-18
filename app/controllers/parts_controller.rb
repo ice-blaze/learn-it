@@ -9,11 +9,10 @@ class PartsController < ApplicationController
 
   def create
     tutorial = Tutorial.find(params[:tutorial_id])
-    tutorial.parts.create(part_params)
+    part = tutorial.parts.create(part_params)
+    part.position = tutorial.parts.count
+    part.save
     redirect_to edit_tutorial_path(tutorial)
-  end
-
-  def edit
   end
 
   def update
@@ -31,6 +30,46 @@ class PartsController < ApplicationController
     tutorial = Tutorial.find(params[:tutorial_id])
     Part.find(params[:id]).destroy
     redirect_to edit_tutorial_path(tutorial), flash: { error: 'Part deleted' }
+  end
+
+  def up_position
+    tutorial = Tutorial.find(params[:tutorial_id])
+    part = Part.find(params[:id])
+
+    if part.position == 1
+      redirect_to edit_tutorial_path(tutorial), flash: { info: 'Is already at the first !' }
+      return
+    end
+
+    next_part = Part.where(tutorial: tutorial, position: part.position-1).first
+    part.position -= 1
+    next_part.position += 1
+
+    if part.save && next_part.save
+      redirect_to edit_tutorial_path(tutorial)
+    else
+      redirect_to edit_tutorial_path(tutorial), flash: { info: 'Position changement failed...' }
+    end
+  end
+
+  def down_position
+    tutorial = Tutorial.find(params[:tutorial_id])
+    part = Part.find(params[:id])
+
+    if part.position == tutorial.parts.count
+      redirect_to edit_tutorial_path(tutorial), flash: { info: 'Is already the last !' }
+      return
+    end
+
+    next_part = Part.where(tutorial: tutorial, position: part.position+1).first
+    part.position += 1
+    next_part.position -= 1
+
+    if part.save && next_part.save
+      redirect_to edit_tutorial_path(tutorial)
+    else
+      redirect_to edit_tutorial_path(tutorial), flash: { info: 'Position changement failed...' }
+    end
   end
 
   private

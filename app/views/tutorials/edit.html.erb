@@ -50,25 +50,29 @@
   </div>
 <% end %>
 
-<dl class="accordion" data-accordion>
-  <dd>
-    <a href="<%= request.original_url %>#newpart">New part</a>
-    <div id="newpart" class="content">
-      <%= render partial: 'part_form',
-                 locals: {link: [@tutorial, @tutorial.parts.build], new: true} %>
-    </div>
-  </dd>
+<div class="row">
+  <div class="large-12 columns">
+    <dl class="accordion" data-accordion>
+      <dd>
+        <a href="<%= request.original_url %>#newpart">New part</a>
+        <div id="newpart" class="content">
+          <%= render partial: 'part_form',
+                     locals: {link: [@tutorial, @tutorial.parts.build], new: true} %>
+        </div>
+      </dd>
 
-  <% @tutorial.parts[0..-2].each_with_index do |p, index| %>
-    <dd>
-      <a href="#part<%= p.id %>"><%= (index+1).to_s+' '+p.title %></a>
-      <div id="part<%= p.id %>" class="content">
-        <%= render partial: 'part_form',
-                   locals: {link: [@tutorial, p], new: false} %>
-      </div>
-    </dd>
-  <% end %>
-</dl>
+      <% @parts.each_with_index do |p, index| %>
+        <dd>
+          <a href="#part<%= p.id %>"><%= (index+1).to_s+' '+p.title %></a>
+          <div id="part<%= p.id %>" class="content">
+            <%= render partial: 'part_form',
+                       locals: {link: [@tutorial, p], new: false} %>
+          </div>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
 
 
 

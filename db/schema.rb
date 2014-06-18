@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604075106) do
+ActiveRecord::Schema.define(version: 20140617114431) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -113,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140604075106) do
   add_index "interpreter_comments", ["user_id"], name: "index_interpreter_comments_on_user_id", using: :btree
 
   create_table "interpreter_grades", force: true do |t|
-    t.float    "grade"
+    t.decimal  "grade",          precision: 11, scale: 0
     t.integer  "user_id"
     t.integer  "interpreter_id"
     t.datetime "created_at"
@@ -179,6 +182,7 @@ ActiveRecord::Schema.define(version: 20140604075106) do
     t.integer  "tutorial_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   add_index "parts", ["tutorial_id"], name: "index_parts_on_tutorial_id", using: :btree
@@ -208,7 +212,7 @@ ActiveRecord::Schema.define(version: 20140604075106) do
   add_index "tutorial_comments", ["user_id"], name: "index_tutorial_comments_on_user_id", using: :btree
 
   create_table "tutorial_grades", force: true do |t|
-    t.float    "grade"
+    t.decimal  "grade",       precision: 11, scale: 0
     t.integer  "user_id"
     t.integer  "tutorial_id"
     t.datetime "created_at"

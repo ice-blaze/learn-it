@@ -1,9 +1,21 @@
 <%= form_for link do |f| %>
   <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
+    <% if new %>
+      <div class="large-12 columns">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+    <% else %>
+      <div class="large-1 text-center columns">
+        <%= link_to '', up_position_tutorial_part_path(link.first, id: link.last.id.to_s),class: 'arrow-up', method: :get %><br><br>
+        <%= link_to '', down_position_tutorial_part_path(link.first, id: link.last.id.to_s),class: 'arrow-down', method: :get %>
+      </div>
+      <div class="large-11 columns">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+
+    <% end %>
   </div>
 
   <div class="row">

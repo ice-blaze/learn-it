@@ -1,6 +1,15 @@
 <%= breadcrumbs current: 'creator' %>
 
 <div class="row">
+  <div class="large-12 column text-center">
+    <p>
+      Before creating a new interpreter or tutorial, look if it already exist.<br>
+      Use an interpreter which exist or try to improve others tutorial with rich commentaries
+    </p>
+  </div>
+</div>
+
+<div class="row">
   <div class="large-6 column text-center">
     <%= button_to 'Create tutorials', new_tutorial_path, class: 'button', method: :get  %>
   </div>
@@ -28,7 +37,15 @@
 
 <div class="row">
   <div class="large-6 column">
+    <% @tutorials.each_with_index do |t, index| %>
+      <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+    <% end %>
+    <%= will_paginate @tutorials, param_name: 'tutorial_page', renderer: FoundationPagination::Rails %>
   </div>
   <div class="large-6 column">
+    <% @interpreters.each_with_index do |t, index| %>
+      <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+    <% end %>
+    <%= will_paginate @tutorials, param_name: 'interpreter_page', renderer: FoundationPagination::Rails %>
   </div>
 </div>
