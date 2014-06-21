@@ -15,6 +15,11 @@
   <div class="large-5 columns panel" data-equalizer-watch>
     <%= form_for([@tutorial,@part,@part.done_parts.build()]) do |f|%>
       <%= text_area_tag :signature, nil, size: '14x16' %>
+
+      <% content_for :javascripts do %>
+        <script>editor("signature");</script>
+      <% end %>
+
       <%= f.submit 'Execute', class: 'button small right' %>
     <% end %>
 

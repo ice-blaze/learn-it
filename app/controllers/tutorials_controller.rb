@@ -1,5 +1,6 @@
 class TutorialsController < ApplicationController
-  before_action :authenticate_creator!, except: :show
+  before_action :authenticate_creator!, except: [:show,:new,:create]
+  before_action :authenticate_user!, only: [:new,:create]
 
   def show
     @tutorial = Tutorial.find(params[:id])

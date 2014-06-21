@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_presence_of :username
+  validates_uniqueness_of :username
+
   has_many :done_parts, inverse_of: :user
   has_many :interpreter_grades, inverse_of: :user, dependent: :delete_all
   has_many :tutorial_grades, inverse_of: :user, dependent: :delete_all

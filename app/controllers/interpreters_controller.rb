@@ -1,6 +1,7 @@
 class InterpretersController < ApplicationController
 
-  before_action :authenticate_creator!, except: :show
+  before_action :authenticate_creator!, except: [:show,:new,:create]
+  before_action :authenticate_user!, only: [:new,:create]
 
   def show
     @interpreter = Interpreter.find(params[:id])
@@ -21,7 +22,7 @@ class InterpretersController < ApplicationController
     @interpreter.is_finish = false if params[:is_finish].blank?
 
     if @interpreter.save
-      redirect_to @interpreter
+      redirect_to [:edit,@interpreter]
     else
       render 'new'
     end

@@ -23,7 +23,7 @@
         <!--grade section-->
         <%= render partial: 'page/grade', locals: {
             grade_link: [@tutorial,@tutorial.tutorial_grades.build],
-            grade_value: @grade
+            grade_value: @grade.to_f
         }%>
 
       </div>
@@ -33,7 +33,7 @@
 
 <div class="row">
   <div class="large-12 columns text-center">
-    <%= link_to 'Start', [@tutorial,@tutorial.parts.first], class: 'button small' %>
+    <%= link_to 'Start', [@tutorial,@tutorial.parts_ordered.first], class: 'button small' %>
   </div>
 </div>
 

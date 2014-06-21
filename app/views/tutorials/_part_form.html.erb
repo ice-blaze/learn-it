@@ -28,7 +28,7 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :signature %>
-      <%= f.text_area :signature %>
+      <%= f.text_area :signature, namespace: link.last.id %>
     </div>
   </div>
 

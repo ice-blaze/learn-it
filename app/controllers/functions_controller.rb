@@ -1,6 +1,7 @@
 class FunctionsController < ApplicationController
 
-  before_action :authenticate_creator!, except: :show
+  before_action :authenticate_creator!, except: [:show,:create]
+  before_action :authenticate_user!, only: :create
 
   def show
     @interpreter = Interpreter.find(params[:interpreter_id])
@@ -28,9 +29,6 @@ class FunctionsController < ApplicationController
     else
       redirect_to edit_interpreter_path(interpreter), flash: { error: 'Ouch' }
     end
-  end
-
-  def edit
   end
 
   def destroy

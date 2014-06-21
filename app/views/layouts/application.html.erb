@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title)+' - Learn-it' : 'Learn-it' %></title>
+    <link rel="stylesheet" href="lib/codemirror.css">
 
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
@@ -27,7 +28,7 @@
           <li><%= link_to 'Create tutorials',creator_path%></li>
         </ul>
         <ul class="right">
-          <li><%= link_to current_user.email, current_user %></li>
+          <li><%= link_to current_user.username, current_user %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
         </ul>
       <% else %>
@@ -84,5 +85,8 @@
     <%= yield %>
 
     <%= javascript_include_tag 'application' %>
+
+    <%= yield :javascripts %>
+
   </body>
 </html>

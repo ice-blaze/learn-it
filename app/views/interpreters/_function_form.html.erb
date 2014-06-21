@@ -19,13 +19,14 @@
     </div>
     <div class="large-6 columns">
       <label>Regex tester</label>
-      <textarea onkeydown="regexTester(this, '<%= link.last.id %>_function_regex')"> </textarea>
+      <textarea onchange="regexTester(this, '<%= link.last.id %>_function_regex')"> </textarea>
     </div>
   </div>
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :content %>
-      <%= f.text_area :content, size: '1x15' %>
+      <%= f.text_area :content, namespace: link.last.id.to_s, size: '1x15' %>
+
     </div>
   </div>
   <div class="row">
