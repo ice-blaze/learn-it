@@ -37,6 +37,46 @@ class FunctionsController < ApplicationController
     redirect_to edit_interpreter_path(interpreter), flash: { error: 'Function deleted' }
   end
 
+  def up_position
+    interpreter = Interpreter.find(params[:interpreter_id])
+    function = Function.find(params[:id])
+
+    if function.position == 1
+      redirect_to edit_interpreter_path(interpreter), flash: { info: 'Is already at the first !' }
+      return
+    end
+
+    next_function = Function.where(interpreter: interpreter, position: function.position-1).first
+    function.position -= 1
+    next_function.position += 1
+
+    if function.save && next_function.save
+      redirect_to edit_interpreter_path(interpreter)
+    else
+      redirect_to edit_interpreter_path(interpreter), flash: { info: 'Position changement failed...' }
+    end
+  end
+
+  def down_position
+    interpreter = Interpreter.find(params[:interpreter_id])
+    function = Function.find(params[:id])
+
+    if function.position == interpreter.functions.count
+      redirect_to edit_interpreter_path(interpreter), flash: { info: 'Is already the last !' }
+      return
+    end
+
+    next_function = Function.where(interpreter: interpreter, position: function.position+1).first
+    function.position += 1
+    next_function.position -= 1
+
+    if function.save && next_function.save
+      redirect_to edit_interpreter_path(interpreter)
+    else
+      redirect_to edit_interpreter_path(interpreter), flash: { info: 'Position changement failed...' }
+    end
+  end
+
   private
   def authenticate_creator!
     interpreter = Function.find(params[:id]).interpreter

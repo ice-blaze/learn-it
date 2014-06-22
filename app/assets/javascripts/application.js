@@ -29,3 +29,7 @@ function regexTester(callElement, regexId) {
         callElement.className = " regex-error";
     }
 }
+
+$('.arrow-up').bind('ajax:complete', function() {
+    $('.accordion').load();
+});

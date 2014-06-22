@@ -6,7 +6,7 @@ class InterpretersController < ApplicationController
   def show
     @interpreter = Interpreter.find(params[:id])
     @function = Function.new
-    @functions = @interpreter.functions
+    @functions = @interpreter.functions_ordered
     @comment = InterpreterComment.new
     @comments = @interpreter.interpreter_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
 
@@ -46,7 +46,7 @@ class InterpretersController < ApplicationController
 
   def edit
     @interpreter = Interpreter.find(params[:id])
-    @functions = @interpreter.functions.sort_by &:created_at
+    @functions = @interpreter.functions_ordered
     @function = Function.new
   end
 

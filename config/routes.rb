@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       resources :interpreter_comment_votes, only: [:create,:update,:destroy]
     end
     resources :functions do
+      get 'up_position', on: :member
+      get 'down_position', on: :member
       resources :function_votes,only: [:create,:update,:destroy]
       resources :function_comments, path: 'comments', only: [:index,:create,:update,:destroy] do
         resources :function_comment_votes, only: [:create,:update,:destroy]

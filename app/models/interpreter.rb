@@ -14,4 +14,8 @@ class Interpreter < ActiveRecord::Base
     return 0.0 if self.interpreter_grades.count == 0
     self.interpreter_grades.sum(:grade) / self.interpreter_grades.count
   end
+
+  def functions_ordered
+    self.functions.order(position: :asc)
+  end
 end

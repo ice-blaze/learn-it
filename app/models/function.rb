@@ -3,7 +3,7 @@ class Function < ActiveRecord::Base
   has_many :function_votes, inverse_of: :function, dependent: :delete_all
   belongs_to :interpreter
 
-  validates :regex, :content, :interpreter, presence: true
+  validates :regex, :content, :interpreter, :position, presence: true
   validates :name, format: { with: /\A[a-zA-Z_][a-zA-Z_0-9?=!]*\z/,
                                     message: 'Only allows ruby function chars '}
 
