@@ -1,0 +1,23 @@
+<table>
+  <thead>
+  <tr>
+    <th width="3000">tag</th>
+    <th width="400">Parent</th>
+    <th>Votes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% datas.each do |data|  %>
+    <tr>
+      <td><%= link_to truncate(data.title, length: 30), data.path %></td>
+      <td><%= link_to data.parent.title, data.parent %></td>
+      <td>
+        <span class="green-text"><%= data.positive %></span>
+        /
+        <span class="red-text"><%= data.negative %></span>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate datas, param_name: data_tag, params: {anchor: data_anchor}, renderer: FoundationPagination::Rails %>

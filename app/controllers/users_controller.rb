@@ -2,32 +2,33 @@ class UsersController < ApplicationController
    # a =.+ before_filter authenticate_admin?, except: :show
   def show
     @user = User.find(params[:id])
+    @comments = @user.comments.sort_by{|e| e[:created_at]}.paginate.paginate(page: params[:comments], per_page: USER_DATA_PER_PAGE)
 
     if current_user != @user
-      @tutor_inter = @user.interpreters+@user.tutorials
+      @tutor_inter = (@user.interpreters+@user.tutorials).paginate.paginate(page: params[:works], per_page: USER_DATA_PER_PAGE)
     else
-      unfinished_tut = current_user.interpreters.where(is_finish: false)
-      unfinished_int = current_user.tutorials.where(is_finish: false)
-      @unfini_tut_int = unfinished_int + unfinished_tut
+      unfinished_tut = @user.interpreters.where(is_finish: false)
+      unfinished_int = @user.tutorials.where(is_finish: false)
+      @unfini_tut_int = (unfinished_int + unfinished_tut).paginate(page: params[:unfini_tut_int], per_page: USER_DATA_PER_PAGE)
 
-      finished_tut = current_user.interpreters.where(is_finish: true)
-      finished_int = current_user.tutorials.where(is_finish: true)
-      @fini_tut_int = finished_int + finished_tut
+      finished_tut = @user.interpreters.where(is_finish: true)
+      finished_int = @user.tutorials.where(is_finish: true)
+      @fini_tut_int = (finished_int + finished_tut).paginate(page: params[:fini_tut_int], per_page: USER_DATA_PER_PAGE)
 
-      try_tutorials = Tutorial.where(id: Part.where(id: DonePart.where(user: current_user).pluck(:part_id)).pluck(:tutorial_id).uniq)
+      try_tutorials = Tutorial.where(id: Part.where(id: DonePart.where(user: @user).pluck(:part_id)).pluck(:tutorial_id).uniq)
       @try_finish = []
       @try_unfinish = []
       try_tutorials.each do |t|
-        if t.done(current_user)
+        if t.done(@user)
           @try_finish << t
         else
           @try_unfinish << t
         end
       end
+      @try_unfinish = @try_unfinish.paginate(page: params[:try_unfinish], per_page: USER_DATA_PER_PAGE)
+      @try_finish = @try_finish.paginate(page: params[:try_finish], per_page: USER_DATA_PER_PAGE)
 
-      parts = Part.where(tutorial: Tutorial.where(user: current_user))
-      functions = Function.where(interpreter: Interpreter.where(user: current_user))
-      @improve = (parts+functions).sort_by{|e| e.votes.where(positive: true).count-e.votes.where(positive: false).count}
+      @improve = @user.improve_func_part.paginate(page: params[:improve], per_page: USER_DATA_PER_PAGE)
     end
   end
 

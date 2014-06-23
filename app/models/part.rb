@@ -7,10 +7,22 @@ class Part < ActiveRecord::Base
   validates :title, :content, :signature, :tutorial, :position, presence: true
 
   def path
-    [self.tutorial,self]
+    [self.parent,self]
+  end
+
+  def parent
+    self.tutorial
   end
 
   def votes
     self.part_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end

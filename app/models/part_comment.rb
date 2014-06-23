@@ -8,7 +8,11 @@ class PartComment < ActiveRecord::Base
   validates :content, :like, :dislike, :user, :part, presence: true
 
   def path
-    [self.part.tutorial,self.part]
+    [self.parent,self.part]
+  end
+
+  def parent
+    self.part.tutorial
   end
 
   def title
@@ -17,5 +21,13 @@ class PartComment < ActiveRecord::Base
 
   def votes
     self.part_comment_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end

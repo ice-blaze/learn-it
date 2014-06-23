@@ -8,6 +8,10 @@ class TutorialComment < ActiveRecord::Base
   validates :content, :like, :dislike, :user, :tutorial, presence: true
 
   def path
+    self.parent
+  end
+
+  def parent
     self.tutorial
   end
 
@@ -17,5 +21,13 @@ class TutorialComment < ActiveRecord::Base
 
   def votes
     self.tutorial_comment_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end

@@ -8,6 +8,10 @@ class InterpreterComment < ActiveRecord::Base
   validates :content, :like, :dislike, :interpreter, :user, presence: true
 
   def path
+    self.parent
+  end
+
+  def parent
     self.interpreter
   end
 
@@ -17,5 +21,13 @@ class InterpreterComment < ActiveRecord::Base
 
   def votes
     self.interpreter_comment_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end

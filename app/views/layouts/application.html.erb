@@ -14,40 +14,42 @@
   </head>
 
   <body>
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="<%= root_path %>">Learn-it</a></h1>
-        </li>
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-      <section class="top-bar-section">
-      <% if user_signed_in? %>
-        <ul class="left">
-          <li><%= link_to 'Create tutorials',creator_path%></li>
+    <div class="sticky">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="<%= root_path %>">Learn-it</a></h1>
+          </li>
+          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
-        <ul class="right">
-          <li><%= link_to current_user.username, current_user %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
-        </ul>
-      <% else %>
-        <ul class="right">
-          <li><%= link_to 'Sign in', new_user_session_path %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        </ul>
-      <% end %>
-      <% if current_user.try(:admin?) %>
+        <section class="top-bar-section ">
+        <% if user_signed_in? %>
           <ul class="left">
-            <li><%= link_to 'Manage users', users_path %></li>
+            <li><%= link_to 'Create tutorials',creator_path%></li>
           </ul>
-      <% end %>
-        <ul class="left">
-          <li><%= link_to 'About',about_path %></li>
-        </ul>
+          <ul class="right">
+            <li><%= link_to current_user.username, current_user %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+          </ul>
+        <% else %>
+          <ul class="right">
+            <li><%= link_to 'Sign in', new_user_session_path %></li>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          </ul>
+        <% end %>
+        <% if current_user.try(:admin?) %>
+            <ul class="left">
+              <li><%= link_to 'Manage users', users_path %></li>
+            </ul>
+        <% end %>
+          <ul class="left">
+            <li><%= link_to 'About',about_path %></li>
+          </ul>
 
-      </section>
-    </nav>
+        </section>
+      </nav>
+    </div>
 
     <div class="row small-6 large-centered columns">
       <% unless notice.nil? %>

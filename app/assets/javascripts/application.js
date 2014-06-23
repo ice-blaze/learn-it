@@ -15,9 +15,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require foundation
+//= require highlight.pack
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+    $(document).foundation();
+    $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+
+
+
 
 function regexTester(callElement, regexId) {
     var regex = document.getElementById(regexId).value;

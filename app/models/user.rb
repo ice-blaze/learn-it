@@ -30,6 +30,18 @@ class User < ActiveRecord::Base
   has_many :part_comments, through: :part_comment_votes
 
   def comments
-    self.tutorial_comments+self.part_comments+self.interpreter_comments+self.function_comments
+    TutorialComment.where(user: self)+InterpreterComment.where(user: self)+FunctionComment.where(user: self)+PartComment.where(user: self)
+  end
+
+  def parts
+    Part.where(tutorial: Tutorial.where(user: self))
+  end
+
+  def functions
+    Function.where(interpreter: Interpreter.where(user: self))
+  end
+
+  def improve_func_part
+    (self.parts+self.functions).sort_by{|e| e.votes.where(positive: true).count-e.votes.where(positive: false).count}
   end
 end

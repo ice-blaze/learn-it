@@ -1,6 +1,7 @@
 <dl class="accordion" data-accordion>
   <dd>
     <a href="#help_section">Help (how it's works)</a>
+
     <div id="help_section" class="content">
       <ol>
         <li>Choose a name of the function that doesn't contain spaces.</li>
@@ -14,6 +15,11 @@
           The content of the function is ruby code.<br>
           If it's isn't a condition, it must return true.<br>
           <ul class="no-bullet">
+            <li><b>Actual line :</b>
+              <ul class="no-bullet">
+                <li><kbd>line</kbd> Is a variable which contain the actual line.</li>
+              </ul>
+            </li>
             <li><b>Variables :</b>
               <ul class="no-bullet">
                 <li>instantiate : <kbd>Variable.new(variable_name,variable_value.to_f)</kbd></li>
@@ -22,12 +28,68 @@
             </li>
             <li><b>Output :</b>
               <ul class="no-bullet">
-                <li>To add values to the output you must use this : <kbd>LIFunction.output("something")</kbd></li>
+                <li>Add values to the output you must use this : <kbd>LIFunction.output("something")</kbd></li>
               </ul>
             </li>
           </ul>
         </li>
       </ol>
+      <h5><b>C interpreter example</b></h5>
+      <dl class="tabs small" data-tab>
+        <dd class="active"><a href="#panel2-1">Initial variables</a></dd>
+        <dd><a href="#panel2-2">Printf function</a></dd>
+        <dd><a href="#panel2-3">If statement</a></dd>
+        <dd><a href="#panel2-4">Empty lines</a></dd>
+      </dl>
+      <div class="tabs-content">
+        <div class="content active" id="panel2-1">
+          <b>Name : </b><kbd>init_vars_func</kbd><br>
+          <b>Regex : </b><kbd>\w+ *= *\d+</kbd><br>
+          <b>Content : </b><br>
+<pre>variable_name = line.scan(/\w+/)[1]
+variable_value = line.scan(/\w+/)[2]
+Variable.new(variable_name,variable_value.to_f)
+true</pre>
+        </div>
+        <div class="content" id="panel2-2">
+          <b>Name : </b><kbd>printf_func</kbd><br>
+          <b>Regex : </b><kbd>printf *\(['"].*["']\) *;</kbd><br>
+          <b>Content : </b><br>
+<pre>LIFunction.output(line[/[\"](.*?)[\"]/]) # pass to the output what is between quotes
+true</pre>
+        </div>
+        <div class="content" id="panel2-3">
+          <b>Name : </b><kbd>if_statement</kbd><br>
+          <b>Regex : </b><kbd>if *\( *\w+ *[<>=]=? *\w+ *\)</kbd><br>
+          <b>Content : </b><br>
+<pre>operator = line.scan(/[<>=]=?/)[0]
+numbers = line.scan(/\w+/)[1,3] # remove the if and get only numbers or vars
+
+numbers[0] = numbers[0].to_f if numbers[0] =~ /\d+/
+numbers[1] = numbers[1].to_f if numbers[1] =~ /\d+/
+
+# if it\'s variable names, then change it to get the real variable
+if numbers[0].is_a? String #should change but for the moment still use this work around
+  numbers[0] = Variable.convert numbers[0]
+end
+if numbers[1].is_a? String #should change but for the moment still use this work around
+  numbers[1] = Variable.convert numbers[1]
+end
+
+#puts numbers[0].inspect + ' ' +numbers[1].inspect
+return numbers[0] >= numbers[1] if operator == '>='
+return numbers[0] <  numbers[1] if operator == '<'
+return numbers[0] <= numbers[1] if operator == '<='
+return numbers[0] == numbers[1] if operator == '=='
+numbers[0] >  numbers[1] if operator == '>'</pre>
+        </div>
+        <div class="content" id="panel2-4">
+          <b>Name : </b><kbd>nothing_func</kbd><br>
+          <b>Regex : ^ *\t?\r?\n$</b><kbd></kbd><br>
+          <b>Content : </b><br>
+<pre>true</pre>
+        </div>
+      </div>
     </div>
   </dd>
 </dl>

@@ -2,79 +2,89 @@
   <div class='small-12'>
     <%= link_to 'change account settings', edit_user_registration_path, class: 'button tiny' %>
   </div>
-  <div class='small-12'>
-    <h4>All your comments</h4>
 
-    <%= render partial: 'users/button_with_votes',
-               locals: {datas: @user.comments} %>
+  <div class="row">
+    <div class="small-6">
+      <a name="comments"><h4>All your comments</h4></a>
 
-  </div>
-
-  <div class='small-12'>
-    <h4>Your work</h4>
-    <div class="small-6 columns">
-      <% if @unfini_tut_int.size == 0 %>
-        <h5>No work in progress</h5>
-      <% else %>
-        <h5>Work in progress</h5>
-        <% @unfini_tut_int.each do |unfinished| %>
-          <%= link_to unfinished, class: 'button round' do %>
-            <%= unfinished.title %><br>
-            Grade : <%= unfinished.grade_mean %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="small-6 columns">
-      <% if @fini_tut_int.size == 0 %>
-        <h5>No work finished</h5>
-      <% else %>
-        <h5>Work finished</h5>
-        <% @fini_tut_int.each do |finished| %>
-          <%= link_to finished, class: 'button round' do %>
-            <%= finished.title %><br>
-            Grade : <%= finished.grade_mean %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render partial: 'users/datas_with_votes', locals: {datas: @comments,
+                                                             data_tag: 'comments',
+                                                             data_anchor: :comments} %>
     </div>
   </div>
 
-  <div class="small-12">
-    <h4>Tutorials</h4>
-    <div class="small-6 columns">
-      <% if @try_unfinish.size == 0 %>
-        <h5>No started tutorials</h5>
-      <% else %>
-        <h5>Started but not finished</h5>
-        <% @try_unfinish.each do |tutorial| %>
-          <%= link_to tutorial, class: 'button round' do %>
-            <% tutorial.title %>
-          <% end %>
+  <div class="row">
+    <div class='small-12'>
+      <a name="works"><h4>Your work</h4></a>
+      <div class="small-6 columns">
+        <% if @unfini_tut_int.size == 0 %>
+          <h5>No work in progress</h5>
+        <% else %>
+          <h5>Work in progress</h5>
+
+          <%= render partial: 'users/datas_with_grades', locals: {datas: @unfini_tut_int,
+                                                                 data_tag: :unfini_tut_int,
+                                                                 data_anchor: :works} %>
+
         <% end %>
-      <% end %>
-    </div>
-    <div class="small-6 columns">
-      <% if @try_finish.size == 0 %>
-        <h5>No tutorials finished</h5>
-      <% else %>
-        <h5>Finished</h5>
-        <% @try_finish.each do |tutorial| %>
-          <%= link_to tutorial, class: 'button round' do %>
-            <% tutorial.title %>
-          <% end %>
+      </div>
+      <div class="small-6 columns">
+        <% if @fini_tut_int.size == 0 %>
+          <h5>No work finished</h5>
+        <% else %>
+          <h5>Work finished</h5>
+
+          <%= render partial: 'users/datas_with_grades', locals: {datas: @fini_tut_int,
+                                                                 data_tag: :fini_tut_int,
+                                                                 data_anchor: :works} %>
+
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="small-12">
-    <% if @improve.size == 0 %>
-      <h4>You have done no tutorials or interpreter</h4>
-    <% else %>
-      <h4>Improve your self</h4>
-      <%= render partial: 'users/button_with_votes',
-                 locals: {datas: @improve} %>
-    <% end %>
+  <div class="row">
+    <div class="small-12">
+      <a name="tutorials"><h4>Tutorials</h4></a>
+      <div class="small-6 columns">
+        <% if @try_unfinish.size == 0 %>
+          <h5>No started tutorials</h5>
+        <% else %>
+          <h5>Started but not finished</h5>
+
+          <%= render partial: 'users/datas_with_grades', locals: {datas: @try_unfinish,
+                                                                 data_tag: :try_unfinish,
+                                                                 data_anchor: :tutorials} %>
+
+        <% end %>
+      </div>
+      <div class="small-6 columns">
+        <% if @try_finish.size == 0 %>
+          <h5>No tutorials finished</h5>
+        <% else %>
+          <h5>Finished</h5>
+
+          <%= render partial: 'users/datas_with_grades', locals: {datas: @try_finish,
+                                                                 data_tag: :try_finish,
+                                                                 data_anchor: :tutorials} %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12">
+      <% if @improve.size == 0 %>
+        <h4>You haven't created tutorials or interpreters</h4>
+      <% else %>
+        <a name="improve"><h4 name="test">Improve your self</h4></a>
+
+        <%= render partial: 'users/datas_with_votes', locals: {datas: @improve,
+                                                               data_tag: :improve,
+                                                               data_anchor: :improve} %>
+
+      <% end %>
+    </div>
   </div>
 </div>

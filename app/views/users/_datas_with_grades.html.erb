@@ -1,0 +1,17 @@
+<table>
+  <thead>
+  <tr>
+    <th width="3000"><%= data_tag %></th>
+    <th>Grades</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% datas.each do |data|  %>
+    <tr>
+      <td><%= link_to data.title, data %></td>
+      <td><%= data.grade_mean %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate datas, param_name: data_tag, params: {anchor: data_anchor}, renderer: FoundationPagination::Rails %>

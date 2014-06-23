@@ -8,7 +8,11 @@ class FunctionComment < ActiveRecord::Base
   validates :content,:like,:dislike,:function,:user, presence: true
 
   def path
-    [self.function.interpreter,self.function]
+    [self.parent,self.function]
+  end
+
+  def parent
+    self.function.interpreter
   end
 
   def title
@@ -17,5 +21,13 @@ class FunctionComment < ActiveRecord::Base
 
   def votes
     self.function_comment_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end

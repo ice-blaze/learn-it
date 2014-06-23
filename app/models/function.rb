@@ -8,7 +8,11 @@ class Function < ActiveRecord::Base
                                     message: 'Only allows ruby function chars '}
 
   def path
-    [self.interpreter,self]
+    [self.parent,self]
+  end
+
+  def parent
+    self.interpreter
   end
 
   def title
@@ -17,5 +21,13 @@ class Function < ActiveRecord::Base
 
   def votes
     self.function_votes
+  end
+
+  def positive
+    self.votes.where(positive: true).count
+  end
+
+  def negative
+    self.votes.where(positive: false).count
   end
 end
