@@ -1,6 +1,6 @@
-require_relative 'variable'
+require_relative 'li_variable'
 
-class Scope
+class LIScope
   @@actual_deep = 0
   @@is_jumping = false
   @@jump_deep = 0
@@ -53,7 +53,7 @@ class Scope
 
   def self.go_back
     if @@actual_deep > 0
-      Variable.clear_variables(@@actual_deep)
+      LIVariable.clear_variables(@@actual_deep)
       # check if we aren't under 0 depth
       @@actual_deep -= 1
     end
@@ -68,12 +68,3 @@ class Scope
     raise 'no token was set' if @@close_token.nil?
   end
 end
-
-
-# should transform this class into somethin like this
-# class A
-#   @ololo = 1
-#   class << self
-#     attr_accessor :ololo
-#   end
-# end

@@ -1,6 +1,6 @@
-require_relative 'scope'
+require_relative 'li_scope'
 
-class Variable
+class LIVariable
   @@all_variables = []
 
   attr_reader :name,:type,:deep
@@ -9,7 +9,7 @@ class Variable
   def initialize(name,value,type=:None)
     @name = name
     @type = type
-    @deep = Scope.actual_deep
+    @deep = LIScope.actual_deep
     @value = value
     @@all_variables << self
   end

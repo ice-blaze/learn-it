@@ -21,7 +21,7 @@ class DonePartsController < ApplicationController
     end
 
     # set token
-    Scope::set_tokens(Regexp.new(@tutorial.interpreter.open_token), Regexp.new(@tutorial.interpreter.close_token))
+    LIScope::set_tokens(Regexp.new(@tutorial.interpreter.open_token), Regexp.new(@tutorial.interpreter.close_token))
 
     # input in splitted line
     signature_part = @part.signature.lines().map(&:chomp)

@@ -1,4 +1,4 @@
-require 'scope'
+require 'li_scope'
 require 'tools'
 class PageController < ApplicationController
   before_action :authenticate_user!, only: :creator
@@ -12,7 +12,7 @@ class PageController < ApplicationController
     # render plain: @tops.inspect
     # return
 
-    Scope::actual_deep
+    LIScope::actual_deep
 
   end
 

@@ -12,6 +12,7 @@ class PartsController < ApplicationController
     tutorial = Tutorial.find(params[:tutorial_id])
     part = tutorial.parts.create(part_params)
     part.position = tutorial.parts.count
+
     part.save
     redirect_to edit_tutorial_path(tutorial)
   end

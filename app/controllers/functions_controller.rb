@@ -12,12 +12,13 @@ class FunctionsController < ApplicationController
   end
 
   def create
-    @interpreter = Interpreter.find(params[:interpreter_id])
-    function = @interpreter.functions.create(function_params)
+    interpreter = Interpreter.find(params[:interpreter_id])
+    function = interpreter.functions.create(function_params)
+    function.position = interpreter.functions.count
     if function.save
-      redirect_to edit_interpreter_path(@interpreter)
+      redirect_to edit_interpreter_path(interpreter)
     else
-      redirect_to edit_interpreter_path(@interpreter), flash: { error: 'Ouch' }
+      redirect_to edit_interpreter_path(interpreter), flash: { error: 'Ouch' }
     end
   end
 

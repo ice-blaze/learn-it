@@ -1,23 +1,23 @@
 require_relative 'li_function'
-require_relative 'scope'
+require_relative 'li_scope'
 require_relative 'tools'
-require_relative 'variable'
+require_relative 'li_variable'
 
 def load_inputs inputs
   signature = []
   begin
-    for line in inputs
+    inputs.each_with_index do |line|
       #if we are in the false jump condition, skip to the output block
-      next if Scope::is_token? line
-      if Scope::is_jumping?
+      next if LIScope::is_token? line
+      if LIScope::is_jumping?
         next
       end
 
       #for all lines check if there is a function
       LIFunction.all_functions.each do |function|
         if function.regex =~ line
-          unless function.do line
-            Scope::start_jump
+          unless function.do(line)
+            LIScope::start_jump
           end
           break
         end

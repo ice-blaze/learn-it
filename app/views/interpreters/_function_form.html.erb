@@ -1,9 +1,21 @@
 <%= form_for link, namespace: link.last.id do |f| %>
+
+  <% if @function.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@function.errors.count, 'error') %> prohibited this function from being saved:</h2>
+      <ul>
+        <% @function.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="row">
     <% if new %>
       <div class="large-12 columns">
-        <%= f.label :title %>
-        <%= f.text_field :title, placeholder: 'Name of your function without space, e.g. "my_function"' %>
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: 'Name of your function without space, e.g. "my_function"' %>
       </div>
     <% else %>
       <div class="large-1 text-center columns">
@@ -13,7 +25,7 @@
       </div>
       <div class="large-11 columns">
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, autocomplete: true  %>
       </div>
 
     <% end %>
@@ -21,14 +33,14 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :description,'Description of your function (what is it doing)' %>
-      <%= f.text_area :description, namespace: link.last.id, class: 'tinymce', rows: 15 %>
+      <%= f.text_area :description, namespace: link.last.id, class: 'tinymce', rows: 15, autocomplete: true  %>
       <%= tinymce %>
     </div>
   </div>
   <div class="row">
     <div class="large-6 columns">
       <%= f.label :regex, 'Regex to find the line' %>
-      <%= f.text_area :regex %>
+      <%= f.text_area :regex, autocomplete: true  %>
     </div>
     <div class="large-6 columns">
       <label>Regex tester (optional)</label>
@@ -38,8 +50,7 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :content, 'Content (ruby code which will be executed when the parser find a line which match with your regex)' %>
-      <%= f.text_area :content, namespace: link.last.id.to_s, size: '1x15'%>
-
+      <%= f.text_area :content, namespace: link.last.id.to_s, size: '1x15', autocomplete: true %>
     </div>
   </div>
   <div class="row">
