@@ -6,9 +6,12 @@ require_relative 'li_variable'
 def load_inputs inputs
   signature = []
   begin
-    inputs.each_with_index do |line|
+    index = 0
+    max_lines = inputs.size
+    while index<max_lines
+      line = inputs[index]
       #if we are in the false jump condition, skip to the output block
-      next if LIScope::is_token? line
+      next if LIScope::is_token?(line)
       if LIScope::is_jumping?
         next
       end
@@ -16,8 +19,11 @@ def load_inputs inputs
       #for all lines check if there is a function
       LIFunction.all_functions.each do |function|
         if function.regex =~ line
-          unless function.do(line)
+          result = function.do(line)
+          if result == false
             LIScope::start_jump
+          elsif result == 'for'
+            # set the function line and scope to come back later
           end
           break
         end

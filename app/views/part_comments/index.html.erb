@@ -4,16 +4,16 @@
 <div class="row">
   <div class="large-2 columns panel">
     <%= render partial: 'parts/parts',
-               locals: {parts: @tutorial.parts,
+               locals: {parts: @tutorial.parts_ordered,
                         tutorial: @tutorial,
                         user: current_user}  %>
   </div>
   <div class="large-10 columns panel">
-    <div class="large-10 columns">
+    <div class="large-11 columns">
       <h4><%= @part.title %></h4>
       <p><%= @part.content.html_safe %></p>
     </div>
-    <div class="large-2 text-right right columns">
+    <div class="large-1 text-right right columns">
       <%= render partial: 'page/comment_vote', locals: {
           votes: @part.part_votes,
           update_vote_link: [@tutorial,@part],

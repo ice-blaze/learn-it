@@ -2,7 +2,7 @@
 <div class="row" data-equalizer>
   <div class="large-2 columns panel center" data-equalizer-watch>
     <%= render partial: 'parts/parts',
-               locals: {parts: @tutorial.parts,
+               locals: {parts: @tutorial.parts_ordered,
                         tutorial: @tutorial,
                         user: current_user}  %>
   </div>
@@ -17,7 +17,7 @@
       <%= text_area_tag :signature, nil, size: '14x16' %>
 
       <% content_for :javascripts do %>
-        <script>editor("signature");</script>
+        <script>editorNoRuby("signature");</script>
       <% end %>
 
       <%= f.submit 'Execute', class: 'button small right' %>

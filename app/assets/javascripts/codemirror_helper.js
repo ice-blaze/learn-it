@@ -13,6 +13,14 @@ var hash = {
     keymap: "sublime"
 };
 
+var hashPart = {
+    theme: "mbo",
+    tabSize: 2,
+    smartIndent: false,
+    lineNumbers: true,
+    keymap: "sublime"
+}
+
 var hashReadonly = {};
 for (var i in hash)
     hashReadonly[i] = hash[i];
@@ -24,7 +32,9 @@ function editorInit(id, readonly){
 
 function editorReadonly(id){ editorInit(id,true); }
 
-function editor(id){ editorInit(id,false); }
+function editorNoRuby(id){
+    return CodeMirror.fromTextArea(document.getElementById(id), hashPart)
+}
 
 function editorAccordion(id){
     $(function () {

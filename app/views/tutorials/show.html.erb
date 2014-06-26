@@ -42,7 +42,7 @@
   <!--Tutorial parts zone-->
   <div class="large-2 columns">
     <%= render partial: 'parts/parts',
-               locals: {parts: @tutorial.parts,
+               locals: {parts: @tutorial.parts_ordered,
                         tutorial: @tutorial,
                         user: current_user}  %>
   </div>

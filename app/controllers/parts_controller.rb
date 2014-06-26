@@ -5,7 +5,7 @@ class PartsController < ApplicationController
   def show
     @tutorial = Tutorial.find(params[:tutorial_id])
     @part = Part.find(params[:id])
-    @parts = @tutorial.parts
+    @parts = @tutorial.parts_ordered
   end
 
   def create
