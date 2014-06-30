@@ -55,7 +55,7 @@
     <dl class="accordion" data-accordion>
       <dd>
         <% signature_id_name = 'part_signature' %>
-        <a href="<%= request.original_url %>#newpart" onclick="editorAccordion('<%= signature_id_name %>')">New part</a>
+        <a href="<%= request.original_url %>#newpart" onclick="editorNoRubyAccordion('<%= signature_id_name %>')">New part</a>
         <div id="newpart" class="content">
           <%= render partial: 'part_form',
                      locals: {link: [@tutorial, @tutorial.parts.build], new: true} %>
@@ -64,7 +64,7 @@
 
       <% @parts.each_with_index do |p, index| %>
         <dd>
-          <a href="#part<%= p.id %>" onclick="editorAccordion('<%= p.id.to_s+'_'+signature_id_name %>')"><%= (index+1).to_s+' '+p.title %></a>
+          <a href="#part<%= p.id %>" onclick="editorNoRubyAccordion('<%= p.id.to_s+'_'+signature_id_name %>')"><%= (index+1).to_s+' '+p.title %></a>
           <div id="part<%= p.id %>" class="content">
             <%= render partial: 'part_form',
                        locals: {link: [@tutorial, p], new: false} %>

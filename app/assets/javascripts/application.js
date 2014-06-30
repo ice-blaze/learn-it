@@ -23,9 +23,6 @@ $(function(){
     $('pre').each(function(i, e) {hljs.highlightBlock(e)});
 });
 
-
-
-
 function regexTester(callElement, regexId) {
     var regex = document.getElementById(regexId).value;
 

@@ -1,7 +1,7 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-// This is CodeMirror (http://codemirror.net), a code editorAccordion
+// This is CodeMirror (http://codemirror.net), a code editorRubyAccordion
 // implemented in JavaScript on top of the browser's DOM.
 //
 // You can find some technical background for some of the code below
@@ -57,7 +57,7 @@
 
   // EDITOR CONSTRUCTOR
 
-  // A CodeMirror instance represents an editorAccordion. This is the object
+  // A CodeMirror instance represents an editorRubyAccordion. This is the object
   // that user code is usually dealing with.
 
   function CodeMirror(place, options) {
@@ -123,7 +123,7 @@
   function Display(place, doc) {
     var d = this;
 
-    // The semihidden textarea that is focused when the editorAccordion is
+    // The semihidden textarea that is focused when the editorRubyAccordion is
     // focused, and receives input.
     var input = d.input = elt("textarea", null, null, "position: absolute; padding: 0; width: 1px; height: 1em; outline: none");
     // The textarea is kept positioned near the cursor to prevent the
@@ -172,7 +172,7 @@
     // Actual scrollable element.
     d.scroller = elt("div", [d.sizer, d.heightForcer, d.gutters], "CodeMirror-scroll");
     d.scroller.setAttribute("tabIndex", "-1");
-    // The element in which the editorAccordion lives.
+    // The element in which the editorRubyAccordion lives.
     d.wrapper = elt("div", [d.inputDiv, d.scrollbarH, d.scrollbarV,
                             d.scrollbarFiller, d.gutterFiller, d.scroller], "CodeMirror");
 
@@ -242,7 +242,7 @@
 
   // STATE UPDATES
 
-  // Used to get the editorAccordion into a consistent state again when options change.
+  // Used to get the editorRubyAccordion into a consistent state again when options change.
 
   function loadMode(cm) {
     cm.doc.mode = CodeMirror.getMode(cm.options, cm.doc.modeOption);
@@ -1687,7 +1687,7 @@
 
   // Converts a {top, bottom, left, right} box from line-local
   // coordinates into another coordinate system. Context may be one of
-  // "line", "div" (display.lineDiv), "local"/null (editorAccordion), or "page".
+  // "line", "div" (display.lineDiv), "local"/null (editorRubyAccordion), or "page".
   function intoCoordSystem(cm, lineObj, rect, context) {
     if (lineObj.widgets) for (var i = 0; i < lineObj.widgets.length; ++i) if (lineObj.widgets[i].above) {
       var size = widgetHeight(lineObj.widgets[i]);
@@ -1885,7 +1885,7 @@
 
   // OPERATIONS
 
-  // Operations are used to wrap a series of changes to the editorAccordion
+  // Operations are used to wrap a series of changes to the editorRubyAccordion
   // state in such a way that each change won't have to update the
   // cursor and display (which would be awkward, slow, and
   // error-prone). Instead, display updates are batched and then all
@@ -1994,7 +1994,7 @@
       finally { endOperation(cm); }
     };
   }
-  // Used to add methods to editorAccordion and doc instances, wrapping them in
+  // Used to add methods to editorRubyAccordion and doc instances, wrapping them in
   // operations.
   function methodOp(f) {
     return function() {
@@ -2204,7 +2204,7 @@
   // INPUT HANDLING
 
   // Poll for input changes, using the normal rate of polling. This
-  // runs as long as the editorAccordion is focused.
+  // runs as long as the editorRubyAccordion is focused.
   function slowPoll(cm) {
     if (cm.display.pollingFast) return;
     cm.display.poll.set(cm.options.pollInterval, function() {
@@ -2349,7 +2349,7 @@
 
   // EVENT HANDLERS
 
-  // Attach the necessary event handlers when initializing the editorAccordion
+  // Attach the necessary event handlers when initializing the editorRubyAccordion
   function registerEventHandlers(cm) {
     var d = cm.display;
     on(d.scroller, "mousedown", operation(cm, onMouseDown));
@@ -2365,7 +2365,7 @@
       }));
     else
       on(d.scroller, "dblclick", function(e) { signalDOMEvent(cm, e) || e_preventDefault(e); });
-    // Prevent normal selection in the editorAccordion (we handle our own)
+    // Prevent normal selection in the editorRubyAccordion (we handle our own)
     on(d.lineSpace, "selectstart", function(e) {
       if (!eventInWidget(d, e)) e_preventDefault(e);
     });
@@ -2812,7 +2812,7 @@
       // Don't do a replace if the drop happened inside of the selected text.
       if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
         cm.state.draggingText(e);
-        // Ensure the editorAccordion is re-focused
+        // Ensure the editorRubyAccordion is re-focused
         setTimeout(bind(focusInput, cm), 20);
         return;
       }
@@ -3455,7 +3455,7 @@
     setSelectionNoUndo(doc, selAfter, sel_dontScroll);
   }
 
-  // Handle the interaction of a change to a document with the editorAccordion
+  // Handle the interaction of a change to a document with the editorRubyAccordion
   // that this document is part of.
   function makeChangeSingleDocInEditor(cm, change, spans) {
     var doc = cm.doc, display = cm.display, from = change.from, to = change.to;
@@ -3523,7 +3523,7 @@
 
   // SCROLLING THINGS INTO VIEW
 
-  // If an editorAccordion sits on the top or bottom of the window, partially
+  // If an editorRubyAccordion sits on the top or bottom of the window, partially
   // scrolled out of view, this ensures that the cursor is visible.
   function maybeScrollWindow(cm, coords) {
     var display = cm.display, box = display.sizer.getBoundingClientRect(), doScroll = null;
@@ -3845,7 +3845,7 @@
   // The publicly visible API. Note that methodOp(f) means
   // 'wrap f in an operation, performed on its `this` parameter'.
 
-  // This is not the complete set of editorAccordion methods. Most of the
+  // This is not the complete set of editorRubyAccordion methods. Most of the
   // methods defined on the Doc type are also injected into
   // CodeMirror.prototype, for backwards compatibility and
   // convenience.
@@ -4311,7 +4311,7 @@
   var Init = CodeMirror.Init = {toString: function(){return "CodeMirror.Init";}};
 
   // These two are, on init, called from the constructor because they
-  // have to be initialized before the editorAccordion can start at all.
+  // have to be initialized before the editorRubyAccordion can start at all.
   option("value", "", function(cm, val) {
     cm.setValue(val);
   }, true);
@@ -4532,7 +4532,7 @@
   // STANDARD COMMANDS
 
   // Commands are parameter-less actions that can be performed on an
-  // editorAccordion, mostly used for keybindings.
+  // editorRubyAccordion, mostly used for keybindings.
   var commands = CodeMirror.commands = {
     selectAll: function(cm) {cm.setSelection(Pos(cm.firstLine(), 0), Pos(cm.lastLine()), sel_dontScroll);},
     singleSelection: function(cm) {
@@ -5086,7 +5086,7 @@
       marker.atomic = true;
     }
     if (cm) {
-      // Sync editorAccordion state
+      // Sync editorRubyAccordion state
       if (updateMaxLine) cm.curOp.updateMaxLine = true;
       if (marker.collapsed)
         regChange(cm, from.line, to.line + 1);
@@ -6195,7 +6195,7 @@
     remove: function(at, n) { this.removeInner(at - this.first, n); },
 
     // From here, the methods are part of the public interface. Most
-    // are also available from CodeMirror (editorAccordion) instances.
+    // are also available from CodeMirror (editorRubyAccordion) instances.
 
     getValue: function(lineSep) {
       var lines = getLines(this, this.first, this.first + this.size);
@@ -6469,7 +6469,7 @@
   // Public alias.
   Doc.prototype.eachLine = Doc.prototype.iter;
 
-  // Set up methods on CodeMirror's prototype to redirect to the editorAccordion's document.
+  // Set up methods on CodeMirror's prototype to redirect to the editorRubyAccordion's document.
   var dontDelegate = "iter insert remove copy getEditor".split(" ");
   for (var prop in Doc.prototype) if (Doc.prototype.hasOwnProperty(prop) && indexOf(dontDelegate, prop) < 0)
     CodeMirror.prototype[prop] = (function(method) {
@@ -6493,7 +6493,7 @@
     propagate(doc, null, true);
   }
 
-  // Attach a document to an editorAccordion.
+  // Attach a document to an editorRubyAccordion.
   function attachDoc(cm, doc) {
     if (doc.cm) throw new Error("This document is already in use.");
     cm.doc = doc;
@@ -6925,7 +6925,7 @@
 
   // Often, we want to signal events at a point where we are in the
   // middle of some work, but don't want the handler to start calling
-  // other methods on the editorAccordion, which might be in an inconsistent
+  // other methods on the editorRubyAccordion, which might be in an inconsistent
   // state or simply not expect any other events to happen.
   // signalLater looks whether there are any handlers, and schedules
   // them to be executed when the last operation ends, or, if no
@@ -6953,7 +6953,7 @@
   }
 
   // The DOM events that CodeMirror handles can be overridden by
-  // registering a (non-DOM) handler on the editorAccordion for the event name,
+  // registering a (non-DOM) handler on the editorRubyAccordion for the event name,
   // and preventDefault-ing the event in that handler.
   function signalDOMEvent(cm, e, override) {
     signal(cm, override || e.type, cm, e);
@@ -7179,7 +7179,7 @@
   // WINDOW-WIDE EVENTS
 
   // These must be handled carefully, because naively registering a
-  // handler for each editorAccordion will cause the editors to never be
+  // handler for each editorRubyAccordion will cause the editors to never be
   // garbage collected.
 
   function forEachCodeMirror(f) {
@@ -7207,7 +7207,7 @@
         forEachCodeMirror(onResize);
       }, 100);
     });
-    // When the window loses focus, we want to show the editorAccordion as blurred
+    // When the window loses focus, we want to show the editorRubyAccordion as blurred
     on(window, "blur", function() {
       forEachCodeMirror(onBlur);
     });

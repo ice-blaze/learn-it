@@ -6,6 +6,8 @@
       <h4>
         <%= @function.name %><br>
       </h4>
+      <%= 'Is a loop' if @function.loop %>
+      <%= 'Is not a loop' unless @function.loop %>
     </div>
     <div class="large-7 columns">
       <%= @function.description.html_safe %>

@@ -6,7 +6,7 @@ class CreateCommentFunctions < ActiveRecord::Migration
       t.integer :dislike
       t.datetime :date
 
-      t.references :function, index: true
+      t.references :code, index: true
 
       t.timestamps
     end

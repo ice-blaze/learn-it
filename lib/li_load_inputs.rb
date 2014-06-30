@@ -4,14 +4,22 @@ require_relative 'tools'
 require_relative 'li_variable'
 
 def load_inputs inputs
-  signature = []
+  LIFunction.reset_signature_and_output
+  LIVariable.clear_variables(0)
+
   begin
-    index = 0
+    index_line = 0
     max_lines = inputs.size
-    while index<max_lines
-      line = inputs[index]
-      #if we are in the false jump condition, skip to the output block
-      next if LIScope::is_token?(line)
+    while index_line<max_lines
+      line = inputs[index_line]
+      index_line += 1
+
+      next if LIScope::is_open_token?(line) # open token, do nothing
+      if LIScope::is_close_token?(line) # close token and got a loop, go to the start of the loop
+        last_loop = LIScope::pop_loop
+        index_line = last_loop.line unless last_loop.nil?
+        next
+      end
       if LIScope::is_jumping?
         next
       end
@@ -22,7 +30,8 @@ def load_inputs inputs
           result = function.do(line)
           if result == false
             LIScope::start_jump
-          elsif result == 'for'
+          elsif function.loop
+            LIScope::save_loop(index_line-1)
             # set the function line and scope to come back later
           end
           break
@@ -30,10 +39,9 @@ def load_inputs inputs
       end
     end
 
-    signature = signature + LIFunction.signature
-    LIFunction.reset_signature_and_output
-    signature
+    {signature: LIFunction.signature, output: LIFunction.output(nil)}
   rescue Exception => e
-    e.message
+    {signature: e.backtrace.append(e.message), output: e.backtrace.append(e.message)}
+    # {signature: e.message, output: e.message}
   end
 end

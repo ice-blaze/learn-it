@@ -1,5 +1,6 @@
 //= require codemirror
 //= require mode/ruby
+//= require mode/clike
 //= require keymap/sublime
 
 var editors = []
@@ -14,6 +15,7 @@ var hash = {
 };
 
 var hashPart = {
+    mode: "clike",
     theme: "mbo",
     tabSize: 2,
     smartIndent: false,
@@ -36,15 +38,24 @@ function editorNoRuby(id){
     return CodeMirror.fromTextArea(document.getElementById(id), hashPart)
 }
 
-function editorAccordion(id){
+function edtiorAccordion(id,isRuby){
     $(function () {
         if (called.indexOf(id) != -1) { return; }
 
-        editors.push(editorInit(id,false));
+        if(isRuby) {editors.push(editorInit(id,false));}
+        else {editors.push(editorNoRuby(id));}
         called.push(id);
         setTimeout(function() {
             editors[editors.length-1].refresh();
         },0);
     });
+}
+
+function editorNoRubyAccordion(id){
+    edtiorAccordion(id,false);
+}
+
+function editorRubyAccordion(id){
+    edtiorAccordion(id,true);
 }
 

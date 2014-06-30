@@ -1,19 +1,9 @@
 <%= form_for link, namespace: link.last.id do |f| %>
 
-  <% if @function.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@function.errors.count, 'error') %> prohibited this function from being saved:</h2>
-      <ul>
-        <% @function.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="row">
     <% if new %>
-      <div class="large-12 columns">
+      <div class="large-10 columns">
         <%= f.label :name %>
         <%= f.text_field :name, placeholder: 'Name of your function without space, e.g. "my_function"' %>
       </div>
@@ -23,18 +13,24 @@
         <%= link_to '', down_position_interpreter_function_path(link.first, id: link.last.id.to_s),class: 'arrow-down', method: :get %>
 
       </div>
-      <div class="large-11 columns">
+      <div class="large-9 columns">
         <%= f.label :title %>
         <%= f.text_field :title, autocomplete: true  %>
       </div>
 
     <% end %>
+
+    <div class="large-2 columns">
+      <%= f.label :loop %>
+      <%= f.check_box :loop, autocomplete: true  %>
+    </div>
+
   </div>
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :description,'Description of your function (what is it doing)' %>
       <%= f.text_area :description, namespace: link.last.id, class: 'tinymce', rows: 15, autocomplete: true  %>
-      <%= tinymce %>
+      <% "tinymce" %>
     </div>
   </div>
   <div class="row">

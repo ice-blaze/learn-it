@@ -1,10 +1,12 @@
 class LIFunction
   @@all_functions = []
-  @@signature = []
+  @@signatures = []
   @@output = []
 
   attr_reader :regex
   attr_reader :function
+  attr_reader :loop
+  attr_reader :is_signature
 
   public
   # -----------------
@@ -16,7 +18,7 @@ class LIFunction
   end
 
   def self.signature
-    @@signature.clone
+    @@signatures.clone
   end
 
   def self.output(line)
@@ -25,7 +27,7 @@ class LIFunction
   end
 
   def self.reset_signature_and_output
-    @@signature = []
+    @@signatures = []
     @@output = []
   end
 
@@ -41,10 +43,11 @@ class LIFunction
   # end static part
   # -----------------
 
-  def initialize(regex, function, isSignature=true)
+  def initialize(regex, function, is_signature=true, loop=false)
     @regex = regex
     @function = function
-    @isSignature = isSignature
+    @is_signature = is_signature
+    @loop = loop
 
     # put the new function on the top of function list
     @@all_functions.unshift self
@@ -52,11 +55,12 @@ class LIFunction
 
   def do(line)
     # to save an history, each function calls are stored in an array
-    @@signature << @function.name if @isSignature
+
+    @@signatures << @function.name if @is_signature
     @function.call(line)
   end
 
   # belongs to the static part but need to be at the end of the class
   # because use an instantiation
-  LIFunction.new(//,method(:default),false)
+  LIFunction.new(//,method(:default),false,false)
 end

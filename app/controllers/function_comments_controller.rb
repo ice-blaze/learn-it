@@ -26,6 +26,6 @@ class FunctionCommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:function_comment).permit(:content, :function, :user)
+    params.require(:function_comment).permit(:content, :code, :user)
   end
 end

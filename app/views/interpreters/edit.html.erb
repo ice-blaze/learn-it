@@ -36,7 +36,7 @@
     <dl class="accordion" data-accordion="functions_accordion">
       <dd>
         <% content_id_name = '_function_content' %>
-        <a href="#newpart" onclick="editorAccordion('<%= content_id_name %>')">New function</a>
+        <a href="#newpart" onclick="editorRubyAccordion('<%= content_id_name %>')">New function</a>
         <div id="newpart" class="content">
           <%= render partial: 'function_form',
                      locals: {link: [@interpreter, @interpreter.functions.build], new: true} %>
@@ -45,7 +45,7 @@
 
       <% @functions.each_with_index do |f, index| %>
         <dd>
-          <a href="#part<%= f.id %>" onclick="editorAccordion('<%=f.id.to_s+content_id_name  %>')"><%=(index+1).to_s+' '+f.title %></a>
+          <a href="#part<%= f.id %>" onclick="editorRubyAccordion('<%=f.id.to_s+content_id_name  %>')"><%=(index+1).to_s+' '+f.title %></a>
           <div id="part<%= f.id %>" class="content">
             <%= render partial: 'function_form',
                        locals: {link: [@interpreter, f],new: false} %>

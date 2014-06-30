@@ -14,7 +14,7 @@ class FunctionsController < ApplicationController
   def create
     interpreter = Interpreter.find(params[:interpreter_id])
     function = interpreter.functions.create(function_params)
-    function.position = interpreter.functions.count
+    function.position = interpreter.functions.count+1
     if function.save
       redirect_to edit_interpreter_path(interpreter)
     else
@@ -51,7 +51,7 @@ class FunctionsController < ApplicationController
     function.position -= 1
     next_function.position += 1
 
-    if function.save && next_function.save
+    if next_function.save and function.save
       redirect_to edit_interpreter_path(interpreter)
     else
       redirect_to edit_interpreter_path(interpreter), flash: { info: 'Position changement failed...' }
@@ -85,6 +85,6 @@ class FunctionsController < ApplicationController
   end
 
   def function_params
-    params.require(:function).permit(:name, :regex, :content, :description, :interpreter)
+    params.require(:function).permit(:name, :regex, :content, :description, :interpreter, :loop)
   end
 end

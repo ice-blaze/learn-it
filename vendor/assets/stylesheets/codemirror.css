@@ -106,7 +106,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 /* STOP */
 
 /* The rest of this file contains styles related to the mechanics of
-   the editorAccordion. You probably shouldn't touch them. */
+   the editorRubyAccordion. You probably shouldn't touch them. */
 
 .CodeMirror {
   line-height: 1;

@@ -1,4 +1,14 @@
-require_relative 'li_variable'
+ 'li_variable'
+
+class LILoop
+  attr_accessor :line
+  attr_accessor :deep
+
+  def initialize(line,deep)
+    @line = line
+    @deep = deep
+  end
+end
 
 class LIScope
   @@actual_deep = 0
@@ -8,10 +18,13 @@ class LIScope
   @@open_token = nil
   @@close_token = nil
 
+  @@loops_list = []
+
   def self.reset
     @@actual_deep = 0
     @@is_jumping = false
     @@jump_deep = 0
+    @@loops_list = []
   end
 
   def self.set_tokens( open, close)
@@ -27,18 +40,25 @@ class LIScope
     @@is_jumping
   end
 
-  def self.is_token?(line)
+  def self.pop_loop
+    return @@loops_list.pop if @@actual_deep == @@loops_list.last.deep rescue nil
+    nil
+  end
+
+  def self.is_close_token?(line)
     if @@close_token.match(line)
       self.go_back
       @@is_jumping = false if @@actual_deep == @@jump_deep  # prevent when there are close tokens but we aren't on the good depth
       return true
     end
+    false
+  end
 
+  def self.is_open_token?(line)
     if @@open_token.match(line)
       self.go_deeper
       return true
     end
-
     false
   end
 
@@ -58,6 +78,11 @@ class LIScope
       @@actual_deep -= 1
     end
     true
+  end
+
+  def self.save_loop(line_number)
+    # maybe actual deep should be lower or higher for the save loop function
+    @@loops_list.push(LILoop.new(line_number,@@actual_deep))
   end
 
   private
