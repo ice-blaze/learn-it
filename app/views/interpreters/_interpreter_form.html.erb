@@ -21,15 +21,13 @@
 </div>
 
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-6 columns">
     <%= form.label :open_token, 'Token to open a block' %>
-    <%= form.text_field :open_token, placeholder: 'In C language it is {' %>
+    <%= form.text_field :open_token, placeholder: 'In C language it is {', maxlength: '1'%>
   </div>
-</div>
 
-<div class="row">
-  <div class="large-12 columns">
+  <div class="large-6 columns">
     <%= form.label :close_token, 'Token to end a block' %>
-    <%= form.text_field :close_token,placeholder: 'In C language it is }' %>
+    <%= form.text_field :close_token,placeholder: 'In C language it is }', maxlength: '1' %>
   </div>
 </div>

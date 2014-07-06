@@ -15,14 +15,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require foundation
-//= require highlight.pack
-//= require chosen.jquery.min
 //= require select2.min
 //= require_tree .
 
 $(function(){
     $(document).foundation();
-    $('pre').each(function(i, e) {hljs.highlightBlock(e)});
 });
 
 function regexTester(callElement, regexId) {
@@ -35,7 +32,3 @@ function regexTester(callElement, regexId) {
         callElement.className = " regex-error";
     }
 }
-
-//$('.arrow-up').bind('ajax:complete', function() {
-//    $('.accordion').load();
-//});

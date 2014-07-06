@@ -3,18 +3,20 @@
 <%= breadcrumbs(current: 'home') %>
 
 <% if cookies[:welcom_alert].blank? %>
-  <div data-alert class="alert-box secondary large-8 large-offset-2 columns">
-    <div class="text-center">
-      <h3>Weclome</h3>
-      <h5>
-        This is a programming learning site web.<br>
-        You will find tutorials, which you can do it right now !<br>
-        You can also make your own tutorial !<br>
-        All tutorials use interpreters.<br>
-        Those interpreters can be create by the community or by you.<br>
-      </h5>
+  <div class="row">
+    <div data-alert class="alert-box secondary large-8 large-offset-2 columns">
+      <div class="text-center">
+        <h3>Weclome</h3>
+        <h5>
+          This is a programming learning site web.<br>
+          You will find tutorials, which you can do it right now !<br>
+          You can also make your own tutorial !<br>
+          All tutorials use interpreters.<br>
+          Those interpreters can be create by the community or by you.<br>
+        </h5>
+      </div>
+      <a href="#" class="close">&times;</a>
     </div>
-    <a href="#" class="close">&times;</a>
   </div>
   <% cookies[:welcom_alert] = true %>
 <% end %>

@@ -29,14 +29,14 @@
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-12 columns"><br>
       <%= f.label :interpreter %>
       <%= f.collection_select :interpreter_id, Interpreter.all, :id, :title %>
     </div>
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-12 columns"><br>
       <%= f.label :is_finish %>
       <%= f.check_box :is_finish %>
     </div>
