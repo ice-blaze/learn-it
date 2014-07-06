@@ -7,6 +7,7 @@
       <h4>All his comments</h4>
 
       <%= render partial: 'users/datas_with_votes', locals: {datas: @comments,
+                                                             data_name: 'Comments',
                                                              data_tag: :comments,
                                                              data_anchor: :comments} %>
 
@@ -14,8 +15,9 @@
     <div class="small-6 columns">
       <h4>All his work</h4>
       <%= render partial: 'users/datas_with_grades', locals: {datas: @tutor_inter,
-                                                             data_tag: :works,
-                                                             data_anchor: :works} %>
+                                                              data_name: 'Tutorials & interpreters',
+                                                              data_tag: :works,
+                                                              data_anchor: :works} %>
 
     </div>
   </div>

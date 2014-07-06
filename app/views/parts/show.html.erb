@@ -1,4 +1,21 @@
 <%= breadcrumbs({title: @tutorial.title, link: @tutorial}, current: @part.title) %>
+
+<% if @output %>
+<div class="row">
+  <div class="large-10 columns">
+    <h4>Output</h4>
+    <%= text_area_tag :output, @output, readonly: true, size: '30x10'%>
+  </div>
+  <% if @is_signature %>
+    <div class="large-2 columns">
+      <h4>&zwnj;</h4>
+      <%= link_to 'Next part', [@tutorial,@next_part], class: 'button small' %>
+    </div>
+  <% end %>
+</div>
+<% end %>
+
+
 <div class="row" data-equalizer>
   <div class="large-2 columns panel center" data-equalizer-watch>
     <%= render partial: 'parts/parts',
@@ -14,7 +31,7 @@
   </div>
   <div class="large-5 columns panel" data-equalizer-watch>
     <%= form_for([@tutorial,@part,@part.done_parts.build()]) do |f|%>
-      <%= text_area_tag :signature, nil, size: '14x16' %>
+      <%= text_area_tag :signature, nil, size: '14x16', autocomplete: true %>
 
       <% content_for :javascripts do %>
         <script>editorNoRuby("signature");</script>
@@ -23,7 +40,6 @@
       <%= f.submit 'Execute', class: 'button small right' %>
     <% end %>
 
-    <h4></h4>
     <!--<textarea rows="12" cols="50"></textarea>-->
     <!--<a href="#" data-reveal-id="underdevelopment" class="button small right">Execute</a>-->
   </div>

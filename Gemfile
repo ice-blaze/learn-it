@@ -52,5 +52,6 @@ gem 'tinymce-rails'
 gem 'jquery-turbolinks'
 # gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-foundation'
+gem 'rack-timeout'
 
 ruby '2.1.0'

@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require foundation
 //= require highlight.pack
+//= require chosen.jquery.min
+//= require select2.min
 //= require_tree .
 
 $(function(){
@@ -34,6 +36,6 @@ function regexTester(callElement, regexId) {
     }
 }
 
-$('.arrow-up').bind('ajax:complete', function() {
-    $('.accordion').load();
-});
+//$('.arrow-up').bind('ajax:complete', function() {
+//    $('.accordion').load();
+//});

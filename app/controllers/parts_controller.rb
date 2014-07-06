@@ -3,9 +3,13 @@ class PartsController < ApplicationController
   before_action :authenticate_user!, only: :create
 
   def show
+    @output = params[:output].try(:join, "\n").gsub('\n',"\n") rescue nil
+
+    @is_signature = params[:signature]=="true"?true:false
     @tutorial = Tutorial.find(params[:tutorial_id])
     @part = Part.find(params[:id])
     @parts = @tutorial.parts_ordered
+    @next_part = @parts[@parts.index(@part)+1]
   end
 
   def create

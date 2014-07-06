@@ -18,6 +18,7 @@
  *= require theme/mbo
  *= require theme/default
  *= require theme/railscasts
+ *= require select2
 
 
  */
@@ -117,4 +118,8 @@ $arrows: #373737;
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.tutu{
+  color: red;
 }

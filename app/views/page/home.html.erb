@@ -19,38 +19,45 @@
   <% cookies[:welcom_alert] = true %>
 <% end %>
 
+<div class="row">
+  <div class="large-8 large-centered columns text-center">
+    <%= form_tag(root_path, method: 'get', id: 'search-form') do %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search tutorial' %>
+      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
-
-  <div class="large-6 columns text-center">
-
-    <h3>Top 5 tutorials</h3>
-    <%= form_tag(root_path, method: 'get', id: 'search-top-form') do %>
-      <%= text_field_tag :top_search, params[:top_search], placeholder: 'Search top tutorial' %>
-      <%= hidden_field_tag :recent_search, params[:recent_search] %>
-      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
-    <% end %>
-
-    <div class="panel">
-      <% @tops.each_with_index do |t, index| %>
-        <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
-      <% end %>
-      <%= will_paginate @tops, param_name: 'top_page', renderer: FoundationPagination::Rails %>
+  <% if @tutorials.blank? %>
+    <div class="large-6 columns text-center">
+      <h3>Top tutorials</h3>
+      <div class="panel">
+        <% @tops.each_with_index do |t, index| %>
+          <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+        <% end %>
+        <%= will_paginate @tops, param_name: 'top_page', renderer: FoundationPagination::Rails %>
+      </div>
     </div>
-  </div>
 
-  <div class="large-6 columns text-center">
-    <h3>Most recent tutorial</h3>
-    <%= form_tag(root_path, method: 'get', id: 'search-recent-form') do %>
-      <%= text_field_tag :recent_search, params[:recent_search], placeholder: 'Search recent tutorial' %>
-      <%= hidden_field_tag :top_search, params[:top_search] %>
-      <%= submit_tag 'Search', name: nil, class: 'button tiny' %>
-    <% end %>
-    <div class="panel">
-      <% @newest.each_with_index do |t, index| %>
-        <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
-      <% end %>
-      <%= will_paginate @newest, param_name: 'recent_page', renderer: FoundationPagination::Rails %>
+    <div class="large-6 columns text-center">
+      <h3>Most recent tutorial</h3>
+      <div class="panel">
+        <% @newest.each_with_index do |t, index| %>
+          <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+        <% end %>
+        <%= will_paginate @newest, param_name: 'recent_page', renderer: FoundationPagination::Rails %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <div class="large-12 columns text-center">
+      <h3>Search result</h3>
+      <div class="panel">
+        <% @tutorials.each_with_index do |t, index| %>
+          <%= render partial: 'tutorial', locals: {index: index, tutorial: t}  %>
+        <% end %>
+        <%= will_paginate @tutorials, param_name: 'search_page', renderer: FoundationPagination::Rails %>
+      </div>
+    </div>
+  <% end %>
 </div>

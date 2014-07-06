@@ -67,19 +67,6 @@ class LIScope
     @@is_jumping = true
   end
 
-  def self.go_deeper
-    @@actual_deep += 1
-  end
-
-  def self.go_back
-    if @@actual_deep > 0
-      LIVariable.clear_variables(@@actual_deep)
-      # check if we aren't under 0 depth
-      @@actual_deep -= 1
-    end
-    true
-  end
-
   def self.save_loop(line_number)
     # maybe actual deep should be lower or higher for the save loop function
     @@loops_list.push(LILoop.new(line_number,@@actual_deep))
@@ -91,5 +78,18 @@ class LIScope
   def self.check_set_tokens
     raise 'no token was set' if @@open_token.nil?
     raise 'no token was set' if @@close_token.nil?
+  end
+  
+  def self.go_back
+    if @@actual_deep > 0
+      LIVariable.clear_variables(@@actual_deep)
+      # check if we aren't under 0 depth
+      @@actual_deep -= 1
+    end
+    true
+  end
+  
+  def self.go_deeper
+    @@actual_deep += 1
   end
 end

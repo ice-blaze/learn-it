@@ -1,5 +1,6 @@
 class DonePartsController < ApplicationController
   require 'li_load_inputs'
+  require 'timeout'
 
   def create
     # render plain: done_params.inspect
@@ -8,16 +9,23 @@ class DonePartsController < ApplicationController
 
     # create functions
     LIFunction::reset_functions
-    @tutorial.interpreter.functions.each do |f|
+
+    @tutorial.interpreter.functions_ordered.reverse.each do |f|
       #thread is there to limit eval abuse
       eval("def #{f.name}(line)
           thread = Thread.start {
-          $SAFE = 3
-          #{f.content}
+            $SAFE = 3
+            begin
+              Timeout::timeout(0.5) {
+                #{f.content}
+              }
+            rescue Timeout::Error
+              raise '#{f.name} take more than 0.5 seconds to execute'
+            end
           }
           thread.join
           thread[:return]
-          end")
+        end")
       LIFunction.new(Regexp.new(f.regex),method(f.name),f.name=='nothing_func'?false:true,f.loop).taint
     end
 
@@ -36,14 +44,14 @@ class DonePartsController < ApplicationController
     # render plain: signature_part.inspect+"\n\n"+signature_inputs.inspect
     # return
     unless output_inputs.is_a? Array
-      return redirect_to [@tutorial,@part], flash: { :error => "An bad error showed up !\nResult : "+output_inputs.to_s}
-    end
-
-    if signature_inputs != signature_part || signature_inputs.blank?
-      redirect_to [@tutorial,@part], :flash => { :error => "Signature doesn't match, retry !\nOutput is :\n"+output_inputs.try(:join,'\n')}
+      redirect_to [@tutorial,@part], flash: { :error => "An bad error showed up !\nResult : "+output_inputs.to_s}
       return
     end
 
+    if signature_inputs != signature_part || signature_inputs.blank?
+      redirect_to [@tutorial,@part,output: output_inputs, signature: false], :flash => { :error => "Signature doesn't match, retry !"}
+      return
+    end
 
     unless current_user.blank?
       @done_part = DonePart.new
@@ -53,9 +61,9 @@ class DonePartsController < ApplicationController
       @done_part.save
     end
 
-    @parts = @tutorial.parts_ordered
-    @next_part = @parts[@parts.index(@part)+1]
+    # @parts = @tutorial.parts_ordered
+    # @next_part = @parts[@parts.index(@part)+1]
 
-    redirect_to [@tutorial,@next_part], flash: { info: "Good job you are now in the next part !\nOutput was :\n"+output_inputs.try(:join,'\n') }
+    redirect_to [@tutorial,@part,output: output_inputs, signature: true] , flash: { info: "Good job !"}
   end
 end

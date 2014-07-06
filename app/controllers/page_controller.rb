@@ -9,6 +9,10 @@ class PageController < ApplicationController
     @newest = Tutorial.where("LOWER(title) LIKE LOWER('%#{params[:recent_search]}%')")
     @newest = @newest.paginate(page: params[:recent_page], per_page: TUTORIALS_PER_PAGE).order(created_at: :desc)
 
+    unless params[:search].blank?
+      @tutorials = Tutorial.where("LOWER(title) LIKE LOWER('%#{params[:search]}%')")
+      @tutorials = @tutorials.paginate(page: params[:search_page], per_page: TUTORIALS_PER_PAGE)
+    end
     # render plain: @tops.inspect
     # return
 
