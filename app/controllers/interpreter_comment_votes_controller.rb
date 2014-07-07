@@ -11,7 +11,7 @@ class InterpreterCommentVotesController < ApplicationController
 
     # no checks in the case where the user try a lot of request and uniquness fail
     @vote.save
-    redirect_to @interpreter
+    redirect_to [@interpreter,{page: params[:page].blank? ? "1": params[:page]}]
   end
 
   def update
@@ -19,9 +19,9 @@ class InterpreterCommentVotesController < ApplicationController
     @interpreter = Interpreter.find(params[:interpreter_id])
 
     if @vote.update(vote_params)
-      redirect_to @interpreter
+      redirect_to [@interpreter,{page: params[:page].blank? ? "1": params[:page]}]
     else
-      redirect_to @interpreter, :flash => { :info => 'Change vote FAILED !' }
+      redirect_to @interpreter, flash: { info: 'Change vote FAILED !' }
     end
   end
 

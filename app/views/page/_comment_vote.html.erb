@@ -19,12 +19,14 @@
       </span>
       <%= form_for(update_vote_link+[v]) do |f| %>
           <%= f.hidden_field :positive, :value => false %>
+          <%= hidden_field_tag :page, params[:page] %>
           <%= nb_neg_vote(votes)-1 %>
           <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
       <% end %>
     <% else %>
       <%= form_for(update_vote_link+[v]) do |f| %>
         <%= f.hidden_field :positive, :value => true %>
+        <%= hidden_field_tag :page, params[:page] %>
         <%= nb_pos_vote(votes) %>
           <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
       <% end %>
@@ -41,11 +43,13 @@
 <% if @exist == false %>
   <%= form_for(create_vote_link) do |f| %>
     <%= f.hidden_field :positive, :value => true %>
+    <%= hidden_field_tag :page, params[:page] %>
     <%= nb_pos_vote(votes) %>
     <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
   <% end %>
   <%= form_for(create_vote_link) do |f| %>
     <%= f.hidden_field :positive, :value => false %>
+    <%= hidden_field_tag :page, params[:page] %>
     <%= nb_neg_vote(votes)-1 %>
     <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
   <% end %>

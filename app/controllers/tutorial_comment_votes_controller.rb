@@ -10,7 +10,7 @@ class TutorialCommentVotesController < ApplicationController
 
     # no checks in the case where the user try a lot of request and uniquness fail
     @vote.save
-    redirect_to @tutorial
+    redirect_to [@tutorial,{page: params[:page].blank? ? "1": params[:page]}]
   end
 
   def update
@@ -18,9 +18,9 @@ class TutorialCommentVotesController < ApplicationController
     @tutorial = Tutorial.find(params[:tutorial_id])
 
     if @vote.update(vote_params)
-      redirect_to @tutorial
+      redirect_to [@tutorial,{page: params[:page].blank? ? "1": params[:page]}]
     else
-      redirect_to @tutorial, :flash => { :info => 'Change vote FAILED !' }
+      redirect_to [@tutorial, flash: { :info => 'Change vote FAILED !' }]
     end
   end
 

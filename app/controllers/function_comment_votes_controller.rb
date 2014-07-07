@@ -12,7 +12,7 @@ class FunctionCommentVotesController < ApplicationController
 
     # no checks in the case where the user try a lot of request and uniquness fail
     @vote.save
-    redirect_to [@interpreter,@function]
+    redirect_to [@interpreter,@function,{page: params[:page].blank? ? "1": params[:page]}]
   end
 
   def update
@@ -21,9 +21,9 @@ class FunctionCommentVotesController < ApplicationController
     @function = Function.find(params[:function_id])
 
     if @vote.update(vote_params)
-      redirect_to [@interpreter,@function]
+      redirect_to [@interpreter,@function,{page: params[:page].blank? ? "1": params[:page]}]
     else
-      redirect_to [@interpreter,@function], flash: { info: 'Change vote FAILED !' }
+      redirect_to [@interpreter,@function,{page: params[:page].blank? ? "1": params[:page]}], flash: { info: 'Change vote FAILED !' }
     end
   end
 
