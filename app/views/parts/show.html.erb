@@ -31,7 +31,7 @@
   </div>
   <div class="large-5 columns panel" data-equalizer-watch>
     <%= form_for([@tutorial,@part,@part.done_parts.build()]) do |f|%>
-      <%= text_area_tag :signature, nil, size: '14x16', autocomplete: true %>
+      <%= text_area_tag :signature, params[:code], size: '14x16', autocomplete: true%>
 
       <% content_for :javascripts do %>
         <script>editorNoRuby("signature");</script>

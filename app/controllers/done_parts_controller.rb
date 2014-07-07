@@ -44,12 +44,12 @@ class DonePartsController < ApplicationController
     # render plain: signature_part.inspect+"\n\n"+signature_inputs.inspect
     # return
     unless output_inputs.is_a? Array
-      redirect_to [@tutorial,@part], flash: { :error => "An bad error showed up !\nResult : "+output_inputs.to_s}
+      redirect_to [@tutorial,@part, code: params[:signature]], flash: { error: "An bad error showed up !\nResult : "+output_inputs.to_s}
       return
     end
 
     if signature_inputs != signature_part || signature_inputs.blank?
-      redirect_to [@tutorial,@part,output: output_inputs, signature: false], :flash => { :error => "Signature doesn't match, retry !"}
+      redirect_to [@tutorial,@part,output: output_inputs, signature: false, code: params[:signature]], :flash => { :error => "Signature doesn't match, retry !"}
       return
     end
 
@@ -64,6 +64,6 @@ class DonePartsController < ApplicationController
     # @parts = @tutorial.parts_ordered
     # @next_part = @parts[@parts.index(@part)+1]
 
-    redirect_to [@tutorial,@part,output: output_inputs, signature: true] , flash: { info: "Good job !"}
+    redirect_to [@tutorial,@part,output: output_inputs, signature: true, code: params[:signature]] , flash: { info: "Good job !"}
   end
 end
