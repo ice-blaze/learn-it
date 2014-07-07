@@ -7,7 +7,7 @@ class InterpretersController < ApplicationController
     @interpreter = Interpreter.find(params[:id])
     @functions = @interpreter.functions_ordered
     @comment = InterpreterComment.new
-    @comments = @interpreter.interpreter_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
+    @comments = @interpreter.comments_top.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE)
 
     @grade = @interpreter.interpreter_grades.where(user_id: current_user.id).first.grade rescue nil
     @grade = 0.0 if @grade.blank?

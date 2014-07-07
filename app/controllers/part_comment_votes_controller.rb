@@ -20,7 +20,9 @@ class PartCommentVotesController < ApplicationController
     @part = Part.find(params[:part_id])
 
     if @vote.update(vote_params)
-      redirect_to tutorial_part_part_comments_path(@tutorial,@part)
+      render plain: params[:page].inspect
+      return
+      redirect_to tutorial_part_part_comments_path(@tutorial,@part,{page: params[:page]})
     else
       redirect_to tutorial_part_part_comments_path(@tutorial,@part), :flash => { :info => 'Change vote FAILED !' }
     end

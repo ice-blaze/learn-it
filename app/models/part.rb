@@ -14,6 +14,10 @@ class Part < ActiveRecord::Base
     self.tutorial
   end
 
+  def comments_top
+    self.part_comments.sort_by{|e| e.votes.where(positive: false).count-e.votes.where(positive: true).count}
+  end
+
   def votes
     self.part_votes
   end

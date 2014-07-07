@@ -18,4 +18,8 @@ class Interpreter < ActiveRecord::Base
   def functions_ordered
     self.functions.order(position: :asc)
   end
+
+  def comments_top
+    self.interpreter_comments.sort_by{|e| e.votes.where(positive: false).count-e.votes.where(positive: true).count}
+  end
 end

@@ -7,7 +7,7 @@ class PartCommentsController < ApplicationController
     @part = Part.find(params[:part_id])
     @parts = @tutorial.parts
     @comment = PartComment.new
-    @comments =  @part.part_comments.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE).order('created_at DESC')
+    @comments =  @part.comments_top.paginate(page: params[:page], per_page: COMMENTS_PER_PAGE)
   end
 
   def create

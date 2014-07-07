@@ -31,4 +31,8 @@ class Function < ActiveRecord::Base
   def negative
     self.votes.where(positive: false).count
   end
+
+  def comments_top
+    self.function_comments.sort_by{|e| e.votes.where(positive: false).count-e.votes.where(positive: true).count}
+  end
 end

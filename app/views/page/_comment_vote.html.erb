@@ -13,23 +13,23 @@
     <% @exist = true %>
 
     <% if v.positive==true %>
-      <span data-tooltip class="tip-top" title="Already vote this choice !">
-        <div class="text-center"><%= nb_pos_vote(votes) %></div>
+      <%= nb_pos_vote(votes) %>
+      <span data-tooltip class="tip-right" title="Already vote this choice !">
         <button class="plus-button-disabled"><i class="fi-plus"></i></button>
       </span>
       <%= form_for(update_vote_link+[v]) do |f| %>
-        <%= f.hidden_field :positive, :value => false %>
-        <div class="text-center"><%= nb_neg_vote(votes)-1 %></div>
-        <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
+          <%= f.hidden_field :positive, :value => false %>
+          <%= nb_neg_vote(votes)-1 %>
+          <button type="submit" class="minus-button"><i class="fi-minus"></i></button>
       <% end %>
     <% else %>
       <%= form_for(update_vote_link+[v]) do |f| %>
         <%= f.hidden_field :positive, :value => true %>
-        <div class="text-center"><%= nb_pos_vote(votes) %></div>
-        <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
+        <%= nb_pos_vote(votes) %>
+          <button type="submit" class="plus-button"><i class="fi-plus"></i></button>
       <% end %>
-      <span data-tooltip class="tip-top" title="Already vote this choice !">
-        <div class="text-center"><%= nb_neg_vote(votes)-1 %></div>
+      <%= nb_neg_vote(votes)-1 %>
+      <span data-tooltip class="tip-right" title="Already vote this choice !">
         <button class="minus-button-disabled"><i class="fi-minus"></i></button>
       </span>
     <% end %>

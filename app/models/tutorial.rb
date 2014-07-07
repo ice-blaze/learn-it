@@ -28,4 +28,8 @@ class Tutorial < ActiveRecord::Base
     return nil if count == 0
     finished
   end
+
+  def comments_top
+    self.tutorial_comments.sort_by{|e| e.votes.where(positive: false).count-e.votes.where(positive: true).count}
+  end
 end
