@@ -1,5 +1,6 @@
 <%= breadcrumbs({title: @interpreter.title, link: @interpreter}, current: 'edit') %>
 <%= tinymce_assets %>
+<%= tinymce %>
 
 <%= render partial: 'layouts/delete_confirm', locals: {id: 'interpreterDelete', name: 'interpreter', link: @interpreter}%>
 

@@ -1,5 +1,6 @@
 <%= breadcrumbs({title: 'creator page', link: creator_path}, current: 'new interpreter') %>
 <%= tinymce_assets %>
+<%= tinymce %>
 
 <% if @interpreter.errors.any? %>
   <div class="alert-box alert">

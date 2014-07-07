@@ -1,6 +1,5 @@
 <%= form_for link, namespace: link.last.id do |f| %>
 
-
   <div class="row">
     <% if new %>
       <div class="large-10 columns">
@@ -30,7 +29,6 @@
     <div class="large-12 columns">
       <%= f.label :description,'Description of your function (what is it doing)' %>
       <%= f.text_area :description, namespace: link.last.id, class: 'tinymce', rows: 15, autocomplete: true  %>
-      <% "tinymce" %>
     </div>
   </div>
   <div class="row">
