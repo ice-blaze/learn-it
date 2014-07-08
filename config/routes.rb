@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :parts do
       get 'up_position', on: :member
       get 'down_position', on: :member
+      get 'execute', on: :member
       resources :part_votes,only: [:create,:update,:destroy]
       resources :done_parts,only: [:create,:destroy]
       resources :part_comments, path: 'comments', only: [:index,:create,:update,:destroy] do

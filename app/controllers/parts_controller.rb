@@ -1,4 +1,6 @@
 class PartsController < ApplicationController
+  require 'li_load_inputs'
+
   before_action :authenticate_creator!, except: [:show,:create]
   before_action :authenticate_user!, only: :create
 
@@ -36,6 +38,27 @@ class PartsController < ApplicationController
     tutorial = Tutorial.find(params[:tutorial_id])
     Part.find(params[:id]).destroy
     redirect_to edit_tutorial_path(tutorial), flash: { error: 'Part deleted' }
+  end
+
+  def execute
+    tutorial = Tutorial.find(params[:tutorial_id])
+    part = Part.find(params[:id])
+    open_token = tutorial.interpreter.open_token
+    close_token = tutorial.interpreter.close_token
+    functions = tutorial.interpreter.functions_ordered
+
+    begin
+      load_inputs(part.signature.lines().map(&:chomp),functions,open_token,close_token).inspect
+      # render plain: load_inputs(part.signature.lines().map(&:chomp),functions,open_token,close_token).inspect
+      # return
+      redirect_to [:edit,tutorial,{output: "No errors", part_id: part.id}]
+    rescue Exception => e
+      # render plain: e.inspect
+      # return
+      redirect_to [:edit,tutorial,{output: e.inspect, part_id: part.id}]
+    end
+    # redirect_to [:edit,tutorial,{output: }]
+    # redirect_to [:edit,tutorial,{output: output, part_id: part.id}]
   end
 
   def up_position

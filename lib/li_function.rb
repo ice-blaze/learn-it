@@ -35,10 +35,6 @@ class LIFunction
     @@all_functions = []
   end
 
-  def self.default(line)
-    raise 'There was no function define for your inputs || line : '+line.inspect
-  end
-
   # -----------------
   # end static part
   # -----------------
@@ -62,5 +58,4 @@ class LIFunction
 
   # belongs to the static part but need to be at the end of the class
   # because use an instantiation
-  LIFunction.new(//,method(:default),false,false)
 end

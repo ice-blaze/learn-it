@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title)+' - Learn-it' : 'Learn-it' %></title>
-    <link rel="stylesheet" href="lib/codemirror.css">
 
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
@@ -86,9 +85,10 @@
 
     <%= yield %>
 
-    <%= javascript_include_tag 'application' %>
-
-    <%= yield :javascripts %>
 
   </body>
+  
+  <%= javascript_include_tag 'application' %>
+
+  <%= yield :javascripts %>
 </html>

@@ -1,50 +1,27 @@
 class DonePartsController < ApplicationController
   require 'li_load_inputs'
-  require 'timeout'
 
   def create
     # render plain: done_params.inspect
     @tutorial = Tutorial.find(params[:tutorial_id])
     @part = Part.find(params[:part_id])
 
-    # create functions
-    LIFunction::reset_functions
-
-    @tutorial.interpreter.functions_ordered.reverse.each do |f|
-      #thread is there to limit eval abuse
-      eval("def #{f.name}(line)
-          thread = Thread.start {
-            $SAFE = 3
-            begin
-              Timeout::timeout(0.5) {
-                #{f.content}
-              }
-            rescue Timeout::Error
-              raise '#{f.name} take more than 0.5 seconds to execute'
-            end
-          }
-          thread.join
-          thread[:return]
-        end")
-      LIFunction.new(Regexp.new(f.regex),method(f.name),f.name=='nothing_func'?false:true,f.loop).taint
-    end
-
-    # set token
-    LIScope::set_tokens(Regexp.new(@tutorial.interpreter.open_token), Regexp.new(@tutorial.interpreter.close_token))
+    open_token = @tutorial.interpreter.open_token
+    close_token = @tutorial.interpreter.close_token
+    functions = @tutorial.interpreter.functions_ordered.reverse
 
     # input in splitted line
     signature_part = @part.signature.lines().map(&:chomp)
-    signature_part = load_inputs(signature_part)[:signature]
 
-    result_inputs = load_inputs(params[:signature].lines().map(&:chomp))
+    begin
+      signature_part = load_inputs(signature_part,functions,open_token,close_token)[:signature]
 
-    signature_inputs = result_inputs[:signature]
-    output_inputs = result_inputs[:output]
+      result_inputs = load_inputs(params[:signature].lines().map(&:chomp),functions,open_token,close_token)
 
-    # render plain: signature_part.inspect+"\n\n"+signature_inputs.inspect
-    # return
-    unless output_inputs.is_a? Array
-      redirect_to [@tutorial,@part, code: params[:signature]], flash: { error: "An bad error showed up !\nResult : "+output_inputs.to_s}
+      signature_inputs = result_inputs[:signature]
+      output_inputs = result_inputs[:output]
+    rescue Exception => e
+      redirect_to [@tutorial,@part, code: params[:signature]], flash: { error: "An bad error showed up !\nResult : "+e.message.to_s}
       return
     end
 

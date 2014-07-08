@@ -65,9 +65,20 @@
       </dd>
 
       <% @parts.each_with_index do |p, index| %>
+        <a name="<%= p.id %>"></a>
         <dd>
           <a href="#part<%= p.id %>" onclick="editorNoRubyAccordion('<%= p.id.to_s+'_'+signature_id_name %>')"><%= (index+1).to_s+' '+p.title %></a>
-          <div id="part<%= p.id %>" class="content">
+          <div id="part<%= p.id %>" class="content <%= 'active' if params[:part_id]==p.id.to_s %>">
+
+            <% if params[:part_id]==p.id.to_s %>
+              <% content_for :javascripts do %>
+                <script>
+                  editorNoRubyAccordion('<%= p.id.to_s+'_'+signature_id_name %>');
+                  window.location.hash="<%= p.id %>";
+                </script>
+              <% end %>
+            <% end %>
+
             <%= render partial: 'part_form',
                        locals: {link: [@tutorial, p], new: false} %>
           </div>

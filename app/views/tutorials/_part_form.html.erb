@@ -25,21 +25,29 @@
     </div>
   </div>
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <%= f.label :signature %>
       <%= f.text_area :signature, namespace: link.last.id %>
+    </div>
+    <div class="large-6 columns">
+      <%= label_tag :signature_tester %>
+      <% if !params[:output].blank? && params[:part_id] == link.last.id.to_s %>
+        <%= text_area_tag :signature_tester, link.last.id.to_s==params[:part_id]?params[:output]:'', readonly: true, size: "10x13" %>
+      <% end %>
+      <%= link_to "Execute", execute_tutorial_part_path(link.first, id: link.last.id.to_s), class: 'button tiny' %>
     </div>
   </div>
 
   <div class="row">
     <div class="large-6 columns">
       <%= f.submit class: 'button tiny' %>
-    </div>
-    <div class="large-6 columns">
       <% unless new %>
         <%= link_to 'delete', link, method: :delete, class: 'button tiny alert right' %>
         <%= link_to 'Go to the page', link, class: 'button tiny right' %>
       <% end %>
     </div>
+    <div class="large-6 columns">
+    </div>
   </div>
 <% end %>
+
