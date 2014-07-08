@@ -26,7 +26,7 @@ class FunctionsController < ApplicationController
     interpreter = Interpreter.find(params[:interpreter_id])
     function = Function.find(params[:id])
     if function.update(function_params)
-      redirect_to edit_interpreter_path(interpreter)
+      redirect_to edit_interpreter_path(interpreter,{function_id: function.id})
     else
       redirect_to edit_interpreter_path(interpreter), flash: { error: 'Ouch' }
     end

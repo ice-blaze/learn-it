@@ -45,9 +45,20 @@
       </dd>
 
       <% @functions.each_with_index do |f, index| %>
+        <a name="<%= f.id %>"></a>
         <dd>
           <a href="#part<%= f.id %>" onclick="editorRubyAccordion('<%=f.id.to_s+content_id_name  %>')"><%=(index+1).to_s+' '+f.title %></a>
-          <div id="part<%= f.id %>" class="content">
+          <div id="part<%= f.id %>" class="content <%= 'active' if params[:function_id]==f.id.to_s %>">
+
+            <% if params[:function_id]==f.id.to_s %>
+              <% content_for :javascripts do %>
+                <script>
+                  editorRubyAccordion('<%=f.id.to_s+content_id_name %>');
+                  window.location.hash="<%= f.id %>";
+                </script>
+              <% end %>
+            <% end %>
+
             <%= render partial: 'function_form',
                        locals: {link: [@interpreter, f],new: false} %>
           </div>
