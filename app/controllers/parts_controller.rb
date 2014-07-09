@@ -28,7 +28,7 @@ class PartsController < ApplicationController
     part = Part.find(params[:id])
 
     if part.update(part_params)
-      redirect_to edit_tutorial_path(tutorial)
+      redirect_to edit_tutorial_path(tutorial,{part_id: part.id})
     else
       render 'edit'
     end

@@ -6,6 +6,8 @@
       <ol>
         <li>Choose a name of the function that doesn't contain spaces.</li>
         <li>Add a description which summarize what the function do.</li>
+        <li>Choose if your function will be a loop or not</li>
+        <li>Choose if you want the function to be in the code comparison</li>
         <li>
           Find a regex which will match with your line. The most precise it is the best it is.<br>
           In the case where the regex is small and cover a large possibilities,<br>
@@ -39,7 +41,8 @@
         <dd class="active"><a href="#panel2-1">Initial variables</a></dd>
         <dd><a href="#panel2-2">Printf function</a></dd>
         <dd><a href="#panel2-3">If statement</a></dd>
-        <dd><a href="#panel2-4">Empty lines</a></dd>
+        <dd><a href="#panel2-4">While loop</a></dd>
+        <dd><a href="#panel2-5">Empty lines</a></dd>
       </dl>
       <div class="tabs-content">
         <div class="content active" id="panel2-1">
@@ -48,15 +51,16 @@
           <b>Content : </b><br>
 <pre>variable_name = line.scan(/\w+/)[1]
 variable_value = line.scan(/\w+/)[2]
-Variable.new(variable_name,variable_value.to_f)
-true</pre>
+LIVariable.new(variable_name,variable_value.to_f)
+next Thread.current[:return] = true</pre>
         </div>
         <div class="content" id="panel2-2">
           <b>Name : </b><kbd>printf_func</kbd><br>
           <b>Regex : </b><kbd>printf *\(['"].*["']\) *;</kbd><br>
           <b>Content : </b><br>
-<pre>LIFunction.output(line[/[\"](.*?)[\"]/]) # pass to the output what is between quotes
-true</pre>
+<pre>line = line[/[\"](.*?)[\"]/]
+LIFunction.output(line[1..-2])
+next Thread.current[:return] = true</pre>
         </div>
         <div class="content" id="panel2-3">
           <b>Name : </b><kbd>if_statement</kbd><br>
@@ -70,24 +74,47 @@ numbers[1] = numbers[1].to_f if numbers[1] =~ /\d+/
 
 # if it\'s variable names, then change it to get the real variable
 if numbers[0].is_a? String #should change but for the moment still use this work around
-  numbers[0] = Variable.convert numbers[0]
+  numbers[0] = LIVariable.convert numbers[0]
 end
 if numbers[1].is_a? String #should change but for the moment still use this work around
-  numbers[1] = Variable.convert numbers[1]
+  numbers[1] = LIVariable.convert numbers[1]
 end
 
-#puts numbers[0].inspect + ' ' +numbers[1].inspect
-return numbers[0] >= numbers[1] if operator == '>='
-return numbers[0] <  numbers[1] if operator == '<'
-return numbers[0] <= numbers[1] if operator == '<='
-return numbers[0] == numbers[1] if operator == '=='
-numbers[0] >  numbers[1] if operator == '>'</pre>
+next Thread.current[:return] = numbers[0] >= numbers[1] if operator == '>='
+next Thread.current[:return] = numbers[0] <  numbers[1] if operator == '<'
+next Thread.current[:return] = numbers[0] <= numbers[1] if operator == '<='
+next Thread.current[:return] = numbers[0] == numbers[1] if operator == '=='
+next Thread.current[:return] = numbers[0] >  numbers[1] if operator == '>'</pre>
         </div>
         <div class="content" id="panel2-4">
-          <b>Name : </b><kbd>nothing_func</kbd><br>
-          <b>Regex : ^ *\t?\r?\n$</b><kbd></kbd><br>
+          <b>Name : </b><kbd>while_func</kbd><br>
+          <b>Regex : </b><kbd>while *\( *\w+ *[<>=]=? *\w+ *\)</kbd><br>
           <b>Content : </b><br>
-<pre>true</pre>
+<pre>operator = line.scan(/[<>=]=?/)[0]
+numbers = line.scan(/\w+/)[1,3]
+
+numbers[0] = numbers[0].to_f if numbers[0] =~ /\d+/
+numbers[1] = numbers[1].to_f if numbers[1] =~ /\d+/
+
+# if it's variable names, then change it to get the real variable
+if numbers[0].is_a? String #should change but for the moment still use this work around
+  numbers[0] = LIVariable.convert numbers[0]
+end
+if numbers[1].is_a? String #should change but for the moment still use this work around
+  numbers[1] = LIVariable.convert numbers[1]
+end
+
+next Thread.current[:return] = numbers[0] >= numbers[1] if operator == '>='
+next Thread.current[:return] = numbers[0] <  numbers[1] if operator == '<'
+next Thread.current[:return] = numbers[0] <= numbers[1] if operator == '<='
+next Thread.current[:return] = numbers[0] == numbers[1] if operator == '=='
+next Thread.current[:return] = numbers[0] >  numbers[1] if operator == '>'</pre>
+        </div>
+        <div class="content" id="panel2-5">
+          <b>Name : </b><kbd>nothing_func</kbd><br>
+          <b>Regex : </b><kbd>^ *\t?\r?\n$</kbd><br>
+          <b>Content : </b><br>
+<pre>next Thread.current[:return] = true</pre>
         </div>
       </div>
     </div>

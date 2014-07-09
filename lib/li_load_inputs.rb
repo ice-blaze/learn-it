@@ -4,7 +4,7 @@ require_relative 'tools'
 require_relative 'li_variable'
 
 def default(line)
-  raise 'There was no function define for your inputs || line : '+line.inspect
+  raise 'There was no function define for your inputs || line : '+line.to_s
 end
 
 
