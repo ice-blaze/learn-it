@@ -7,6 +7,7 @@ class Function < ActiveRecord::Base
   validates :name, format: { with: /\A[a-zA-Z_][a-zA-Z_0-9?=!]*\z/,
                                     message: 'Only allows ruby function chars '}
   validates :loop, inclusion: [true, false]
+  validates :signature, inclusion: [true, false]
 
   def path
     [self.parent,self]

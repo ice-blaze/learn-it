@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628171049) do
+ActiveRecord::Schema.define(version: 20140709082454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140628171049) do
     t.string   "description"
     t.integer  "position"
     t.boolean  "loop"
+    t.boolean  "signature"
   end
 
   add_index "functions", ["interpreter_id"], name: "index_functions_on_interpreter_id", using: :btree

@@ -85,6 +85,6 @@ class FunctionsController < ApplicationController
   end
 
   def function_params
-    params.require(:function).permit(:name, :regex, :content, :description, :interpreter, :loop)
+    params.require(:function).permit(:name, :regex, :content, :description, :interpreter, :loop, :signature)
   end
 end

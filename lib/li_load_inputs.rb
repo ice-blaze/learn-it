@@ -31,7 +31,7 @@ def load_inputs inputs, functions, open_token, close_token
           thread.join
           thread[:return]
         end")
-    LIFunction.new(Regexp.new(f.regex),method(f.name),f.name=='nothing_func'?false:true,f.loop).taint
+    LIFunction.new(Regexp.new(f.regex),method(f.name),f.signature,f.loop).taint
   end
 
   # set token
