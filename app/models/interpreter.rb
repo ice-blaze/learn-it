@@ -1,7 +1,7 @@
 class Interpreter < ActiveRecord::Base
-  has_many :interpreter_comments, inverse_of: :interpreter
-  has_many :interpreter_grades, inverse_of: :interpreter
-  has_many :functions, inverse_of: :interpreter
+  has_many :interpreter_comments, inverse_of: :interpreter, dependent: :delete_all
+  has_many :interpreter_grades, inverse_of: :interpreter, dependent: :delete_all
+  has_many :functions, inverse_of: :interpreter, dependent: :delete_all
   has_many :tutorials, inverse_of: :interpreter
   belongs_to :user
 

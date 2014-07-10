@@ -1,7 +1,7 @@
 <%= breadcrumbs({title: @interpreter.title, link: @interpreter}, current: @function.title) %>
 
 <div class="row">
-  <div class="large-6 columns">
+  <div class="large-5 columns">
     <div class="large-5 columns">
       <h4>
         <%= @function.name %><br>
@@ -22,7 +22,7 @@
       <script>editorReadonly("function_content");</script>
     <% end %>
   </div>
-  <div class="large-1 columns text-right right">
+  <div class="large-2 columns text-right right">
     <%= render partial: 'page/comment_vote', locals: {
         votes: @function.function_votes,
         update_vote_link: [@interpreter,@function],

@@ -35,6 +35,8 @@ class UsersController < ApplicationController
   def index
     if admin?
       @users = User.where('id != ?', current_user.id)
+      @users = @users.where("LOWER(username) LIKE LOWER('%#{params[:search]}%') OR LOWER(email) LIKE LOWER('%#{params[:search]}%')")
+      @users = @users.paginate(page: params[:page], per_page: USER_MANAGEMENT_PER_PAGE)
     else
       redirect_to root_path
     end

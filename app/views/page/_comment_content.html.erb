@@ -4,7 +4,7 @@
   <% if current_user.admin == true %>
     <div class="large-2">
       <br><br>
-      <% id = "s"+comment.id.to_s+"part_com" %>
+      <% id = "part_com"+comment.id.to_s %>
       <a data-reveal-id="<%= id %>" class="button tiny alert right expand">Delete</a>
       <%= render partial: 'layouts/delete_confirm', locals: {id: id, name: 'comment', link: comment.path+[comment]} %>
     </div>
