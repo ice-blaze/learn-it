@@ -19,6 +19,11 @@ class InterpreterCommentsController < ApplicationController
 
   end
 
+  def destroy
+    InterpreterComment.find(params[:id]).destroy
+    redirect_to :back, flash: { info: 'Comment deleted' }
+  end
+
   private
   def comment_params
     params.require(:interpreter_comment).permit(:content, :interpreter, :user)

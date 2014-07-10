@@ -28,6 +28,11 @@ class PartCommentsController < ApplicationController
 
   end
 
+  def destroy
+    PartComment.find(params[:id]).destroy
+    redirect_to :back, flash: { info: 'Comment deleted' }
+  end
+
 
   private
   def comment_params

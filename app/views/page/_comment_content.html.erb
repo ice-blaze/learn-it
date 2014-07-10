@@ -1,4 +1,12 @@
 <div class="large-10 columns">
   <%= link_to comment.user.username, comment.user %> <span class="right"><%= comment.created_at.strftime("Posted on %d %a %Y at %T") %></span><br><br>
   <%= comment.content %>
+  <% if current_user.admin == true %>
+    <div class="large-2">
+      <br><br>
+      <% id = "s"+comment.id.to_s+"part_com" %>
+      <a data-reveal-id="<%= id %>" class="button tiny alert right expand">Delete</a>
+      <%= render partial: 'layouts/delete_confirm', locals: {id: id, name: 'comment', link: comment.path+[comment]} %>
+    </div>
+  <% end %>
 </div>

@@ -8,7 +8,7 @@ class InterpreterComment < ActiveRecord::Base
   validates :content, :like, :dislike, :interpreter, :user, presence: true
 
   def path
-    self.parent
+    [self.parent]
   end
 
   def parent

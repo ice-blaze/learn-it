@@ -8,7 +8,7 @@ class TutorialComment < ActiveRecord::Base
   validates :content, :like, :dislike, :user, :tutorial, presence: true
 
   def path
-    self.parent
+    [self.parent]
   end
 
   def parent

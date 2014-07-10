@@ -1,6 +1,7 @@
 <%= breadcrumbs({title: @tutorial.title, link: @tutorial},
                 {title: @part.title, link: [@tutorial,@part]},
                 current: "comments") %>
+
 <div class="row">
   <div class="large-2 columns panel">
     <%= render partial: 'parts/parts',

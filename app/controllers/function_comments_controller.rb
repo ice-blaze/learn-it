@@ -24,6 +24,11 @@ class FunctionCommentsController < ApplicationController
 
   end
 
+  def destroy
+    FunctionComment.find(params[:id]).destroy
+    redirect_to :back, flash: { info: 'Comment deleted' }
+  end
+
   private
   def comment_params
     params.require(:function_comment).permit(:content, :code, :user)

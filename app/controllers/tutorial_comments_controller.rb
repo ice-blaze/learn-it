@@ -18,6 +18,11 @@ class TutorialCommentsController < ApplicationController
 
   end
 
+  def destroy
+    TutorialComment.find(params[:id]).destroy
+    redirect_to :back, flash: { info: 'Comment deleted' }
+  end
+
   private
   def comment_params
     params.require(:tutorial_comment).permit(:content, :tutorial_id, :user_id)
